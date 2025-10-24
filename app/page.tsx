@@ -1,4 +1,13 @@
-import { GradientButtonOne } from "@/components/bitsandpieces/buttons/Gradients";
+import {
+  GradientButtonOne,
+  GradientButtonThree,
+  AnimatedButtonOne,
+  AnimatedButtonTwo,
+  AnimatedButtonThree,
+  GlassButtonOne,
+  GlassButtonTwo,
+  GlassButtonThree,
+} from "@/components/bitsandpieces/buttons";
 
 export default function Home() {
   return (
@@ -24,12 +33,27 @@ export default function Home() {
           <GradientButtonOne variant="glass" size="lg">
             Click Me
           </GradientButtonOne>
-          <GradientButtonOne variant="glass" size="default">
+          <GradientButtonThree variant="gradient-hover" size="lg">
             Click Me
-          </GradientButtonOne>
-          <GradientButtonOne variant="glass" size="sm">
+          </GradientButtonThree>
+          <AnimatedButtonOne variant="pulsing" size="lg">
             Click Me
-          </GradientButtonOne>
+          </AnimatedButtonOne>
+          <AnimatedButtonTwo variant="shimmer" size="lg">
+            Click Me
+          </AnimatedButtonTwo>
+          <AnimatedButtonThree variant="glow" size="lg">
+            Click Me
+          </AnimatedButtonThree>
+          <GlassButtonOne variant="glass" size="lg">
+            Click Me
+          </GlassButtonOne>
+          <GlassButtonTwo variant="glass-dark" size="lg">
+            Click Me
+          </GlassButtonTwo>
+          <GlassButtonThree variant="glass-light" size="lg">
+            Click Me
+          </GlassButtonThree>
         </div>
       </main>
     </div>
