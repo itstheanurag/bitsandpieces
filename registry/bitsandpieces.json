@@ -1,0 +1,12 @@
+[
+  {
+    "name": "button",
+    "dependencies": [
+      "react"
+    ],
+    "registryDependencies": ["cn"],
+    "files": [
+      "components/bitsandpieces/button.tsx"
+    ]
+  }
+]
