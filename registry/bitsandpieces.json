@@ -54,5 +54,26 @@
     "registryDependencies": ["cn"],
     "files": ["components/bitsandpieces/buttons/glass/three.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
+  },
+  {
+    "name": "FloatingNavbar",
+    "dependencies": ["react", "framer-motion", "lucide-react"],
+    "registryDependencies": ["cn"],
+    "files": ["components/bitsandpieces/navbars/Floating.tsx"],
+    "source": "git@github.com:itstheanurag/bitsandpieces.git"
+  },
+  {
+    "name": "GlassNavbar",
+    "dependencies": ["react", "framer-motion", "lucide-react"],
+    "registryDependencies": ["cn"],
+    "files": ["components/bitsandpieces/navbars/Glass.tsx"],
+    "source": "git@github.com:itstheanurag/bitsandpieces.git"
+  },
+  {
+    "name": "MorphingNavbar",
+    "dependencies": ["react", "framer-motion", "lucide-react"],
+    "registryDependencies": ["cn"],
+    "files": ["components/bitsandpieces/navbars/Morphing.tsx"],
+    "source": "git@github.com:itstheanurag/bitsandpieces.git"
   }
 ]
