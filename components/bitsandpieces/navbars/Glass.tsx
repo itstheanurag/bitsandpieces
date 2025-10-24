@@ -30,7 +30,7 @@ const GlassNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
           transition={{ type: "spring", stiffness: 120, damping: 20 }}
           className="max-w-7xl mx-auto bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-xl"
         >
-          <div className="px-4 sm:px-6 py-3 sm:py-4">
+          <div className="py-3 px-4">
             <div className="flex items-center justify-between">
               {/* Logo */}
               {logo || (
@@ -134,7 +134,7 @@ const GlassNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="px-4 py-3 w-full rounded-lg bg-white text-purple-600 font-semibold hover:shadow-lg transition-shadow"
+                          className="px-4 py-3 w-full rounded-lg bg-white text-neutral-600 font-semibold hover:shadow-lg transition-shadow"
                         >
                           Sign In
                         </motion.button>

@@ -21,7 +21,7 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
   const itemsToRender = navItems || defaultNavItems;
 
   return (
-    <nav className="w-full bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 px-4 sm:px-6 py-3 sm:py-4">
+    <nav className="w-full bg-linear-to-r  p-4">
       {children ? (
         <>{children}</>
       ) : (
@@ -30,7 +30,7 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
           animate={{ y: 0, opacity: 1 }}
           className="max-w-7xl mx-auto bg-slate-900 rounded-2xl shadow-xl backdrop-blur-md border border-slate-800"
         >
-          <div className="px-4 sm:px-6 py-3 sm:py-4">
+          <div className="py-3 px-4">
             <div className="flex items-center justify-between">
               {logo || (
                 <motion.div
@@ -104,14 +104,6 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                 {buttons || (
                   <div className="flex items-center gap-3 ml-4 pl-4 border-l border-slate-700">
                     <motion.button
-                      whileHover={{ scale: 1.1, rotate: 360 }}
-                      whileTap={{ scale: 0.9 }}
-                      transition={{ rotate: { duration: 0.6 } }}
-                      className="p-2 lg:p-3 rounded-lg text-gray-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition"
-                    >
-                      <User className="w-5 h-5" />
-                    </motion.button>
-                    <motion.button
                       whileHover={{
                         scale: 1.05,
                         boxShadow: "0 0 20px rgba(16,185,129,0.5)",
@@ -183,14 +175,6 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                     {/* Mobile Buttons */}
                     {buttons || (
                       <div className="flex flex-col items-center gap-3 mt-4 pt-4 border-t border-slate-700">
-                        <motion.button
-                          whileHover={{ scale: 1.1, rotate: 360 }}
-                          whileTap={{ scale: 0.9 }}
-                          transition={{ rotate: { duration: 0.6 } }}
-                          className="p-3 rounded-lg text-gray-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition w-full"
-                        >
-                          <User className="w-5 h-5 mx-auto" />
-                        </motion.button>
                         <motion.button
                           whileHover={{
                             scale: 1.05,

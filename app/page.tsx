@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-8 bg-gray-900">
       {/* <FloatingNavbar /> */}
-      <GlassNavbar />
-      {/* <MorphingNavbar /> */}
+      {/* <GlassNavbar /> */}
+      <MorphingNavbar />
     </div>
   );
 }
