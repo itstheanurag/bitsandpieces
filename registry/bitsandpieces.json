@@ -1,12 +1,9 @@
 [
   {
-    "name": "button",
-    "dependencies": [
-      "react"
-    ],
+    "name": "GradientButtonOne",
+    "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": [
-      "components/bitsandpieces/button.tsx"
-    ]
+    "files": ["components/bitsandpieces/buttons/Gradients.tsx"],
+    "source": "git@github.com:itstheanurag/bitsandpieces.git"
   }
 ]

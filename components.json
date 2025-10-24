@@ -22,7 +22,7 @@
   "registries": {
     "@bitsandpieces": {
       "name": "bitsandpieces",
-      "url": "file:///home/itstheanurag/Dev/Frontend/bitsandpieces/registry",
+      "url": "https://github.com/itstheanurag/bitsandpieces.git/registry",
       "baseColor": "stone",
       "cssVariables": true,
       "cssVariablesRoot": "themes",
