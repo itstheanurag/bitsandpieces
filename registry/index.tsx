@@ -1,8 +1,7 @@
-import * as Components from "./registry.internal.json";
+"use client ";
 
-export const Index: Record<string, any> = {
-  ...Components,
-};
+import { lazy, ComponentType } from "react";
+// import registryData from "./registry.internal";
 
 export interface RegistryEntry {
   name: string;
@@ -14,15 +13,13 @@ export interface RegistryEntry {
   registryDependencies: string[];
 }
 
-export function getComponent(name: string): RegistryEntry | null {
-  return Index[name] || null;
-}
+// export function getComponent(name: string): RegistryEntry | null {
+//   return registryData[name] || null;
+// }
 
-export function getAllComponents(): RegistryEntry[] {
-  return Object.values(Index);
-}
-
-import { lazy, ComponentType } from "react";
+// export function getAllComponents(): RegistryEntry[] {
+//   return Object.values(registryData);
+// }
 
 const componentCache = new Map<string, ComponentType<any>>();
 
