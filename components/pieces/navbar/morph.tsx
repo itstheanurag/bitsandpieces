@@ -1,9 +1,22 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Rocket, User, X, Menu } from "lucide-react";
+import { Rocket, X, Menu } from "lucide-react";
 import { useState } from "react";
-import { NavbarProps } from "./types";
+
+import React from "react";
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface NavbarProps {
+  logo?: React.ReactNode;
+  navItems?: NavItem[];
+  buttons?: React.ReactNode;
+  children?: React.ReactNode;
+}
 
 const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -80,7 +93,7 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                     {activeIndex === index && (
                       <motion.div
                         layoutId="underline"
-                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-linear-to-r from-emerald-400 to-cyan-400 rounded-full"
                         transition={{
                           type: "spring",
                           stiffness: 400,
@@ -181,7 +194,7 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                             boxShadow: "0 0 25px rgba(16,185,129,0.6)",
                           }}
                           whileTap={{ scale: 0.95 }}
-                          className="px-5 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold shadow-lg w-full"
+                          className="px-5 py-3 rounded-lg bg-linear-to-r from-emerald-500 to-cyan-500 text-white font-semibold shadow-lg w-full"
                         >
                           Launch App
                         </motion.button>

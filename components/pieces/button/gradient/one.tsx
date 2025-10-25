@@ -1,18 +1,17 @@
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/bitsandpieces/buttons/variants";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { type VariantProps } from "class-variance-authority";
 
-export interface AnimatedButtonTwoProps
+export interface GradientButtonOneProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
-const AnimatedButtonTwo = React.forwardRef<
+const GradientButtonOne = React.forwardRef<
   HTMLButtonElement,
-  AnimatedButtonTwoProps
+  GradientButtonOneProps
 >(({ className, variant, size, asChild = false, ...props }, ref) => {
   return (
     <Button
@@ -23,6 +22,6 @@ const AnimatedButtonTwo = React.forwardRef<
   );
 });
 
-AnimatedButtonTwo.displayName = "AnimatedButtonTwo";
+GradientButtonOne.displayName = "GradientButtonOne";
 
-export { AnimatedButtonTwo };
+export { GradientButtonOne };

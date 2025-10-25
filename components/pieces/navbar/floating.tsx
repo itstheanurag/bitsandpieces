@@ -2,7 +2,18 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, X, Menu, Circle } from "lucide-react";
 import { useState } from "react";
-import { NavbarProps } from "./types";
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface NavbarProps {
+  logo?: React.ReactNode;
+  navItems?: NavItem[];
+  buttons?: React.ReactNode;
+  children?: React.ReactNode;
+}
 
 export function FloatingNavbar({
   logo,

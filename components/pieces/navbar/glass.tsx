@@ -2,9 +2,19 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles, Search, Bell } from "lucide-react";
-import { NavbarProps } from "./types";
+import { Menu, X, Sparkles } from "lucide-react";
 
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface NavbarProps {
+  logo?: React.ReactNode;
+  navItems?: NavItem[];
+  buttons?: React.ReactNode;
+  children?: React.ReactNode;
+}
 const GlassNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);

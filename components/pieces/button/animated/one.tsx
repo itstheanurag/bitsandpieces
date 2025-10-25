@@ -1,18 +1,17 @@
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/bitsandpieces/buttons/variants";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { type VariantProps } from "class-variance-authority";
 
-export interface GlassButtonThreeProps
+export interface AnimatedButtonOneProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
-const GlassButtonThree = React.forwardRef<
+const AnimatedButtonOne = React.forwardRef<
   HTMLButtonElement,
-  GlassButtonThreeProps
+  AnimatedButtonOneProps
 >(({ className, variant, size, asChild = false, ...props }, ref) => {
   return (
     <Button
@@ -23,6 +22,6 @@ const GlassButtonThree = React.forwardRef<
   );
 });
 
-GlassButtonThree.displayName = "GlassButtonThree";
+AnimatedButtonOne.displayName = "AnimatedButtonOne";
 
-export { GlassButtonThree };
+export { AnimatedButtonOne };
