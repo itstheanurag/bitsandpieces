@@ -1,9 +1,11 @@
 import BorderDisplay from "@/components/bits/BorderDisplay";
+import { HeroSectionOne } from "@/components/root/home";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8 bg-gray-900">
+    <main>
+      <HeroSectionOne />
       <BorderDisplay />
-    </div>
+    </main>
   );
 }

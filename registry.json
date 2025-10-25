@@ -1,0 +1,224 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "pieces",
+  "homepage": "https://github.com/itstheanurag/bitsandpieces",
+  "items": [
+    {
+      "name": "button-animated-one",
+      "type": "registry:component",
+      "title": "Button Animated One",
+      "description": "A Button Animated One component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/animated/one.tsx",
+          "target": "components/pieces/button-animated-one.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-animated-three",
+      "type": "registry:component",
+      "title": "Button Animated Three",
+      "description": "A Button Animated Three component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/animated/three.tsx",
+          "target": "components/pieces/button-animated-three.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-animated-two",
+      "type": "registry:component",
+      "title": "Button Animated Two",
+      "description": "A Button Animated Two component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/animated/two.tsx",
+          "target": "components/pieces/button-animated-two.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-glass-one",
+      "type": "registry:component",
+      "title": "Button Glass One",
+      "description": "A Button Glass One component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/glass/one.tsx",
+          "target": "components/pieces/button-glass-one.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-glass-three",
+      "type": "registry:component",
+      "title": "Button Glass Three",
+      "description": "A Button Glass Three component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/glass/three.tsx",
+          "target": "components/pieces/button-glass-three.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-glass-two",
+      "type": "registry:component",
+      "title": "Button Glass Two",
+      "description": "A Button Glass Two component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/glass/two.tsx",
+          "target": "components/pieces/button-glass-two.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-gradient-one",
+      "type": "registry:component",
+      "title": "Button Gradient One",
+      "description": "A Button Gradient One component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/gradient/one.tsx",
+          "target": "components/pieces/button-gradient-one.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button-gradient-three",
+      "type": "registry:component",
+      "title": "Button Gradient Three",
+      "description": "A Button Gradient Three component.",
+      "dependencies": [
+        "react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "cn"
+      ],
+      "files": [
+        {
+          "path": "components/pieces/button/gradient/three.tsx",
+          "target": "components/pieces/button-gradient-three.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "navbar-floating",
+      "type": "registry:component",
+      "title": "Navbar Floating",
+      "description": "A Navbar Floating component.",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react",
+        "react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/pieces/navbar/floating.tsx",
+          "target": "components/pieces/navbar-floating.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "navbar-glass",
+      "type": "registry:component",
+      "title": "Navbar Glass",
+      "description": "A Navbar Glass component.",
+      "dependencies": [
+        "react",
+        "framer-motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/pieces/navbar/glass.tsx",
+          "target": "components/pieces/navbar-glass.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "navbar-morph",
+      "type": "registry:component",
+      "title": "Navbar Morph",
+      "description": "A Navbar Morph component.",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react",
+        "react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/pieces/navbar/morph.tsx",
+          "target": "components/pieces/navbar-morph.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
