@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { borderStyles } from "./borders";
+import borderStyles from "./borders";
 
 const BorderDisplay: React.FC = () => {
   const [copied, setCopied] = useState(false);

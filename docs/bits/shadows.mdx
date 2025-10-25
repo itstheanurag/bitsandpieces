@@ -1,0 +1,28 @@
+---
+title: Shadows
+description: Documentation for shadow styles.
+---
+
+# Shadows
+
+This page showcases various shadow styles available as "Bits".
+
+## Examples
+
+import { shadowStyles } from "@/components/bits/shadows";
+
+{shadowStyles.map((shadow, index) => (
+  <div key={index} className="mb-8">
+    <h3 className="text-xl font-semibold mb-4">{shadow.name}</h3>
+    <div className="flex items-center justify-center h-32 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+      <div className={`w-3/4 h-16 rounded-lg flex items-center justify-center bg-white dark:bg-neutral-800 ${shadow.className}`}>
+        <p className="text-neutral-700 dark:text-neutral-300">{shadow.name}</p>
+      </div>
+    </div>
+    <pre className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg mt-4 text-sm overflow-x-auto">
+      <code>
+        className: "{shadow.className}"
+      </code>
+    </pre>
+  </div>
+))}

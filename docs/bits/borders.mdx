@@ -1,0 +1,39 @@
+---
+title: Borders
+description: Documentation for border styles.
+---
+
+# Borders
+
+This page showcases various border styles available as "Bits".
+
+## Examples
+
+import borderStyles from "@/components/bits/borders";
+
+{borderStyles.map((border, index) => (
+  <div key={index} className="mb-8">
+    <h3 className="text-xl font-semibold mb-4">{border.name}</h3>
+    <div className="flex items-center justify-center p-4 bg-neutral-50 dark:bg-neutral-950 rounded-lg border border-neutral-200 dark:border-neutral-800">
+      <div className={border.outerClass}>
+        {border.contentWrapper ? (
+          border.contentWrapper(
+            <div className={border.innerClass}>
+              <p className="text-neutral-700 dark:text-neutral-300">Content</p>
+            </div>
+          )
+        ) : (
+          <div className={border.innerClass}>
+            <p className="text-neutral-700 dark:text-neutral-300">Content</p>
+          </div>
+        )}
+      </div>
+    </div>
+    <pre className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg mt-4 text-sm overflow-x-auto">
+      <code>
+        outerClass: "{border.outerClass}"
+        {border.innerClass && `\ninnerClass: "{border.innerClass}"`}
+      </code>
+    </pre>
+  </div>
+))}

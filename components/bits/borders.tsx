@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+"use client";
+import React from "react";
 
-type BorderStyle = {
+export type BorderStyle = {
   name: string;
   outerClass: string;
   innerClass: string;
   contentWrapper: ((children: React.ReactNode) => React.ReactNode) | null;
 };
 
-export const borderStyles: BorderStyle[] = [
+const borderStyles: BorderStyle[] = [
   {
     name: "Corner Plus Signs",
     outerClass:
@@ -237,85 +238,4 @@ export const borderStyles: BorderStyle[] = [
   },
 ];
 
-const ModernBordersLibrary: React.FC = () => {
-  const [selectedBorder, setSelectedBorder] = useState<number>(0);
-
-  const renderBorder = (style: BorderStyle, index: number) => {
-    const content = (
-      <div className={style.innerClass}>
-        <p className="text-white font-semibold">{style.name}</p>
-        <p className="text-slate-500 dark:text-gray-400">
-          Border style #{index}
-        </p>
-      </div>
-    );
-
-    return (
-      <div
-        key={index}
-        onClick={() => setSelectedBorder(index)}
-        className={`cursor-pointer transition-all duration-300 ${
-          selectedBorder === index ? "scale-105" : "hover:scale-102"
-        }`}
-      >
-        <div className={style.outerClass}>
-          {style.contentWrapper ? style.contentWrapper(content) : content}
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:via-indigo-900 dark:to-slate-900 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-slate-900 dark:text-white text-center">
-          Modern Border Styles Library
-        </h1>
-        <p className="text-gray-400 text-center mb-8">
-          Click any border to select it. Currently selected:{" "}
-          <span className="text-cyan-500 dark:text-cyan-400 font-semibold">
-            #{selectedBorder} - {borderStyles[selectedBorder].name}
-          </span>
-        </p>
-
-        {/* Preview of selected border */}
-        <div className="mb-12 flex justify-center">
-          <div className="bg-slate-200/50 dark:bg-slate-800/50 rounded-2xl p-8 backdrop-blur-sm">
-            <h2 className="text-white text-xl font-semibold mb-4 text-center">
-              Selected Border Preview
-            </h2>
-            <div className={borderStyles[selectedBorder].outerClass}>
-              {borderStyles[selectedBorder].contentWrapper ? (
-                borderStyles[selectedBorder].contentWrapper(
-                  <div className={borderStyles[selectedBorder].innerClass}>
-                    <p className="text-white font-bold text-lg">
-                      {borderStyles[selectedBorder].name}
-                    </p>
-                  </div>
-                )
-              ) : (
-                <div className={borderStyles[selectedBorder].innerClass}>
-                  <p className="text-white font-bold text-lg">
-                    {borderStyles[selectedBorder].name}
-                  </p>
-                  <p className="text-gray-300">
-                    This is your selected border style
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Grid of all borders */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {borderStyles.map((style, index) => renderBorder(style, index))}
-        </div>
-
-        {/* Code example */}
-      </div>
-    </div>
-  );
-};
-
-export default ModernBordersLibrary;
+export default borderStyles;

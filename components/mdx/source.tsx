@@ -1,9 +1,12 @@
 import * as React from "react";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
-import { Index } from "@/registry";
+import registryData from "@/registry/registry.internal";
+import { RegistryEntry } from "@/registry";
 
 export const ComponentSource: React.FC<{ name: string }> = ({ name }) => {
-  const value = Index[name]?.files[0].content;
+  const value = (registryData as unknown as Record<string, RegistryEntry>)[name]
+    ?.code;
+
   if (!value) {
     return null;
   }
