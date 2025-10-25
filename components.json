@@ -17,6 +17,6 @@
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks",
-    "@bitsandpieces": "@/components/bitsandpieces"
+    "@pieces": "@/components/pieces"
   }
 }

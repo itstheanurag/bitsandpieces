@@ -3,77 +3,77 @@
     "name": "GradientButtonOne",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/gradient/one.tsx"],
+    "files": ["components/pieces/buttons/gradient/one.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "GradientButtonThree",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/gradient/three.tsx"],
+    "files": ["components/pieces/buttons/gradient/three.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "AnimatedButtonOne",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/animated/one.tsx"],
+    "files": ["components/pieces/buttons/animated/one.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "AnimatedButtonTwo",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/animated/two.tsx"],
+    "files": ["components/pieces/buttons/animated/two.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "AnimatedButtonThree",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/animated/three.tsx"],
+    "files": ["components/pieces/buttons/animated/three.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "GlassButtonOne",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/glass/one.tsx"],
+    "files": ["components/pieces/buttons/glass/one.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "GlassButtonTwo",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/glass/two.tsx"],
+    "files": ["components/pieces/buttons/glass/two.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "GlassButtonThree",
     "dependencies": ["react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/buttons/glass/three.tsx"],
+    "files": ["components/pieces/buttons/glass/three.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "FloatingNavbar",
     "dependencies": ["react", "framer-motion", "lucide-react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/navbars/Floating.tsx"],
+    "files": ["components/pieces/navbars/Floating.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "GlassNavbar",
     "dependencies": ["react", "framer-motion", "lucide-react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/navbars/Glass.tsx"],
+    "files": ["components/pieces/navbars/Glass.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   },
   {
     "name": "MorphingNavbar",
     "dependencies": ["react", "framer-motion", "lucide-react"],
     "registryDependencies": ["cn"],
-    "files": ["components/bitsandpieces/navbars/Morphing.tsx"],
+    "files": ["components/pieces/navbars/Morphing.tsx"],
     "source": "git@github.com:itstheanurag/bitsandpieces.git"
   }
 ]
