@@ -30,6 +30,7 @@ components/
 ├── pieces/         # Installable React components (navbars, cards, etc.)
 ├── examples/       # Usage examples
 └── docs/          # Documentation
+└── root/          # components used in the project itself
 ```
 
 ---
@@ -42,7 +43,7 @@ components/
 
 ✅ **ALLOWED**:
 
-- `slate-*` 
+- `slate-*`
 - `zinc-*`
 - `stone-*`
 - `gray-*`
@@ -56,7 +57,7 @@ components/
 
 ```typescript
 // ✅ CORRECT
-className = "bg-slate-900 border-slate-700 text-slate-100";
+className = "bg-neutral-900 border-neutral-700 text-neutral-100";
 
 // ❌ WRONG
 className = "bg-blue-500 border-purple-600 text-red-100";
@@ -70,10 +71,8 @@ className = "bg-blue-500 border-purple-600 text-red-100";
 
 ```typescript
 // Use Tailwind's dark: modifier
-className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100"
+className="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100"
 
-// Or use isDark prop pattern (for Bits)
-className={isDark ? 'bg-slate-950' : 'bg-white'}
 ```
 
 ❌ **FORBIDDEN**:
@@ -248,9 +247,9 @@ className = "w-[800px] p-8";
 
 ```typescript
 // ✅ CORRECT
-className="bg-white dark:bg-slate-950
-           text-slate-900 dark:text-slate-100
-           border-slate-200 dark:border-slate-800"
+className="bg-white dark:bg-neutral-950
+           text-neutral-900 dark:text-neutral-100
+           border-neutral-200 dark:border-neutral-800"
 
 // ❌ WRONG
 className="bg-white text-slate-900"
@@ -269,10 +268,10 @@ Accents: 400, 500
 
 ```typescript
 // ✅ CORRECT
-<div className="bg-slate-50 dark:bg-slate-950">
-  <h1 className="text-slate-900 dark:text-slate-100">Title</h1>
-  <p className="text-slate-600 dark:text-slate-400">Description</p>
-  <div className="border border-slate-200 dark:border-slate-800">Content</div>
+<div className="bg-neutral-50 dark:bg-neutral-950">
+  <h1 className="text-neutral-900 dark:text-neutral-100">Title</h1>
+  <p className="text-neutral-600 dark:text-neutral-400">Description</p>
+  <div className="border border-neutral-200 dark:border-neutral-800">Content</div>
 </div>
 ```
 
@@ -461,39 +460,6 @@ export const borderStyles: BorderStyle[] = [
     description: "Modern corner plus sign decorations",
   },
 ];
-```
-
----
-
-## 🧪 TESTING REQUIREMENTS
-
-### Rule 1: Type Safety
-
-```bash
-# Must pass without errors
-bun run tsc --noEmit
-```
-
-### Rule 2: Component Testing
-
-```typescript
-// Use React Testing Library
-import { render, screen } from "@testing-library/react";
-import { FloatingNavbar } from "./FloatingNavbar";
-
-describe("FloatingNavbar", () => {
-  it("renders navigation items", () => {
-    const items = [
-      { label: "Home", href: "/" },
-      { label: "About", href: "/about" },
-    ];
-
-    render(<FloatingNavbar items={items} />);
-
-    expect(screen.getByText("Home")).toBeInTheDocument();
-    expect(screen.getByText("About")).toBeInTheDocument();
-  });
-});
 ```
 
 ---
