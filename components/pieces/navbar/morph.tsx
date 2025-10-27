@@ -34,7 +34,7 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
   const itemsToRender = navItems || defaultNavItems;
 
   return (
-    <nav className="w-full bg-linear-to-r  p-4">
+    <nav className="fixed top-2 z-50 w-full">
       {children ? (
         <>{children}</>
       ) : (
@@ -79,7 +79,7 @@ const MorphingNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                     }}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    className="relative py-2 text-gray-300 font-medium text-sm lg:text-base cursor-pointer"
+                    className="relative pt-2 text-gray-300 font-medium text-sm lg:text-base cursor-pointer no-underline"
                     whileHover={{ scale: 1.05 }}
                   >
                     <span

@@ -1,4 +1,5 @@
 "use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, X, Menu, Circle } from "lucide-react";
 import { useState } from "react";
@@ -34,7 +35,7 @@ export function FloatingNavbar({
   const itemsToRender = navItems || defaultNavItems;
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 p-3">
+    <nav className="fixed top-0 left-0 w-full z-50 p-2 sm:p-6">
       {children ? (
         children
       ) : (
@@ -44,9 +45,9 @@ export function FloatingNavbar({
           className="max-w-6xl mx-auto"
         >
           <div
-            className={`bg-black/80 backdrop-blur-lg ${
-              mobileOpen ? "rounded-2xl" : "rounded-full"
-            } px-5 sm:px-6 py-3 sm:py-4 border border-white/10 shadow-lg transition-all`}
+            className={`bg-background/80 backdrop-blur-lg ${
+              mobileOpen ? "rounded-lg" : "rounded-full"
+            } sm:px-6 py-3 px-4 border border-border shadow-lg transition-all`}
           >
             {/* Top Row */}
             <div className="flex items-center justify-between">
@@ -57,8 +58,8 @@ export function FloatingNavbar({
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-2 cursor-pointer"
                 >
-                  <Circle className="w-6 h-6 text-white" />
-                  <span className="text-xl sm:text-2xl font-semibold text-white">
+                  <Circle className="w-6 h-6 text-primary" />
+                  <span className="text-xl sm:text-2xl font-semibold text-foreground">
                     FloatNav
                   </span>
                 </motion.div>
@@ -76,17 +77,17 @@ export function FloatingNavbar({
                     }}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className={`relative px-3 py-2 text-sm font-medium transition-all ${
+                    className={`relative px-3 pt-2 pb-1 text-sm font-medium transition-all no-underline ${
                       activeIndex === index
-                        ? "text-white"
-                        : "text-gray-400 hover:text-white"
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {item.label}
                     {activeIndex === index && (
                       <motion.span
                         layoutId="underline"
-                        className="absolute left-0 right-0 -bottom-0.5 h-[1.5px] bg-white"
+                        className="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-primary"
                       />
                     )}
                   </motion.a>
@@ -94,21 +95,21 @@ export function FloatingNavbar({
 
                 {/* Buttons */}
                 {buttons || (
-                  <div className="flex items-center gap-2 ml-3">
+                  <div className="flex items-center gap-2 ml-3 pl-3 border-l border-border">
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="p-2 rounded-full text-gray-200 hover:bg-white/10 transition-colors relative"
+                      className="p-2 rounded-full text-foreground hover:bg-accent transition-colors relative"
                     >
                       <ShoppingCart className="w-5 h-5" />
-                      <span className="absolute -top-1 -right-1 w-4 h-4 bg-white text-black text-[10px] rounded-full flex items-center justify-center font-bold">
+                      <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-primary-foreground text-[10px] rounded-full flex items-center justify-center font-bold">
                         2
                       </span>
                     </motion.button>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-5 py-2 rounded-full border border-white/20 text-white font-medium text-sm hover:bg-white hover:text-black transition-colors"
+                      className="px-5 py-2 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors"
                     >
                       Get Started
                     </motion.button>
@@ -120,7 +121,7 @@ export function FloatingNavbar({
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden text-white"
+                className="md:hidden text-foreground"
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </motion.button>
@@ -134,7 +135,7 @@ export function FloatingNavbar({
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="md:hidden mt-3 pt-3 border-t border-white/10"
+                  className="md:hidden mt-3 pt-3 border-t border-border"
                 >
                   {itemsToRender.map((item, index) => (
                     <motion.a
@@ -149,10 +150,10 @@ export function FloatingNavbar({
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: index * 0.05 }}
                       whileHover={{ x: 8 }}
-                      className={`block px-4 py-2.5 rounded-lg text-sm font-medium mb-1 ${
+                      className={`block px-4 py-2.5 rounded-lg text-sm font-medium mb-1 no-underline ${
                         activeIndex === index
-                          ? "bg-white/10 text-white"
-                          : "text-gray-400 hover:text-white"
+                          ? "bg-accent text-accent-foreground"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                       }`}
                     >
                       {item.label}
@@ -163,19 +164,20 @@ export function FloatingNavbar({
                   {buttons || (
                     <div className="flex flex-col gap-3 mt-4">
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="relative p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors w-full flex justify-center"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="relative p-3 rounded-full bg-accent text-accent-foreground hover:bg-accent/80 transition-colors w-full flex justify-center"
                       >
                         <ShoppingCart className="w-5 h-5" />
-                        <span className="absolute top-1 right-1 w-4 h-4 bg-white text-black text-[10px] rounded-full flex items-center justify-center font-bold">
+                        <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[10px] rounded-full flex items-center justify-center font-bold">
                           2
                         </span>
                       </motion.button>
+
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="px-5 py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white hover:text-black transition-colors w-full text-sm"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="px-5 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors w-full text-sm"
                       >
                         Get Started
                       </motion.button>
