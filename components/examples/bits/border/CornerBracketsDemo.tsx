@@ -1,9 +1,12 @@
-
 "use client";
-
-import { BorderDemo } from "./BorderDemo";
-import cornerBrackets from "@/components/bits/border/corner-brackets";
+import { CornerBrackets } from "@/components/bits/border/corner-brackets";
 
 export function CornerBracketsDemo() {
-  return <BorderDemo borderStyle={cornerBrackets} />;
+  return (
+    <CornerBrackets>
+      <div className="p-4 text-center text-slate-600 dark:text-slate-400">
+        Content for Corner Brackets
+      </div>
+    </CornerBrackets>
+  );
 }

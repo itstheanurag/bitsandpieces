@@ -1,9 +1,13 @@
-
 "use client";
 
-import { BorderDemo } from "./BorderDemo";
-import cornerLines from "@/components/bits/border/corner-lines";
+import { CornerLines } from "@/components/bits/border/corner-lines";
 
 export function CornerLinesDemo() {
-  return <BorderDemo borderStyle={cornerLines} />;
+  return (
+    <CornerLines>
+      <div className="p-4 text-center text-slate-600 dark:text-slate-400">
+        Content for Corner Lines
+      </div>
+    </CornerLines>
+  );
 }

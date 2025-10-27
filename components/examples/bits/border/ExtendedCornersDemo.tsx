@@ -1,9 +1,13 @@
-
 "use client";
 
-import { BorderDemo } from "./BorderDemo";
-import extendedCorners from "@/components/bits/border/extended-corners";
+import { ExtendedCorners } from "@/components/bits/border/extended-corners";
 
 export function ExtendedCornersDemo() {
-  return <BorderDemo borderStyle={extendedCorners} />;
+  return (
+    <ExtendedCorners>
+      <div className="p-4 text-center text-slate-600 dark:text-slate-400">
+        Content for Extended Corners
+      </div>
+    </ExtendedCorners>
+  );
 }

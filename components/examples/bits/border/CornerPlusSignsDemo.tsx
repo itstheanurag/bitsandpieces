@@ -1,9 +1,13 @@
-
 "use client";
 
-import { BorderDemo } from "./BorderDemo";
-import cornerPlusSigns from "@/components/bits/border/corner-plus-signs";
+import { CornerPlusSigns } from "@/components/bits/border/corner-plus-signs";
 
 export function CornerPlusSignsDemo() {
-  return <BorderDemo borderStyle={cornerPlusSigns} />;
+  return (
+    <CornerPlusSigns>
+      <div className="p-4 text-center text-slate-600 dark:text-slate-400">
+        Content for Corner Plus Signs
+      </div>
+    </CornerPlusSigns>
+  );
 }
