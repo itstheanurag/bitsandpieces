@@ -71,8 +71,8 @@ className = "bg-blue-500 border-purple-600 text-red-100";
 
 ```typescript
 // Use Tailwind's dark: modifier
-className="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100"
-
+className =
+  "bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100";
 ```
 
 ❌ **FORBIDDEN**:
@@ -108,11 +108,9 @@ className="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100"
 
 #### BITS (Copyable Utilities)
 
-- Simple design utilities
-- Pure Tailwind classes
-- No external dependencies
-- Exported as arrays or objects
-- Examples: shadows, borders, backgrounds, animations
+- Design utilities
+- Exported as arrays or objects or components as well.
+- Examples: shadows, borders, backgrounds, animations 
 
 ```typescript
 // ✅ CORRECT: Bit format
@@ -271,7 +269,9 @@ Accents: 400, 500
 <div className="bg-neutral-50 dark:bg-neutral-950">
   <h1 className="text-neutral-900 dark:text-neutral-100">Title</h1>
   <p className="text-neutral-600 dark:text-neutral-400">Description</p>
-  <div className="border border-neutral-200 dark:border-neutral-800">Content</div>
+  <div className="border border-neutral-200 dark:border-neutral-800">
+    Content
+  </div>
 </div>
 ```
 
@@ -508,7 +508,7 @@ Brief description
 ## Installation
 
 \`\`\`bash
-bun bunx @bitsandpieces/cli add component-name
+bun bunx @shadcn/cli add component-name
 \`\`\`
 
 ## Usage
