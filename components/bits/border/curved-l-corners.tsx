@@ -1,13 +1,18 @@
 "use client";
 import React from "react";
-import { BorderStyle } from "./types";
+import { cn } from "@/lib/utils";
 
-const curvedLCorners: BorderStyle = {
-  name: "Curved L Corners",
-  outerClass: "relative px-8 py-6 rounded-lg",
-  innerClass: "relative z-10",
-  contentWrapper: (children: React.ReactNode) => (
-    <>
+interface CurvedLCornersProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function CurvedLCorners({ children, className }: CurvedLCornersProps) {
+  const outerClass = "relative px-8 py-6 rounded-lg";
+  const innerClass = "relative z-10";
+
+  return (
+    <div className={cn(outerClass, className)}>
       <svg
         className="absolute top-0 left-0 w-6 h-6 -translate-x-1 -translate-y-1 text-slate-400 dark:text-slate-600"
         viewBox="0 0 24 24"
@@ -52,9 +57,7 @@ const curvedLCorners: BorderStyle = {
           strokeWidth="2"
         />
       </svg>
-      {children}
-    </>
-  ),
-};
-
-export default curvedLCorners;
+      <div className={innerClass}>{children}</div>
+    </div>
+  );
+}

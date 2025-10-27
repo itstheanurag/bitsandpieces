@@ -1,14 +1,19 @@
 "use client";
 import React from "react";
-import { BorderStyle } from "./types";
+import { cn } from "@/lib/utils";
 
-const cornerDots: BorderStyle = {
-  name: "Corner Dots",
-  outerClass:
-    "relative px-8 py-6 border border-slate-400 dark:border-slate-600",
-  innerClass: "relative z-10",
-  contentWrapper: (children: React.ReactNode) => (
-    <>
+interface CornerDotsProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function CornerDots({ children, className }: CornerDotsProps) {
+  const outerClass =
+    "relative px-8 py-6 border border-slate-400 dark:border-slate-600";
+  const innerClass = "relative z-10";
+
+  return (
+    <div className={cn(outerClass, className)}>
       {/* top-left */}
       <div className="absolute -top-0.5 -left-0.5 w-1 h-1 bg-slate-400 dark:bg-slate-600 rounded-full"></div>
       {/* top-right */}
@@ -17,9 +22,7 @@ const cornerDots: BorderStyle = {
       <div className="absolute -bottom-0.5 -left-0.5 w-1 h-1 bg-slate-400 dark:bg-slate-600 rounded-full"></div>
       {/* bottom-right */}
       <div className="absolute -bottom-0.5 -right-0.5 w-1 h-1 bg-slate-400 dark:bg-slate-600 rounded-full"></div>{" "}
-      {children}
-    </>
-  ),
-};
-
-export default cornerDots;
+      <div className={innerClass}>{children}</div>
+    </div>
+  );
+}

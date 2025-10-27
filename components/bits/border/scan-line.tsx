@@ -1,18 +1,21 @@
 "use client";
 import React from "react";
-import { BorderStyle } from "./types";
+import { cn } from "@/lib/utils";
 
-const scanLine: BorderStyle = {
-  name: "Scan Line",
-  outerClass:
-    "relative px-8 py-6 rounded-lg border-2 border-slate-700 overflow-hidden group",
-  innerClass: "relative z-10",
-  contentWrapper: (children: React.ReactNode) => (
-    <>
-      <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent -translate-y-full group-hover:translate-y-[400%] transition-transform duration-1000"></div>
-      {children}
-    </>
-  ),
-};
+interface ScanLineProps {
+  children: React.ReactNode;
+  className?: string;
+}
 
-export default scanLine;
+export function ScanLine({ children, className }: ScanLineProps) {
+  const outerClass =
+    "relative px-8 py-6 rounded-lg border-2 border-slate-700 overflow-hidden group";
+  const innerClass = "relative z-10";
+
+  return (
+    <div className={cn(outerClass, className)}>
+      <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-slate-400 dark:via-slate-600 to-transparent -translate-y-full group-hover:translate-y-[400%] transition-transform duration-1000"></div>
+      <div className={innerClass}>{children}</div>
+    </div>
+  );
+}
