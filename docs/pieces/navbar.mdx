@@ -3,6 +3,15 @@ title: Navbar
 description: Documentation for navbar components.
 ---
 
+import { ComponentPreview } from '@/components/mdx/preview';
+import { ComponentCodeBlock } from '@/components/mdx/interactive-code-block';
+import { ComponentDemoTabs } from '@/components/mdx/component-demo-tabs';
+import { FloatingNavbar } from '@/components/pieces/navbar/floating';
+import { GlassNavbar } from '@/components/pieces/navbar/glass';
+import { MorphingNavbar } from '@/components/pieces/navbar/morph';
+
+
+
 # Navbar
 
 This page showcases various navbar components available as "Pieces".
@@ -11,18 +20,30 @@ This page showcases various navbar components available as "Pieces".
 
 ### Floating Navbar
 
-<ComponentPreview name="navbar-floating" />
+<ComponentDemoTabs name="navbar-floating">
+  <ComponentPreview>
+    <FloatingNavbar />
+  </ComponentPreview>
+</ComponentDemoTabs>
 
-<ComponentSource name="navbar-floating" />
+<ComponentCodeBlock name="navbar-floating" />
 
 ### Glass Navbar
 
-<ComponentPreview name="navbar-glass" />
+<ComponentDemoTabs name="navbar-glass">
+  <ComponentPreview>
+    <GlassNavbar />
+  </ComponentPreview>
+</ComponentDemoTabs>
 
-<ComponentSource name="navbar-glass" />
+<ComponentCodeBlock name="navbar-glass" />
 
 ### Morph Navbar
 
-<ComponentPreview name="navbar-morph" />
+<ComponentDemoTabs name="navbar-morph">
+  <ComponentPreview>
+    <MorphingNavbar />
+  </ComponentPreview>
+</ComponentDemoTabs>
 
-<ComponentSource name="navbar-morph" />
+<ComponentCodeBlock name="navbar-morph" />
