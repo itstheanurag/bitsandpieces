@@ -14,31 +14,29 @@ interface Feature {
 const getGridSpan = (index: number) => {
   switch (index) {
     case 0:
-      return "md:col-span-3 md:row-span-2";
+      return "md:col-span-2 md:row-span-2";
     case 1:
       return "md:col-span-2 md:row-span-1";
     case 2:
       return "md:col-span-2 md:row-span-1";
     case 3:
-      return "md:col-span-2 md:row-span-2";
-    case 4:
-      return "md:col-span-3 md:row-span-1";
+      return "md:col-span-4 md:row-span-1";
     default:
-      return "md:col-span-3 md:row-span-1";
+      return "md:col-span-2 md:row-span-1";
   }
 };
 
-export const BentoGridTwo = ({ features }: { features: Feature[] }) => {
+export const BentoGridThree = ({ features }: { features: Feature[] }) => {
   return (
     <div
       className={cn(
         "grid gap-4",
-        "grid-cols-1 sm:grid-cols-2 md:grid-cols-5",
+        "grid-cols-1 sm:grid-cols-2 md:grid-cols-4",
         "auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[240px]"
       )}
     >
       {features.map((feature: Feature, index: number) => (
-        <BentoCardTwo
+        <BentoCardThree
           key={feature.id}
           index={index}
           className={getGridSpan(index)}
@@ -47,13 +45,13 @@ export const BentoGridTwo = ({ features }: { features: Feature[] }) => {
           description={feature.description}
         >
           <>{feature.children}</>
-        </BentoCardTwo>
+        </BentoCardThree>
       ))}
     </div>
   );
 };
 
-const BentoCardTwo = ({
+const BentoCardThree = ({
   children,
   className,
   index,

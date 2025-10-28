@@ -14,31 +14,29 @@ interface Feature {
 const getGridSpan = (index: number) => {
   switch (index) {
     case 0:
-      return "md:col-span-3 md:row-span-2";
+      return "md:col-span-4 md:row-span-1";
     case 1:
-      return "md:col-span-2 md:row-span-1";
+      return "md:col-span-2 md:row-span-2";
     case 2:
       return "md:col-span-2 md:row-span-1";
     case 3:
-      return "md:col-span-2 md:row-span-2";
-    case 4:
-      return "md:col-span-3 md:row-span-1";
+      return "md:col-span-2 md:row-span-1";
     default:
-      return "md:col-span-3 md:row-span-1";
+      return "md:col-span-2 md:row-span-1";
   }
 };
 
-export const BentoGridTwo = ({ features }: { features: Feature[] }) => {
+export const BentoGridSix = ({ features }: { features: Feature[] }) => {
   return (
     <div
       className={cn(
         "grid gap-4",
-        "grid-cols-1 sm:grid-cols-2 md:grid-cols-5",
+        "grid-cols-1 sm:grid-cols-2 md:grid-cols-4",
         "auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[240px]"
       )}
     >
       {features.map((feature: Feature, index: number) => (
-        <BentoCardTwo
+        <BentoCardSix
           key={feature.id}
           index={index}
           className={getGridSpan(index)}
@@ -47,13 +45,13 @@ export const BentoGridTwo = ({ features }: { features: Feature[] }) => {
           description={feature.description}
         >
           <>{feature.children}</>
-        </BentoCardTwo>
+        </BentoCardSix>
       ))}
     </div>
   );
 };
 
-const BentoCardTwo = ({
+const BentoCardSix = ({
   children,
   className,
   index,
@@ -69,14 +67,12 @@ const BentoCardTwo = ({
   description: string;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    animate={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, x: -24 }}
+    animate={{ opacity: 1, x: 0 }}
     transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
     whileHover={{
-      y: -6,
-      scale: 1.01,
-      boxShadow:
-        "0 12px 40px -8px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.14)",
+      y: -4,
+      boxShadow: "0 8px 30px -6px rgba(0,0,0,0.3)",
     }}
     className={cn(
       "relative group overflow-hidden rounded-md border p-6",

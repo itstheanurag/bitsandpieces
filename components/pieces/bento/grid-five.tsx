@@ -14,31 +14,29 @@ interface Feature {
 const getGridSpan = (index: number) => {
   switch (index) {
     case 0:
-      return "md:col-span-3 md:row-span-2";
+      return "md:col-span-2 md:row-span-2";
     case 1:
       return "md:col-span-2 md:row-span-1";
     case 2:
       return "md:col-span-2 md:row-span-1";
     case 3:
-      return "md:col-span-2 md:row-span-2";
-    case 4:
-      return "md:col-span-3 md:row-span-1";
+      return "md:col-span-4 md:row-span-1";
     default:
-      return "md:col-span-3 md:row-span-1";
+      return "md:col-span-2 md:row-span-1";
   }
 };
 
-export const BentoGridTwo = ({ features }: { features: Feature[] }) => {
+export const BentoGridFive = ({ features }: { features: Feature[] }) => {
   return (
     <div
       className={cn(
         "grid gap-4",
-        "grid-cols-1 sm:grid-cols-2 md:grid-cols-5",
+        "grid-cols-1 sm:grid-cols-2 md:grid-cols-4",
         "auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[240px]"
       )}
     >
       {features.map((feature: Feature, index: number) => (
-        <BentoCardTwo
+        <BentoCardFive
           key={feature.id}
           index={index}
           className={getGridSpan(index)}
@@ -47,13 +45,13 @@ export const BentoGridTwo = ({ features }: { features: Feature[] }) => {
           description={feature.description}
         >
           <>{feature.children}</>
-        </BentoCardTwo>
+        </BentoCardFive>
       ))}
     </div>
   );
 };
 
-const BentoCardTwo = ({
+const BentoCardFive = ({
   children,
   className,
   index,
@@ -69,12 +67,12 @@ const BentoCardTwo = ({
   description: string;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    animate={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
     transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
     whileHover={{
-      y: -6,
-      scale: 1.01,
+      scale: 1.05,
+      rotate: 2,
       boxShadow:
         "0 12px 40px -8px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.14)",
     }}

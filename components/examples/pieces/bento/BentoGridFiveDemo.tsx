@@ -1,6 +1,6 @@
 "use client";
 import { Palette, Zap, Code, Layers, Smartphone, Package } from "lucide-react";
-import { BentoGridTwo } from "@/components/pieces/bento/grid-two";
+import { BentoGridFive } from "@/components/pieces/bento/grid-five";
 import { motion } from "framer-motion";
 
 export const ThemedPreview = () => {
@@ -110,27 +110,9 @@ const features = [
     className: "lg:col-span-2",
     children: <ComponentGridVisual />,
   },
-  {
-    id: 5,
-    icon: (
-      <Smartphone className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />
-    ),
-    title: "Responsive",
-    description: "Looks great on all screen sizes, from mobile to desktop.",
-    children: <ResponsivePreview />,
-  },
-  {
-    id: 6,
-    icon: (
-      <Package className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />
-    ),
-    title: "Modular",
-    description: "Import only the components you need.",
-    children: <ModularBlocks />,
-  },
 ];
 
-export function BentoGridTwoDemo() {
+export function BentoGridFiveDemo() {
   return (
     <div className="w-full bg-white dark:bg-black p-8">
       <div className="max-w-7xl mx-auto">
@@ -143,7 +125,7 @@ export function BentoGridTwoDemo() {
             joy to use. Here's what makes it special.
           </p>
         </div>
-        <BentoGridTwo features={features} />
+        <BentoGridFive features={features} />
       </div>
     </div>
   );

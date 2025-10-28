@@ -1,6 +1,6 @@
 "use client";
 import { Palette, Zap, Code, Layers, Smartphone, Package } from "lucide-react";
-import { BentoGridTwo } from "@/components/pieces/bento/grid-two";
+import { BentoGridSix } from "@/components/pieces/bento/grid-six";
 import { motion } from "framer-motion";
 
 export const ThemedPreview = () => {
@@ -130,7 +130,7 @@ const features = [
   },
 ];
 
-export function BentoGridTwoDemo() {
+export function BentoGridSixDemo() {
   return (
     <div className="w-full bg-white dark:bg-black p-8">
       <div className="max-w-7xl mx-auto">
@@ -143,7 +143,7 @@ export function BentoGridTwoDemo() {
             joy to use. Here's what makes it special.
           </p>
         </div>
-        <BentoGridTwo features={features} />
+        <BentoGridSix features={features} />
       </div>
     </div>
   );
