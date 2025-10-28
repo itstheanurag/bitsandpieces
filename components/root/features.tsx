@@ -59,11 +59,15 @@ export function Features() {
               variants={itemVariants}
               whileHover={{ translateY: -5 }}
               transition={{ duration: 0.2 }}
-              className="p-8 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 cursor-pointer"
+              className="p-8 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer"
             >
-              <div className="text-neutral-900 dark:text-neutral-100">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
+                className="text-neutral-900 dark:text-neutral-100"
+              >
                 {feature.icon}
-              </div>
+              </motion.div>
               <h3 className="mt-4 text-xl font-bold text-neutral-900 dark:text-neutral-100">
                 {feature.title}
               </h3>

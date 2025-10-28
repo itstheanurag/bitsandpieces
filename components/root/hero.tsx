@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Github } from "lucide-react";
+import { CornerPlusSigns } from "../bits/border/corner-plus-signs";
 
 export function Hero() {
   return (
@@ -33,14 +34,16 @@ export function Hero() {
           className="mt-8 flex justify-center gap-4"
         >
           <Link href="/docs/pieces">
-            <Button
-              size="lg"
-              className="bg-neutral-900 text-neutral-100 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
-            >
-              Get Started <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <CornerPlusSigns>
+              <Button className="border-none bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 size-lg">
+                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CornerPlusSigns>
           </Link>
-          <Link href="https://github.com/itsTheAnurag/BitsAndPieces" target="_blank">
+          <Link
+            href="https://github.com/itsTheAnurag/BitsAndPieces"
+            target="_blank"
+          >
             <Button
               size="lg"
               variant="outline"

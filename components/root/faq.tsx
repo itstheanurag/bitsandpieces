@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -39,10 +40,23 @@ export function FAQ() {
         </h2>
         <Accordion type="single" collapsible className="w-full mt-12">
           {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="mb-4 p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 shadow-md hover:shadow-lg transition-shadow duration-200"
+            >
+              <AccordionItem value={`item-${index}`} className="border-none">
+                <AccordionTrigger className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 hover:no-underline">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-neutral-600 dark:text-neutral-400 pt-2">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
           ))}
         </Accordion>
       </div>
