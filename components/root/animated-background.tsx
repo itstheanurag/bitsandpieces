@@ -13,16 +13,22 @@ import {
   Sun,
 } from "lucide-react";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const icons = [
   <ArrowRight key="arrow" className="text-neutral-200 dark:text-neutral-800" />,
   <Github key="github" className="text-neutral-200 dark:text-neutral-800" />,
-  <LayoutGrid key="layout" className="text-neutral-200 dark:text-neutral-800" />,
+  <LayoutGrid
+    key="layout"
+    className="text-neutral-200 dark:text-neutral-800"
+  />,
   <Copy key="copy" className="text-neutral-200 dark:text-neutral-800" />,
   <Wind key="wind" className="text-neutral-200 dark:text-neutral-800" />,
   <Palette key="palette" className="text-neutral-200 dark:text-neutral-800" />,
-  <ChevronDown key="chevron" className="text-neutral-200 dark:text-neutral-800" />,
+  <ChevronDown
+    key="chevron"
+    className="text-neutral-200 dark:text-neutral-800"
+  />,
   <Moon key="moon" className="text-neutral-200 dark:text-neutral-800" />,
   <Sun key="sun" className="text-neutral-200 dark:text-neutral-800" />,
 ];
@@ -39,7 +45,7 @@ export function AnimatedBackground() {
   }
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className="absolute inset-0 z-10 overflow-hidden">
       {icons.map((icon, i) => (
         <motion.div
           key={i}

@@ -43,10 +43,9 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 target={item.label === "GitHub" ? "_blank" : "_self"}
-                className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
               >
                 {item.icon}
-                {item.label}
               </Link>
             ))}
             <ThemeToggle />

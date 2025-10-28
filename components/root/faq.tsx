@@ -33,11 +33,12 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section className="py-24 bg-neutral-50 dark:bg-neutral-900">
-      <div className="container px-4 max-w-2xl mx-auto">
+    <section className="py-12 bg-neutral-200 dark:bg-neutral-900">
+      <div className="container px-4 max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-neutral-900 dark:text-neutral-100">
           Frequently Asked Questions
         </h2>
+
         <Accordion type="single" collapsible className="w-full mt-12">
           {faqs.map((faq, index) => (
             <motion.div

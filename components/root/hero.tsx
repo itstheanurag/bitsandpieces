@@ -5,11 +5,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Github } from "lucide-react";
 import { CornerPlusSigns } from "../bits/border/corner-plus-signs";
+import { HeroSectionOneDemo } from "../examples/pieces/hero/HeroSectionOne";
+import { HeroSectionOne } from "../pieces/hero/section-one";
+import { AnimatedBackground } from "./animated-background";
 
 export function Hero() {
   return (
-    <section className="relative h-screen flex items-center justify-center">
-      <div className="container px-4 text-center">
+    <section className="relative h-screen w-full flex items-center justify-center">
+      {/* <div className="container px-4 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,7 +61,34 @@ export function Hero() {
             </CornerPlusSigns>
           </Link>
         </motion.div>
-      </div>
+      </div> */}
+      <AnimatedBackground />
+      <HeroSectionOne
+        badge={{
+          label: "v1.0 Released",
+          href: "#",
+        }}
+        title="Bits & Pieces"
+        description="A collection of copy-paste and installable components to build your next idea faster."
+        cta={{
+          primary: {
+            label: "Get Started",
+            href: "#",
+          },
+          secondary: {
+            label: "Learn More",
+            href: "#",
+          },
+        }}
+        logos={
+          <div className="flex gap-8 items-center text-neutral-500 dark:text-neutral-600">
+            <span>Logo1</span>
+            <span>Logo2</span>
+            <span>Logo3</span>
+            <span>Logo4</span>
+          </div>
+        }
+      />
     </section>
   );
 }
