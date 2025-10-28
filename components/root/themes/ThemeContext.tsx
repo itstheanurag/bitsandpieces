@@ -103,7 +103,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             ease: "easeInOut",
           }}
           className={`fixed inset-0 pointer-events-none z-50 ${
-            previousTheme === "light" ? "bg-neutral-50" : "bg-neutral-950"
+            previousTheme === "light" ? "bg-neutral-100" : "bg-neutral-900"
           }`}
           onAnimationComplete={() => setIsAnimating(false)}
         />
