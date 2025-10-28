@@ -35,7 +35,10 @@ export function Hero() {
         >
           <Link href="/docs/pieces">
             <CornerPlusSigns>
-              <Button className="border-none bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 size-lg">
+              <Button
+                size="lg"
+                className="border-none bg-neutral-900 dark:bg-neutral-200 text-white dark:text-neutral-900 hover:bg-neutral-900 dark:hover:bg-neutral-200 rounded-none"
+              >
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </CornerPlusSigns>
@@ -44,13 +47,15 @@ export function Hero() {
             href="https://github.com/itsTheAnurag/BitsAndPieces"
             target="_blank"
           >
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-neutral-300 dark:border-neutral-700"
-            >
-              GitHub <Github className="ml-2 h-4 w-4" />
-            </Button>
+            <CornerPlusSigns>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-none rounded-none"
+              >
+                GitHub <Github className="ml-2 h-4 w-4" />
+              </Button>
+            </CornerPlusSigns>
           </Link>
         </motion.div>
       </div>

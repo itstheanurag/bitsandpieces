@@ -1,82 +1,72 @@
 "use client";
-
-import { motion } from "framer-motion";
-import { Copy, Wind, Palette } from "lucide-react";
+import { BentoGrid } from "@/components/pieces/bento/grid-one";
+import {
+  Copy,
+  Wind,
+  Palette,
+  Code,
+  Layers,
+  Package,
+  Smartphone,
+  Zap,
+} from "lucide-react";
 
 const features = [
   {
-    icon: <Copy className="h-8 w-8" />,
-    title: "Copy & Paste",
+    id: 1,
+    icon: (
+      <Palette className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />
+    ),
+    title: "Themeable",
     description:
-      "Components are designed to be easily copied and pasted into your projects.",
+      "Customize every aspect of the component to fit your brand's design system.",
+    className: "md:col-span-2 lg:col-span-2",
   },
   {
-    icon: <Wind className="h-8 w-8" />,
-    title: "Framer Motion",
-    description:
-      "Beautifully animated components using the power of Framer Motion.",
+    id: 2,
+    icon: <Zap className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />,
+    title: "Blazingly Fast",
+    description: "Optimized for performance with minimal footprint.",
   },
   {
-    icon: <Palette className="h-8 w-8" />,
-    title: "Themed",
-    description:
-      "Built with Tailwind CSS, with full support for dark mode and easy customization.",
+    id: 3,
+    icon: <Code className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />,
+    title: "Developer First",
+    description: "Built with TypeScript and a clean, intuitive API.",
+  },
+  {
+    id: 4,
+    icon: <Layers className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />,
+    title: "50+ Components",
+    description: "A comprehensive library of UI components.",
+    className: "lg:col-span-2",
+  },
+  {
+    id: 5,
+    icon: (
+      <Smartphone className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />
+    ),
+    title: "Responsive",
+    description: "Looks great on all screen sizes, from mobile to desktop.",
+  },
+  {
+    id: 6,
+    icon: (
+      <Package className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />
+    ),
+    title: "Modular",
+    description: "Import only the components you need.",
   },
 ];
 
 export function Features() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     <section className="py-24 bg-neutral-50 dark:bg-neutral-900">
       <div className="container px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-neutral-900 dark:text-neutral-100">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-neutral-900 dark:text-neutral-100 mb-12">
           Why BitsAndPieces?
         </h2>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          className="mt-12 grid gap-8 md:grid-cols-3"
-        >
-          {features.map((feature) => (
-            <motion.div
-              key={feature.title}
-              variants={itemVariants}
-              whileHover={{ translateY: -5 }}
-              transition={{ duration: 0.2 }}
-              className="p-8 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer"
-            >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
-                className="text-neutral-900 dark:text-neutral-100"
-              >
-                {feature.icon}
-              </motion.div>
-              <h3 className="mt-4 text-xl font-bold text-neutral-900 dark:text-neutral-100">
-                {feature.title}
-              </h3>
-              <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-                {feature.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <BentoGrid features={features} />
       </div>
     </section>
   );

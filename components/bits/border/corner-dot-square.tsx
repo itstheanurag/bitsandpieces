@@ -15,13 +15,13 @@ export function CornerDotSquare({ children, className }: CornerDotSquareProps) {
   return (
     <div className={cn(outerClass, className)}>
       {/* top-left */}
-      <div className="absolute -top-0.5 -left-0.5 w-1 h-1 bg-neutral-200 dark:bg-neutral-600 "></div>
+      <div className="absolute -top-0.5 -left-0.5 w-1 h-1 bg-neutral-300 dark:bg-neutral-400 "></div>
       {/* top-right */}
-      <div className="absolute -top-0.5 -right-0.5 w-1 h-1 bg-neutral-200 dark:bg-neutral-600 "></div>
+      <div className="absolute -top-0.5 -right-0.5 w-1 h-1 bg-neutral-300 dark:bg-neutral-400 "></div>
       {/* bottom-left */}
-      <div className="absolute -bottom-0.5 -left-0.5 w-1 h-1 bg-neutral-200 dark:bg-neutral-600 "></div>
+      <div className="absolute -bottom-0.5 -left-0.5 w-1 h-1 bg-neutral-300 dark:bg-neutral-400 "></div>
       {/* bottom-right */}
-      <div className="absolute -bottom-0.5 -right-0.5 w-1 h-1 bg-neutral-200 dark:bg-neutral-600 "></div>{" "}
+      <div className="absolute -bottom-0.5 -right-0.5 w-1 h-1 bg-neutral-300 dark:bg-neutral-400 "></div>{" "}
       <div className={innerClass}>{children}</div>
     </div>
   );
