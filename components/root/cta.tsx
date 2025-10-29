@@ -1,50 +1,49 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 export function CTA() {
   return (
     <section className="py-24">
-      <div className="container px-4 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="relative overflow-hidden rounded-2xl p-12 text-center
+        bg-gradient-to-br from-primary to-primary/60"
+      >
+        <div className="absolute inset-0 bg-grid-white/10 [mask-image:radial-gradient(white,transparent_70%)]" />
+
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100"
+          transition={{ delay: 0.2, duration: 0.7 }}
+          viewport={{ once: true }}
+          className="relative text-4xl font-bold text-primary-foreground mb-4"
         >
           Ready to build something amazing?
         </motion.h2>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 mx-auto max-w-xl text-lg text-neutral-600 dark:text-neutral-400"
+          transition={{ delay: 0.35, duration: 0.7 }}
+          viewport={{ once: true }}
+          className="relative text-lg text-primary-foreground/80 mb-8"
         >
-          Explore the collection of components and start building your next
-          project today.
+          Join thousands of developers using ComponentHub
         </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8"
+
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ type: "spring", stiffness: 250, damping: 12 }}
+          className="px-8 py-4 bg-primary-foreground text-primary rounded-lg font-semibold shadow-lg hover:bg-primary-foreground/90 transition-colors"
         >
-          <Link href="/docs/pieces">
-            <Button
-              size="lg"
-              className="bg-neutral-900 text-neutral-100 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
-            >
-              Browse Components <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </motion.div>
-      </div>
+          Start Building Now
+        </motion.button>
+      </motion.div>
     </section>
   );
 }
