@@ -44,7 +44,7 @@ export function Features() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="flex flex-col gap-8 bg-card p-8 border border-border rounded-lg"
+              className="flex flex-col gap-8 bg-card p-8 border border-border"
             >
               <BentoGridFour features={features} />
             </motion.div>

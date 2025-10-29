@@ -36,7 +36,7 @@ export const BentoGridFour = ({ features }: { features: Feature[] }) => {
       className={cn(
         "grid gap-4",
         "grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 xl:grid-cols-7",
-        "auto-rows-[180px] sm:auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[240px] xl:auto-rows-[260px]"
+        "auto-rows-[180px] sm:auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[220px]"
       )}
     >
       {features.map((feature: Feature, index: number) => (
@@ -73,7 +73,7 @@ const BentoCardFour = ({
   <motion.div
     initial={{ opacity: 0, y: 24 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
+    transition={{ delay: index * 0.01, duration: 0.2, ease: "easeOut" }}
     whileHover={{
       y: -6,
       scale: 1.01,

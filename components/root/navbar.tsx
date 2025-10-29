@@ -28,7 +28,7 @@ export function Navbar() {
       className="fixed z-50 top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl"
     >
       <CornerPlusSigns>
-        <nav className="flex items-center justify-between px-6 py-3 rounded-md bg-background/80 backdrop-blur-md border border-border shadow-sm">
+        <nav className="flex items-center justify-between px-6 py-3 bg-background/80 backdrop-blur-md border border-border">
           <Link
             href="/"
             className="text-lg font-bold text-primary hover:text-foreground/90 transition-colors"
