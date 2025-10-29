@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -11,22 +10,23 @@ interface Feature {
   children?: React.ReactNode;
 }
 
+// Define grid spans based on index and screen size
 const getGridSpan = (index: number) => {
   switch (index) {
     case 0:
-      return "md:col-span-3 md:row-span-2";
+      return "sm:col-span-2 sm:row-span-3 md:col-span-2 md:row-span-2 lg:col-span-3 lg:row-span-2";
     case 1:
-      return "md:col-span-2 md:row-span-1";
+      return "sm:col-span-2 sm:row-span-3 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-1";
     case 2:
-      return "md:col-span-2 md:row-span-2";
+      return "sm:col-span-2 sm:row-span-3 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2";
     case 3:
-      return "md:col-span-2 md:row-span-2";
+      return "sm:col-span-2 sm:row-span-3 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2";
     case 4:
-      return "md:col-span-3 md:row-span-1";
+      return "sm:col-span-2 sm:row-span-3 md:col-span-3 md:row-span-1 lg:col-span-3 lg:row-span-1";
     case 5:
-      return "md:col-span-2 md:row-span-1";
+      return "sm:col-span-2 sm:row-span-3 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-1";
     default:
-      return "md:col-span-3 md:row-span-1";
+      return "sm:col-span-2 sm:row-span-3 md:col-span-3 md:row-span-1 lg:col-span-3 lg:row-span-1";
   }
 };
 
@@ -35,8 +35,8 @@ export const BentoGridFour = ({ features }: { features: Feature[] }) => {
     <div
       className={cn(
         "grid gap-4",
-        "grid-cols-1 sm:grid-cols-2 md:grid-cols-7",
-        "auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[240px]"
+        "grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 xl:grid-cols-7",
+        "auto-rows-[180px] sm:auto-rows-[180px] md:auto-rows-[200px] lg:auto-rows-[240px] xl:auto-rows-[260px]"
       )}
     >
       {features.map((feature: Feature, index: number) => (
@@ -48,7 +48,7 @@ export const BentoGridFour = ({ features }: { features: Feature[] }) => {
           title={feature.title}
           description={feature.description}
         >
-          <>{feature.children}</>
+          {feature.children}
         </BentoCardFour>
       ))}
     </div>
@@ -101,7 +101,7 @@ const BentoCardFour = ({
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             {title}
           </h3>
-          <p className="text-sm  text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             {description}
           </p>
         </div>

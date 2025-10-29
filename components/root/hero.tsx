@@ -1,19 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Copy, Zap } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { useState } from "react";
 
 export function Hero() {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText("npx shadcn-ui@latest add component-name");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  // Animation Variants
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
     visible: (delay = 0) => ({
@@ -24,7 +17,7 @@ export function Hero() {
   };
 
   return (
-    <section className="h-[90vh] relative z-10 max-w-7xl mx-auto pt-36 flex flex-col items-center">
+    <section className="relative z-10 max-w-7xl mx-auto px-4 pt-28 pb-20 md:pt-36 md:pb-32">
       <motion.div
         className="text-center max-w-4xl mx-auto"
         initial="hidden"
@@ -46,7 +39,7 @@ export function Hero() {
         <motion.h1
           variants={fadeUp}
           custom={0.2}
-          className="text-6xl md:text-7xl font-bold mb-6 leading-tight"
+          className="font-bold mb-6 leading-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
         >
           Beautiful <span className="text-primary">Components</span>
           <br />
@@ -57,24 +50,22 @@ export function Hero() {
         <motion.p
           variants={fadeUp}
           custom={0.3}
-          className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
         >
           A curated collection of premium, animated components built with
           Next.js, Framer Motion, and shadcn/ui.
         </motion.p>
 
-        {/* Animated Border Code Block */}
-
         {/* Buttons */}
         <motion.div
           variants={fadeUp}
           custom={0.5}
-          className="flex items-center justify-center gap-4 pt-12"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6"
         >
           <motion.button
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-primary text-primary-foreground rounded-lg transition-all font-medium flex items-center gap-2"
+            className="px-6 py-3 bg-primary text-primary-foreground rounded-lg transition-all font-medium flex items-center gap-2 w-full sm:w-auto justify-center"
           >
             Browse Components
             <ArrowRight className="w-4 h-4" />
@@ -83,7 +74,7 @@ export function Hero() {
           <motion.button
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-accent text-accent-foreground rounded-lg transition-all font-medium"
+            className="px-6 py-3 bg-accent text-accent-foreground rounded-lg transition-all font-medium w-full sm:w-auto"
           >
             View on GitHub
           </motion.button>
