@@ -10,10 +10,7 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <motion.button
-      className="relative flex items-center justify-center w-9 h-9 rounded-md 
-                 border border-border bg-muted hover:bg-accent 
-                 text-muted-foreground hover:text-accent-foreground 
-                 transition-colors"
+      className="relative flex items-center justify-center w-9 h-9 rounded-md bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground transition-colors cursor-pointer"
       onClick={toggleTheme}
       whileTap={{ scale: 0.9 }}
       aria-label="Toggle theme"

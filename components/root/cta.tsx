@@ -11,9 +11,9 @@ export function CTA() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
         className="relative overflow-hidden rounded-2xl p-12 text-center
-        bg-gradient-to-br from-primary to-primary/60"
+        bg-linear-to-br from-primary to-primary/60"
       >
-        <div className="absolute inset-0 bg-grid-white/10 [mask-image:radial-gradient(white,transparent_70%)]" />
+        <div className="absolute inset-0 bg-grid-white/10 mask-[radial-gradient(white,transparent_70%)]" />
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

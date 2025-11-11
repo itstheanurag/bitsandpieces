@@ -4,11 +4,14 @@ import { Features } from "./features";
 import { CTA } from "./cta";
 import { Contributors } from "./contributors";
 import { FAQ } from "./faq";
+import Container from "./container";
 export function Home() {
   return (
     <div className="w-full min-h-screen flex flex-col items-center overflow-hidden">
-      <Navbar />
-      <Hero />
+      <Container>
+        <Navbar />
+        <Hero />
+      </Container>
 
       <Features />
       <CTA />

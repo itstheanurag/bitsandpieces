@@ -5,8 +5,6 @@ import { ArrowRight, Zap } from "lucide-react";
 import { useState } from "react";
 
 export function Hero() {
-  const [copied, setCopied] = useState(false);
-
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
     visible: (delay = 0) => ({
@@ -27,21 +25,19 @@ export function Hero() {
         <motion.div
           variants={fadeUp}
           custom={0.1}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-accent rounded-full mb-6 border border-border"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 border border-border text-muted-foreground font-semibold text-sm cursor-pointer"
         >
-          <Zap className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium">
-            Built with shadcn/ui + Framer Motion
-          </span>
+          <Zap className="w-4 h-4" />
+          <span className="">Built with shadcn/ui + Framer Motion</span>
         </motion.div>
 
         {/* Title */}
         <motion.h1
           variants={fadeUp}
           custom={0.2}
-          className="font-bold mb-6 leading-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+          className="text-primary font-bold mb-6 leading-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          Beautiful <span className="text-primary">Components</span>
+          Beautiful Components
           <br />
           <span className="">Built for Modern Web</span>
         </motion.h1>
@@ -65,7 +61,7 @@ export function Hero() {
           <motion.button
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-primary text-primary-foreground rounded-lg transition-all font-medium flex items-center gap-2 w-full sm:w-auto justify-center"
+            className="px-6 py-3 bg-primary text-primary-foreground rounded-lg transition-all font-medium flex items-center gap-2 w-full sm:w-auto justify-center cursor-pointer"
           >
             Browse Components
             <ArrowRight className="w-4 h-4" />
@@ -74,7 +70,7 @@ export function Hero() {
           <motion.button
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-accent text-accent-foreground rounded-lg transition-all font-medium w-full sm:w-auto"
+            className="px-6 py-3 bg-accent text-accent-foreground rounded-lg transition-all font-medium w-full sm:w-auto cursor-pointer"
           >
             View on GitHub
           </motion.button>
