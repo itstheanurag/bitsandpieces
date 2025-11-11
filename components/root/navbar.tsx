@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ThemeToggle } from "./themes";
 import { LayoutGrid, Github } from "lucide-react";
-import { CornerPlusSigns } from "../bits/border/corner-plus-signs";
 
 export function Navbar() {
   const navItems = [
@@ -27,30 +26,28 @@ export function Navbar() {
       transition={{ duration: 0.5 }}
       className="fixed z-50 top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl"
     >
-      <CornerPlusSigns>
-        <nav className="flex items-center justify-between px-6 py-3 bg-background/80 backdrop-blur-md border border-border">
-          <Link
-            href="/"
-            className="text-lg font-bold text-primary hover:text-foreground/90 transition-colors"
-          >
-            Bits&Pieces
-          </Link>
+      <nav className="flex items-center justify-between px-6 py-3 bg-background/80 backdrop-blur-md border border-border">
+        <Link
+          href="/"
+          className="text-lg font-bold text-primary hover:text-foreground/90 transition-colors"
+        >
+          Bits&Pieces
+        </Link>
 
-          <div className="flex items-center gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                target={item.label === "GitHub" ? "_blank" : "_self"}
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {item.icon}
-              </Link>
-            ))}
-            <ThemeToggle />
-          </div>
-        </nav>
-      </CornerPlusSigns>
+        <div className="flex items-center gap-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              target={item.label === "GitHub" ? "_blank" : "_self"}
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {item.icon}
+            </Link>
+          ))}
+          <ThemeToggle />
+        </div>
+      </nav>
     </motion.div>
   );
 }

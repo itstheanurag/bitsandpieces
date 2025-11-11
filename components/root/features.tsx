@@ -1,9 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CornerPlusSigns } from "../bits/border/corner-plus-signs";
-import { features } from "../examples/pieces/bento/BentoGridFourDemo";
-import { BentoGridFour } from "../pieces/bento/grid-four";
 
 import type { Variants } from "framer-motion";
 
@@ -37,19 +34,7 @@ export function Features() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-        >
-          <CornerPlusSigns>
-            <motion.div
-              variants={fadeUp(0.5)}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="flex flex-col gap-8 bg-card p-8 border border-border"
-            >
-              <BentoGridFour features={features} />
-            </motion.div>
-          </CornerPlusSigns>
-        </motion.div>
+        ></motion.div>
       </div>
     </section>
   );
