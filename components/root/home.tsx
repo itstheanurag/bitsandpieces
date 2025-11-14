@@ -7,26 +7,41 @@ import { CTA } from "./cta";
 import { Contributors } from "./contributors";
 import { FAQ } from "./faq";
 import Container from "./container";
-import SectionDivider from "./backgrounds/divider";
 
 export function Home() {
   return (
     <div className="w-full min-h-screen flex flex-col items-center overflow-hidden">
-      <Container>
-        <Navbar />
-        <Hero />
-      </Container>
+      {/* Navbar + Hero Section */}
+      <section className="w-full">
+        <Container>
+          <Navbar />
+          <Hero />
+        </Container>
+      </section>
 
-      <div>
-        <SectionDivider />
+      {/* Features Section */}
+      <section className="w-full pt-20">
         <Container>
           <Features />
+        </Container>
+      </section>
+
+      {/* CTA Section */}
+      <section className="w-full pt-20 pb-20">
+        <Container>
           <CTA />
         </Container>
-      </div>
+      </section>
 
-      <FAQ />
-      <Contributors />
+      {/* FAQ */}
+      <section className="w-full pt-20">
+        <FAQ />
+      </section>
+
+      {/* Contributors */}
+      <section className="w-full pt-20 pb-32">
+        <Contributors />
+      </section>
     </div>
   );
 }

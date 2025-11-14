@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ThemeToggle } from "./themes";
@@ -24,27 +25,51 @@ export function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed z-50 top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl"
+      className={cn(
+        "fixed z-50",
+        "top-4 left-1/2 -translate-x-1/2",
+        "w-[90%] max-w-5xl"
+      )}
     >
-      <nav className="flex items-center justify-between px-6 py-3 bg-background/80 backdrop-blur-md border border-border">
+      <nav
+        className={cn(
+          "flex items-center justify-between",
+          "px-6 py-3",
+          "bg-background/80 backdrop-blur-md",
+          "border border-neutral-200 dark:border-neutral-700",
+          "rounded-lg shadow inset-0"
+        )}
+      >
+        {/* Logo */}
         <Link
           href="/"
-          className="text-lg font-bold text-primary hover:text-foreground/90 transition-colors"
+          className={cn(
+            "text-lg font-bold",
+            "text-primary hover:text-foreground/90",
+            "transition-colors"
+          )}
         >
           Bits&Pieces
         </Link>
 
-        <div className="flex items-center gap-4">
+        {/* Nav Items */}
+        <div className={cn("flex items-center gap-4")}>
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               target={item.label === "GitHub" ? "_blank" : "_self"}
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              className={cn(
+                "flex items-center gap-2",
+                "text-neutral-800 hover:text-neutral-600",
+                "dark:text-neutral-200 hover:dark:text-neutral-400",
+                "transition-colors cursor-pointer"
+              )}
             >
               {item.icon}
             </Link>
           ))}
+
           <ThemeToggle />
         </div>
       </nav>
