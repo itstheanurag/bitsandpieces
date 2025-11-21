@@ -89,7 +89,9 @@ export function Features() {
               "
             >
               <div className="mb-4">{icon}</div>
-              <h3 className="text-muted-foreground text-xl font-semibold mb-2">{title}</h3>
+              <h3 className="text-muted-foreground text-xl font-semibold mb-2">
+                {title}
+              </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {description}
               </p>

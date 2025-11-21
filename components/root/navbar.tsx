@@ -40,15 +40,18 @@ export function Navbar() {
           "rounded-lg shadow inset-0"
         )}
       >
-        {/* Logo */}
         <Link
           href="/"
           className={cn(
+            "flex items-center gap-2",
             "text-lg font-bold",
             "text-primary hover:text-foreground/90",
             "transition-colors"
           )}
         >
+          <div className="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 p-1 rounded-md">
+            <LayoutGrid className="w-5 h-5" />
+          </div>
           Bits&Pieces
         </Link>
 

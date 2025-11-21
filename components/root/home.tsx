@@ -7,31 +7,25 @@ import { CTA } from "./cta";
 import { Contributors } from "./contributors";
 import { FAQ } from "./faq";
 import Container from "./container";
+import { Footer } from "./footer";
+import { ComponentsPreview } from "./components-preview";
 
 export function Home() {
   return (
     <div className="w-full min-h-screen flex flex-col items-center overflow-hidden">
       {/* Navbar + Hero Section */}
-      <section className="w-full">
-        <Container>
-          <Navbar />
-          <Hero />
-        </Container>
-      </section>
 
-      {/* Features Section */}
-      <section className="w-full pt-20">
-        <Container>
-          <Features />
-        </Container>
-      </section>
+      <Container>
+        <Navbar />
+        
+        <Hero />
 
-      {/* CTA Section */}
-      <section className="w-full pt-20 pb-20">
-        <Container>
-          <CTA />
-        </Container>
-      </section>
+        <Features />
+
+        <ComponentsPreview />
+
+        <CTA />
+      </Container>
 
       {/* FAQ */}
       <section className="w-full pt-20">
@@ -39,8 +33,12 @@ export function Home() {
       </section>
 
       {/* Contributors */}
-      <section className="w-full pt-20 pb-32">
+      <section className="w-full">
         <Contributors />
+      </section>
+
+      <section className="w-full">
+        <Footer />
       </section>
     </div>
   );

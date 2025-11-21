@@ -52,7 +52,7 @@ export function FAQ() {
 
   return (
     <section className="py-20">
-      <div className="container px-4 max-w-4xl mx-auto">
+      <div className="container px-4 max-w-5xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -6 }}
           whileInView={{ opacity: 1, y: 0 }}
