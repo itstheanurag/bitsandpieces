@@ -36,7 +36,7 @@ export function Features() {
   ];
 
   return (
-    <section className="py-24 w-full bg-neutral-50/50 dark:bg-neutral-950/50">
+    <section className="py-24 w-full bg-neutral-50 dark:bg-neutral-900">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-neutral-900 dark:text-white">

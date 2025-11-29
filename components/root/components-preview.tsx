@@ -9,7 +9,7 @@ export function ComponentsPreview() {
   const [activeTab, setActiveTab] = useState<"bits" | "pieces">("bits");
 
   return (
-    <section className="py-24 bg-neutral-50/50 dark:bg-neutral-950/50 w-full">
+    <section className="py-24 bg-white dark:bg-neutral-950 w-full">
       <div className="max-w-7xl px-4 mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4 text-neutral-900 dark:text-white">

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -43,55 +44,81 @@ const faqs = [
 ];
 
 export function FAQ() {
-  const [openIndexes, setOpenIndexes] = useState<number[]>([]);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleIndex = (index: number) => {
-    setOpenIndexes((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="py-24 bg-white dark:bg-neutral-950">
-      <div className="container px-4 max-w-5xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: -6 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-neutral-900 dark:text-white"
-        >
-          Frequently Asked Questions
-        </motion.h2>
+    <section className="py-24 bg-neutral-50 dark:bg-neutral-900 w-full">
+      <div className="container px-4 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold mb-6 text-neutral-900 dark:text-white"
+          >
+            Frequently Asked Questions
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg"
+          >
+            Everything you need to know about the library and how it works.
+          </motion.p>
+        </div>
 
-        <div className="space-y-4">
+        <div className="max-w-4xl mx-auto space-y-4">
           {faqs.map((faq, index) => {
-            const isOpen = openIndexes.includes(index);
+            const isOpen = openIndex === index;
 
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="border-b border-neutral-200 dark:border-neutral-800 last:border-0"
+                className={cn(
+                  "rounded-2xl border transition-all duration-200",
+                  isOpen
+                    ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 shadow-lg"
+                    : "bg-white/50 dark:bg-neutral-900/50 border-transparent hover:bg-white dark:hover:bg-neutral-900 hover:border-neutral-200 dark:hover:border-neutral-800"
+                )}
               >
                 <button
                   onClick={() => toggleIndex(index)}
-                  className="flex w-full items-center justify-between py-4 text-left group"
+                  className="flex w-full items-center justify-between p-6 text-left"
                 >
-                  <span className="font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+                  <span
+                    className={cn(
+                      "text-lg font-medium transition-colors",
+                      isOpen
+                        ? "text-neutral-900 dark:text-white"
+                        : "text-neutral-700 dark:text-neutral-300"
+                    )}
+                  >
                     {faq.question}
                   </span>
-
-                  <motion.span
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-neutral-500"
+                  <div
+                    className={cn(
+                      "flex items-center justify-center w-8 h-8 rounded-full border transition-colors",
+                      isOpen
+                        ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 border-neutral-900 dark:border-white"
+                        : "bg-transparent border-neutral-200 dark:border-neutral-700 text-neutral-500"
+                    )}
                   >
-                    <ChevronDown className="w-5 h-5" />
-                  </motion.span>
+                    {isOpen ? (
+                      <Minus className="w-4 h-4" />
+                    ) : (
+                      <Plus className="w-4 h-4" />
+                    )}
+                  </div>
                 </button>
 
                 <AnimatePresence>
@@ -100,10 +127,10 @@ export function FAQ() {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="pb-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      <div className="px-6 pb-6 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
