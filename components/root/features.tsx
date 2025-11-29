@@ -1,103 +1,78 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
-import { Code, Zap, Users, Rocket } from "lucide-react"; // <-- icons (shadcn/lucide)
-
-const fadeUp = (delay = 0): Variants => ({
-  initial: { opacity: 0, y: 30 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay },
-  },
-});
+import { Code2, Copy, Moon, Box } from "lucide-react";
 
 export function Features() {
   const features = [
     {
-      icon: <Code className="w-10 h-10 text-primary" />,
-      title: "Copy-Paste Code Snippets",
+      title: "Bits & Pieces",
       description:
-        "Save reusable components and utilities that you can instantly paste into any new project.",
+        "A clear distinction between small utilities (Bits) and large components (Pieces).",
+      icon: <Box className="w-6 h-6" />,
+      className: "md:col-span-2",
     },
     {
-      icon: <Zap className="w-10 h-10 text-primary" />,
-      title: "Lightning Fast Search",
+      title: "Copy & Paste",
       description:
-        "Find your saved snippets within seconds using full-text search.",
+        "Simply copy the code and paste it into your project. No npm install required.",
+      icon: <Copy className="w-6 h-6" />,
+      className: "md:col-span-1",
     },
     {
-      icon: <Users className="w-10 h-10 text-primary" />,
-      title: "Collaborate With Teammates",
+      title: "Dark Mode Ready",
       description:
-        "Share your snippets with your team or keep them private — your choice.",
+        "Every component is built with dark mode support out of the box.",
+      icon: <Moon className="w-6 h-6" />,
+      className: "md:col-span-1",
     },
     {
-      icon: <Rocket className="w-10 h-10 text-primary" />,
-      title: "Get Started Instantly",
-      description:
-        "Zero setup — just create an account and start storing your bits and pieces.",
+      title: "Modern Stack",
+      description: "Built with Next.js 14, Tailwind CSS, and Framer Motion.",
+      icon: <Code2 className="w-6 h-6" />,
+      className: "md:col-span-2",
     },
   ];
 
   return (
-    <section className="py-16">
-      <div className="container w-full max-w-7xl">
-        {/* Title */}
-        <motion.h2
-          variants={fadeUp(0.1)}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center text-primary mb-12"
-        >
-          Why BitsAndPieces?
-        </motion.h2>
+    <section className="py-24 w-full bg-neutral-50/50 dark:bg-neutral-950/50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-neutral-900 dark:text-white">
+            Everything you need.
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl mx-auto">
+            Thoughtfully designed components that you can drop into your
+            projects immediately.
+          </p>
+        </div>
 
-        {/* Bento Grid */}
-        <motion.div
-          variants={fadeUp(0.3)}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="
-            grid grid-cols-1
-            sm:grid-cols-2
-            md:grid-cols-4
-            gap-6
-          "
-        >
-          {features.map(({ icon, title, description }, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map((feature, i) => (
             <motion.div
               key={i}
-              variants={fadeUp(0.2 * (i + 1))}
-              initial="initial"
-              whileInView="animate"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="
-                rounded-xl
-                border
-                border-border
-                p-6
-                bg-muted/30
-                backdrop-blur-sm
-                shadow
-                hover:shadow-lg
-                transition-all
-                hover:-translate-y-1
-              "
+              transition={{ delay: i * 0.1 }}
+              className={cn(
+                "group relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-8 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors",
+                feature.className
+              )}
             >
-              <div className="mb-4">{icon}</div>
-              <h3 className="text-muted-foreground text-xl font-semibold mb-2">
-                {title}
+              <div className="mb-4 inline-flex items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800 p-3 text-neutral-900 dark:text-white group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 transition-colors">
+                {feature.icon}
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-neutral-900 dark:text-white">
+                {feature.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {description}
+              <p className="text-neutral-600 dark:text-neutral-400">
+                {feature.description}
               </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

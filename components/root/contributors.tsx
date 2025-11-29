@@ -16,7 +16,7 @@ const contributors = [
 export function Contributors() {
   return (
     <section className="py-24">
-      <div className="container px-4 text-center">
+      <div className="w-full px-4 mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
           Our Contributors
         </h2>

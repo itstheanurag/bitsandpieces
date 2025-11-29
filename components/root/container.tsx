@@ -6,12 +6,7 @@ const Container: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   return (
-    <div
-      className={cn(
-        "max-w-6xl w-full mx-auto py-2 px-4",
-        className
-      )}
-    >
+    <div className={cn("max-w-7xl w-full mx-auto py-2 px-4", className)}>
       {children}
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
@@ -32,7 +33,7 @@ const faqs = [
   {
     question: "Do the components support dark mode?",
     answer:
-      "Yes. All components use Tailwind’s `text-foreground`, `bg-card`, `border-border`, and other theme-aware tokens to ensure they adapt to light and dark modes automatically.",
+      "Yes. All components use Tailwind’s dark mode modifiers to ensure they adapt to light and dark modes automatically.",
   },
   {
     question: "Will you be adding more components?",
@@ -51,73 +52,58 @@ export function FAQ() {
   };
 
   return (
-    <section className="py-20">
+    <section className="py-24 bg-white dark:bg-neutral-950">
       <div className="container px-4 max-w-5xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-neutral-900 dark:text-white"
         >
           Frequently Asked Questions
         </motion.h2>
 
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={{
-            hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1 },
-            },
-          }}
-          className="space-y-4"
-        >
+        <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndexes.includes(index);
 
             return (
               <motion.div
                 key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 12 },
-                  show: { opacity: 1, y: 0 },
-                }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="border-b border-neutral-200 dark:border-neutral-800 last:border-0"
               >
-                {/* Question Card */}
-                <div className="rounded-xl border border-border bg-card shadow-sm hover:shadow-md transition-shadow">
-                  <button
-                    onClick={() => toggleIndex(index)}
-                    className="flex w-full items-center justify-between p-5 text-left"
+                <button
+                  onClick={() => toggleIndex(index)}
+                  className="flex w-full items-center justify-between py-4 text-left group"
+                >
+                  <span className="font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+                    {faq.question}
+                  </span>
+
+                  <motion.span
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-neutral-500"
                   >
-                    <span className="font-semibold text-primary">
-                      {faq.question}
-                    </span>
+                    <ChevronDown className="w-5 h-5" />
+                  </motion.span>
+                </button>
 
-                    <motion.span
-                      animate={{ rotate: isOpen ? 180 : 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="text-primary ml-4"
-                    >
-                      ▼
-                    </motion.span>
-                  </button>
-                </div>
-
-                {/* Answer Panel */}
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                      animate={{ opacity: 1, height: "auto", marginTop: 10 }}
-                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="rounded-xl border border-border bg-muted/40 shadow-sm p-5 text-muted-foreground leading-relaxed">
+                      <div className="pb-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -126,7 +112,7 @@ export function FAQ() {
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
