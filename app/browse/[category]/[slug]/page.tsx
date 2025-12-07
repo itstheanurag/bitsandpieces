@@ -4,6 +4,21 @@ import { registryData as piecesRegistry } from "@/__registry__/registry.pieces";
 import { registryMap, exampleRegistryMap } from "@/__registry__/registry.map";
 import { ComponentView } from "@/components/component-view";
 
+
+export async function generateStaticParams() {
+  const bitsParams = Object.keys(bitsRegistry).map((slug) => ({
+    category: "bits",
+    slug,
+  }));
+
+  const piecesParams = Object.keys(piecesRegistry).map((slug) => ({
+    category: "pieces",
+    slug,
+  }));
+
+  return [...bitsParams, ...piecesParams];
+}
+
 interface PageProps {
   params: Promise<{
     category: string;
