@@ -10,7 +10,7 @@ export function Navbar() {
   const navItems = [
     {
       label: "Components",
-      href: "/docs/pieces",
+      href: "/browse",
       icon: <LayoutGrid className="h-4 w-4" />,
     },
     {

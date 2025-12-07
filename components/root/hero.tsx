@@ -68,7 +68,7 @@ export function Hero() {
           className="flex flex-wrap items-center justify-center gap-4 mt-4"
         >
           <Link
-            href="/docs"
+            href="/browse"
             className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-neutral-950 dark:bg-neutral-50 px-8 font-medium text-neutral-50 dark:text-neutral-950 transition-all duration-300 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:ring-2 hover:ring-neutral-950 dark:hover:ring-neutral-50 hover:ring-offset-2"
           >
             <span className="mr-2">Browse Components</span>
