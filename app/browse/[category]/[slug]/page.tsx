@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { registryData as bitsRegistry } from "@/__registry__/registry.bits";
 import { registryData as piecesRegistry } from "@/__registry__/registry.pieces";
-import { registryMap } from "@/__registry__/registry.map";
+import { registryMap, exampleRegistryMap } from "@/__registry__/registry.map";
 import { ComponentView } from "@/components/component-view";
 
 interface PageProps {
@@ -27,7 +27,7 @@ export default async function ComponentPage(props: PageProps) {
   const item = (registry as any)[slug];
   if (!item) return notFound();
 
-  const Component = registryMap[slug];
+  const Component = exampleRegistryMap[slug] || registryMap[slug];
 
   return (
     <div className="container max-w-5xl py-10 px-6">

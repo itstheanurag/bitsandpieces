@@ -263,9 +263,24 @@ import * as React from "react";
 
 ${mapImports.join("\n")}
 
+const exampleRegistryMap: Record<string, React.ComponentType<any>> = {};
+
+${Object.entries(allItems)
+  .filter(([_, item]) => item.examplePath)
+  .map(([key, item]) => {
+    // We rely on the fact that examplePath is relative to projectRoot
+    // e.g. "components/examples/LayoutBentoGridDemo.tsx"
+    const exampleImportPath = "@/" + item.examplePath!.replace(/\.tsx?$/, "");
+    const exampleName = extractExportName(item.exampleCode!);
+    return `import { ${exampleName} as Example_${key.replace(/-/g, "_")} } from "${exampleImportPath}";\nexampleRegistryMap["${key}"] = Example_${key.replace(/-/g, "_")};`;
+  })
+  .join("\n")}
+
 export const registryMap: Record<string, React.ComponentType<any>> = {
 ${mapEntries.join("\n")}
 };
+
+export { exampleRegistryMap };
 `;
 
   const mapRegistryPath = path.join(registryDir, "registry.map.ts");
