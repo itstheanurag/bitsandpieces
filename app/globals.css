@@ -189,3 +189,18 @@
   background-image: linear-gradient(to right, currentColor 1px, transparent 1px),
     linear-gradient(to bottom, currentColor 1px, transparent 1px);
 }
+
+@theme inline {
+  /* ... existing theme ... */
+  --animate-grid: grid 15s linear infinite;
+  --animate-border-beam: border-beam calc(var(--duration)*1s) infinite linear;
+
+  @keyframes grid {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+
+  @keyframes border-beam {
+    100% { offset-distance: 100%; }
+  }
+}

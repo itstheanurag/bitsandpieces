@@ -1,140 +1,224 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Component, Layers } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Check, Copy, Code2, Eye, Terminal } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative w-full overflow-hidden min-h-screen flex flex-col items-center justify-center pt-20">
+    <section className="relative w-full overflow-hidden min-h-screen flex flex-col items-center justify-center pt-24 pb-12">
       {/* Background */}
-      <div className="absolute inset-0 z-0 w-full h-full bg-white dark:bg-neutral-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]">
-        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-neutral-400 opacity-20 blur-[100px] dark:bg-neutral-500"></div>
+      <div className="absolute inset-0 z-0">
+         {/* Noise overlay */}
+         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-20 brightness-100 contrast-150"></div>
+         {/* Gradient Background */}
+         <div className="absolute inset-0 bg-gradient-to-b from-white via-neutral-100/50 to-white dark:from-neutral-950 dark:via-neutral-900/50 dark:to-neutral-950"></div>
+         {/* Grid */}
+         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
       </div>
 
-      {/* Content */}
-      <div className="z-10 flex flex-col items-center text-center max-w-5xl mx-auto px-4 gap-6">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm text-xs font-medium text-neutral-600 dark:text-neutral-400"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neutral-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-neutral-500"></span>
-          </span>
-          v1.0.0 Public Beta
-        </motion.div>
+      <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center gap-12">
+        
+        {/* Text Content */}
+        <div className="flex flex-col items-center text-center gap-6 max-w-4xl">
+           <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.5 }}
+             className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm text-xs font-medium text-neutral-600 dark:text-neutral-400 shadow-sm"
+           >
+             <span className="relative flex h-2 w-2">
+               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+             </span>
+             v1.0 is now live
+           </motion.div>
 
-        {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-neutral-900 dark:text-white"
-        >
-          Craft <span className="text-neutral-500">Better</span> Interfaces
-          <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-neutral-500 dark:from-neutral-100 dark:to-neutral-500">
-            Piece by Piece.
-          </span>
-        </motion.h1>
+           <motion.h1
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.5, delay: 0.1 }}
+             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-neutral-900 dark:text-white"
+           >
+             Build <span className="text-neutral-500 dark:text-neutral-400">faster</span> with
+             <br />
+             <span className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 via-neutral-600 to-neutral-900 dark:from-white dark:via-neutral-400 dark:to-white animate-gradient-x">
+               premium components.
+             </span>
+           </motion.h1>
 
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl"
-        >
-          A collection of modern, copy-paste React components. From small{" "}
-          <span className="font-semibold text-neutral-900 dark:text-neutral-200">
-            Bits
-          </span>{" "}
-          like buttons and shadows to large{" "}
-          <span className="font-semibold text-neutral-900 dark:text-neutral-200">
-            Pieces
-          </span>{" "}
-          like navbars and dashboards.
-        </motion.p>
+           <motion.p
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.5, delay: 0.2 }}
+             className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed"
+           >
+             Copy and paste beautiful, accessible components into your app.
+             Open source and free to use.
+           </motion.p>
 
-        {/* Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-4 mt-4"
-        >
-          <Link
-            href="/browse"
-            className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-neutral-950 dark:bg-neutral-50 px-8 font-medium text-neutral-50 dark:text-neutral-950 transition-all duration-300 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:ring-2 hover:ring-neutral-950 dark:hover:ring-neutral-50 hover:ring-offset-2"
-          >
-            <span className="mr-2">Browse Components</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <Link
-            href="https://github.com"
-            target="_blank"
-            className="inline-flex h-12 items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 bg-transparent px-8 font-medium text-neutral-900 dark:text-neutral-100 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900"
-          >
-            GitHub
-          </Link>
-        </motion.div>
-      </div>
-
-      {/* Visual Preview / Abstract Representation */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="relative w-full max-w-6xl mt-16 px-4"
-      >
-        <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 backdrop-blur-xl p-4 shadow-2xl">
-          <div className="absolute inset-0 bg-gradient-to-b from-neutral-100/20 to-transparent dark:from-neutral-800/20 pointer-events-none rounded-xl" />
-          {/* Mock UI Content */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[400px] w-full overflow-hidden">
-            {/* Card 1: Bits */}
-            <div className="col-span-1 bg-white dark:bg-neutral-950 rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 flex flex-col gap-4">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="p-2 rounded-md bg-neutral-100 dark:bg-neutral-900">
-                  <Component className="w-4 h-4" />
-                </div>
-                <h3 className="font-semibold">Bits</h3>
-              </div>
-              <div className="space-y-3">
-                <div className="h-8 w-24 bg-neutral-100 dark:bg-neutral-900 rounded animate-pulse" />
-                <div className="h-8 w-32 bg-neutral-100 dark:bg-neutral-900 rounded animate-pulse delay-75" />
-                <div className="h-8 w-20 bg-neutral-100 dark:bg-neutral-900 rounded animate-pulse delay-150" />
-              </div>
-            </div>
-
-            {/* Card 2: Pieces */}
-            <div className="col-span-1 md:col-span-2 bg-white dark:bg-neutral-950 rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 relative overflow-hidden">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="p-2 rounded-md bg-neutral-100 dark:bg-neutral-900">
-                  <Layers className="w-4 h-4" />
-                </div>
-                <h3 className="font-semibold">Pieces</h3>
-              </div>
-              {/* Mock Navbar */}
-              <div className="w-full h-12 border border-neutral-200 dark:border-neutral-800 rounded-md mb-4 flex items-center px-4 justify-between">
-                <div className="w-20 h-4 bg-neutral-200 dark:bg-neutral-800 rounded" />
-                <div className="flex gap-2">
-                  <div className="w-16 h-4 bg-neutral-100 dark:bg-neutral-900 rounded" />
-                  <div className="w-16 h-4 bg-neutral-100 dark:bg-neutral-900 rounded" />
-                </div>
-              </div>
-              {/* Mock Hero Content */}
-              <div className="space-y-4">
-                <div className="w-3/4 h-8 bg-neutral-200 dark:bg-neutral-800 rounded" />
-                <div className="w-1/2 h-4 bg-neutral-100 dark:bg-neutral-900 rounded" />
-              </div>
-            </div>
-          </div>
+           <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.5, delay: 0.3 }}
+             className="flex flex-wrap items-center justify-center gap-4"
+           >
+             <Link
+               href="/browse"
+               className="h-12 px-8 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium flex items-center gap-2 hover:scale-105 active:scale-95 transition-transform"
+             >
+               Browse Components
+               <ArrowRight className="w-4 h-4" />
+             </Link>
+             <Link
+               href="https://github.com/itstheanurag/bitsandpieces"
+               target="_blank"
+               className="h-12 px-8 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white font-medium flex items-center gap-2 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+             >
+               <Terminal className="w-4 h-4" />
+               GitHub
+             </Link>
+           </motion.div>
         </div>
-      </motion.div>
+
+        {/* Interactive Demo */}
+        <motion.div
+           initial={{ opacity: 0, scale: 0.95, y: 40 }}
+           animate={{ opacity: 1, scale: 1, y: 0 }}
+           transition={{ duration: 0.8, delay: 0.4 }} // Slow, dramatic entrance
+           className="w-full max-w-5xl"
+        >
+          <HeroDemo />
+        </motion.div>
+
+      </div>
     </section>
+  );
+}
+
+function HeroDemo() {
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [copied, setCopied] = useState(false);
+
+  const codeString = `// 1. Copy the code
+import { Button } from "@/components/ui/button";
+
+export function HeroButton() {
+  return (
+    <Button 
+      variant="neutral" 
+      size="lg" 
+      className="shadow-xl"
+    >
+      Click me
+    </Button>
+  );
+}`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeString);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-md shadow-2xl overflow-hidden">
+      {/* Window Header */}
+      <div className="h-12 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between px-4 bg-white/80 dark:bg-neutral-900/80">
+        <div className="flex gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-400/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
+          <div className="w-3 h-3 rounded-full bg-green-400/80" />
+        </div>
+        
+        <div className="flex bg-neutral-100 dark:bg-neutral-800 rounded-lg p-1">
+          <button
+            onClick={() => setActiveTab("preview")}
+            className={cn(
+              "px-3 py-1 rounded-md text-xs font-medium transition-all flex items-center gap-2",
+              activeTab === "preview" 
+                ? "bg-white dark:bg-neutral-700 shadow-sm text-neutral-900 dark:text-neutral-100" 
+                : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300"
+            )}
+          >
+            <Eye className="w-3 h-3" />
+            Preview
+          </button>
+          <button
+             onClick={() => setActiveTab("code")}
+             className={cn(
+               "px-3 py-1 rounded-md text-xs font-medium transition-all flex items-center gap-2",
+               activeTab === "code" 
+                 ? "bg-white dark:bg-neutral-700 shadow-sm text-neutral-900 dark:text-neutral-100" 
+                 : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300"
+             )}
+          >
+             <Code2 className="w-3 h-3" />
+             Code
+          </button>
+        </div>
+
+        <div className="w-16" /> {/* Spacer for centering */}
+      </div>
+
+      {/* Content Area */}
+      <div className="relative h-[400px] bg-neutral-50/50 dark:bg-neutral-950/50">
+         <AnimatePresence mode="wait">
+            {activeTab === "preview" ? (
+              <motion.div
+                key="preview"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0 flex items-center justify-center p-12"
+              >
+                 {/* The "Demo" Component */}
+                 <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-neutral-200 to-neutral-200 dark:from-neutral-800 dark:to-neutral-800 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    
+                    <div className="relative p-8 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-2xl flex flex-col items-center gap-6 max-w-sm">
+                       <div className="w-16 h-16 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-4xl">
+                          🚀
+                       </div>
+                       <div className="text-center space-y-2">
+                          <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Start Building</h3>
+                          <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                            This is a live component. It's fully responsive, accessible, and ready to use.
+                          </p>
+                       </div>
+                       <button className="w-full py-2.5 rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-sm hover:opacity-90 transition-opacity">
+                          Get it now
+                       </button>
+                    </div>
+                 </div>
+              </motion.div>
+            ) : (
+               <motion.div
+                  key="code"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute inset-0 overflow-auto"
+               >
+                  <div className="p-6 font-mono text-sm relative min-h-full bg-neutral-950 text-neutral-300">
+                     <button
+                        onClick={handleCopy}
+                        className="absolute top-4 right-4 p-2 rounded-md hover:bg-neutral-800 transition-colors text-neutral-400 hover:text-white"
+                     >
+                        {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                     </button>
+                     <pre>
+                        <code>{codeString}</code>
+                     </pre>
+                  </div>
+               </motion.div>
+            )}
+         </AnimatePresence>
+      </div>
+    </div>
   );
 }
