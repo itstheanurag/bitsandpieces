@@ -1,17 +1,17 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: "export",
-  basePath: "/bitsandpieces",
+  output: isProd ? "export" : undefined,
+  basePath: isProd ? "/bitsandpieces" : "",
   images: {
     unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "github.com",
-        port: "",
-        pathname: "/**", // Allow any path on github.com
+        pathname: "/**",
       },
     ],
   },
