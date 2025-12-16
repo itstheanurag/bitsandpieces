@@ -5,12 +5,22 @@ import { useState, useMemo, useEffect } from "react";
 import { registryData as bitsRegistry } from "@/__registry__/registry.bits";
 import { registryData as piecesRegistry } from "@/__registry__/registry.pieces";
 
+interface RegistryItem {
+  name: string;
+  title: string;
+  description: string;
+}
+
 // Combine the two registries
-const bits = Object.values(bitsRegistry).map((i) => ({
-  ...i,
-  category: "bits" as const,
-}));
-const pieces = Object.values(piecesRegistry).map((i) => ({
+const bits = Object.values(bitsRegistry as Record<string, RegistryItem>).map(
+  (i) => ({
+    ...i,
+    category: "bits" as const,
+  })
+);
+const pieces = Object.values(
+  piecesRegistry as Record<string, RegistryItem>
+).map((i) => ({
   ...i,
   category: "pieces" as const,
 }));
