@@ -4,49 +4,10 @@
   "homepage": "https://github.com/itstheanurag/bitsandpieces",
   "items": [
     {
-      "name": "cards-spotlight",
+      "name": "navbar-floating-navbar",
       "type": "registry:component",
-      "title": "Cards Spotlight",
-      "description": "A Cards Spotlight component.",
-      "dependencies": [
-        "react",
-        "framer-motion"
-      ],
-      "registryDependencies": [
-        "cn"
-      ],
-      "files": [
-        {
-          "path": "components/pieces/cards/spotlight.tsx",
-          "target": "components/pieces/cards-spotlight.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "layout-bento-grid",
-      "type": "registry:component",
-      "title": "Layout Bento Grid",
-      "description": "A Layout Bento Grid component.",
-      "dependencies": [
-        "framer-motion"
-      ],
-      "registryDependencies": [
-        "cn"
-      ],
-      "files": [
-        {
-          "path": "components/pieces/layout/bento-grid.tsx",
-          "target": "components/pieces/layout-bento-grid.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "navbar-floating",
-      "type": "registry:component",
-      "title": "Navbar Floating",
-      "description": "A Navbar Floating component.",
+      "title": "Navbar Floating Navbar",
+      "description": "A Navbar Floating Navbar component.",
       "dependencies": [
         "framer-motion",
         "lucide-react",
@@ -55,17 +16,17 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/pieces/navbar/floating.tsx",
-          "target": "components/pieces/navbar-floating.tsx",
+          "path": "components/pieces/navbar/floating-navbar.tsx",
+          "target": "components/pieces/navbar-floating-navbar.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "navbar-glass",
+      "name": "navbar-glass-navbar",
       "type": "registry:component",
-      "title": "Navbar Glass",
-      "description": "A Navbar Glass component.",
+      "title": "Navbar Glass Navbar",
+      "description": "A Navbar Glass Navbar component.",
       "dependencies": [
         "react",
         "framer-motion",
@@ -74,17 +35,17 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/pieces/navbar/glass.tsx",
-          "target": "components/pieces/navbar-glass.tsx",
+          "path": "components/pieces/navbar/glass-navbar.tsx",
+          "target": "components/pieces/navbar-glass-navbar.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "navbar-morph",
+      "name": "navbar-morph-navbar",
       "type": "registry:component",
-      "title": "Navbar Morph",
-      "description": "A Navbar Morph component.",
+      "title": "Navbar Morph Navbar",
+      "description": "A Navbar Morph Navbar component.",
       "dependencies": [
         "framer-motion",
         "lucide-react",
@@ -93,8 +54,8 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/pieces/navbar/morph.tsx",
-          "target": "components/pieces/navbar-morph.tsx",
+          "path": "components/pieces/navbar/morph-navbar.tsx",
+          "target": "components/pieces/navbar-morph-navbar.tsx",
           "type": "registry:component"
         }
       ]

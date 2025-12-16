@@ -7,6 +7,7 @@ import {
   toTitleCase,
   toPascalCase,
   extractDependencies,
+  extractExportName,
 } from "../internal";
 
 export async function processPieces(
@@ -25,7 +26,11 @@ export async function processPieces(
 
     const { dependencies, registryDependencies } = extractDependencies(content);
     const kebabName = getComponentName(file);
-    const title = toTitleCase(kebabName);
+
+    // Use the actual exported component name as the title
+    const exportName = extractExportName(content);
+    const title =
+      exportName !== "default" ? exportName : toTitleCase(kebabName);
 
     const pascalCaseName = toPascalCase(kebabName);
 
