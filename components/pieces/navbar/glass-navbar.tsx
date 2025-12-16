@@ -51,7 +51,6 @@ const GlassNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                   className="flex items-center gap-2 text-lg sm:text-xl md:text-2xl font-bold text-foreground cursor-pointer"
                 >
                   <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
-                  <span>GlassNav</span>
                 </motion.div>
               )}
 
