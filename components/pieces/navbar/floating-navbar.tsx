@@ -59,9 +59,6 @@ export function FloatingNavbar({
                   className="flex items-center gap-2 cursor-pointer"
                 >
                   <Circle className="w-6 h-6 text-primary" />
-                  <span className="text-xl sm:text-2xl font-semibold text-foreground">
-                    FloatNav
-                  </span>
                 </motion.div>
               )}
 
