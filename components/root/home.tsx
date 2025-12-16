@@ -6,9 +6,7 @@ import { Features } from "./features";
 import { CTA } from "./cta";
 import { Contributors } from "./contributors";
 import { FAQ } from "./faq";
-
 import { Footer } from "./footer";
-import { ComponentsPreview } from "./components-preview";
 
 export function Home() {
   return (
@@ -18,7 +16,6 @@ export function Home() {
       <Navbar />
       <Hero />
       <Features />
-      <ComponentsPreview />
       <CTA />
 
       <FAQ />
