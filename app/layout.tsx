@@ -14,8 +14,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bits&Pieces",
-  description: "A collection of useful components and utilities",
+  title: "Bits&Pieces - Premium React UI Components",
+  description:
+    "A high-performance toolkit for React developers who demand speed, accessibility, and pixel-perfect aesthetics. Built with Next.js, Tailwind CSS, and Framer Motion.",
+  keywords: [
+    "React",
+    "UI Components",
+    "Next.js",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Web Design",
+  ],
+  authors: [{ name: "Gaurav", url: "https://github.com/itstheanurag" }],
+  openGraph: {
+    title: "Bits&Pieces - Premium React UI Components",
+    description:
+      "A high-performance toolkit for React developers who demand speed, accessibility, and pixel-perfect aesthetics.",
+    url: "https://itstheanurag.github.io/bitsandpieces",
+    siteName: "Bits&Pieces",
+    images: [
+      {
+        url: "/bitsandpieces/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Bits&Pieces Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bits&Pieces",
+    description: "Premium React UI Components",
+    images: ["/bitsandpieces/logo.png"],
+  },
+  icons: {
+    icon: "/bitsandpieces/icon.png",
+    apple: "/bitsandpieces/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
