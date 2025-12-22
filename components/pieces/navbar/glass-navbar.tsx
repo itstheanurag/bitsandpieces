@@ -46,11 +46,15 @@ const GlassNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
               {/* Logo */}
               {logo || (
                 <motion.div
-                  whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
+                  whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
                   className="flex items-center gap-2 text-lg sm:text-xl md:text-2xl font-bold text-foreground cursor-pointer"
                 >
-                  <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+                  <img
+                    src="/logo.png"
+                    alt="Bits&Pieces"
+                    className="w-9 h-9 rounded-lg"
+                  />
                 </motion.div>
               )}
 

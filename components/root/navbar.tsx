@@ -1,81 +1,102 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ThemeToggle } from "./themes";
-import { LayoutGrid, Github } from "lucide-react";
+import { LayoutGrid, Github, Menu } from "lucide-react";
+import { useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navItems = [
     {
       label: "Components",
       href: "/browse",
-      icon: <LayoutGrid className="h-4 w-4" />,
+      icon: <LayoutGrid className="size-5" />,
+      external: false,
     },
     {
       label: "GitHub",
-      href: "https://github.com/itsTheAnurag/BitsAndPieces",
-      icon: <Github className="h-4 w-4" />,
+      href: "https://github.com/itstheanurag/bitsandpieces",
+      icon: <Github className="size-5" />,
+      external: true,
     },
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={cn(
-        "fixed z-50",
-        "top-4 left-1/2 -translate-x-1/2",
-        "w-[90%] max-w-5xl"
-      )}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "py-4" : "py-8"
+      }`}
     >
-      <nav
-        className={cn(
-          "flex items-center justify-between",
-          "px-6 py-3",
-          "bg-background/80 backdrop-blur-md",
-          "border border-neutral-200 dark:border-neutral-700",
-          "rounded-lg shadow inset-0"
-        )}
-      >
-        <Link
-          href="/"
-          className={cn(
-            "flex items-center gap-2",
-            "text-lg font-bold",
-            "text-primary hover:text-foreground/90",
-            "transition-colors"
-          )}
+      <div className="max-w-7xl mx-auto px-2">
+        <div
+          className={`flex items-center justify-between rounded-md px-3 py-2 transition-all bg-blur backdrop-blur-sm ${
+            isScrolled ? "shadow-lg" : ""
+          }`}
         >
-          <div className="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 p-1 rounded-md">
-            <LayoutGrid className="w-5 h-5" />
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <img
+              src="/logo.png"
+              alt="Bits&Pieces"
+              className="size-10 rounded-lg"
+            />
+          </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-2">
+            {navItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-md p-2 text-sm text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition"
+                >
+                  {item.icon}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="flex items-center gap-2 rounded-md p-2 text-sm text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition"
+                >
+                  {item.icon}
+                </Link>
+              )
+            )}
+
+            <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700 mx-2" />
+
+            <ThemeToggle />
           </div>
-          Bits&Pieces
-        </Link>
 
-        {/* Nav Items */}
-        <div className={cn("flex items-center gap-4")}>
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              target={item.label === "GitHub" ? "_blank" : "_self"}
-              className={cn(
-                "flex items-center gap-2",
-                "text-neutral-800 hover:text-neutral-600",
-                "dark:text-neutral-200 hover:dark:text-neutral-400",
-                "transition-colors cursor-pointer"
-              )}
-            >
-              {item.icon}
-            </Link>
-          ))}
-
-          <ThemeToggle />
+          {/* Mobile */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button className="rounded-md p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
         </div>
-      </nav>
-    </motion.div>
+      </div>
+    </nav>
   );
 }

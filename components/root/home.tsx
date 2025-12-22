@@ -1,12 +1,14 @@
 "use client";
 
 import { Navbar } from "./navbar";
-import { Hero } from "./hero";
 import { Features } from "./features";
 import { CTA } from "./cta";
 import { Contributors } from "./contributors";
 import { FAQ } from "./faq";
 import { Footer } from "./footer";
+import Hero from "./hero";
+import FloatingShapes from "./floating-shape";
+import UtilitiesSection from "./utilities";
 
 export function Home() {
   return (
@@ -14,14 +16,18 @@ export function Home() {
       {/* Navbar + Hero Section */}
 
       <Navbar />
-      <Hero />
-      <Features />
-      <CTA />
+      <section className="relative">
+        <FloatingShapes />
+        <Hero />
+      </section>
 
+      <Features />
+      <UtilitiesSection />
+
+      <CTA />
       <FAQ />
 
       <Contributors />
-
       <Footer />
     </div>
   );

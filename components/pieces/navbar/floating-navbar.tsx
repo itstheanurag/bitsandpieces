@@ -58,7 +58,11 @@ export function FloatingNavbar({
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-2 cursor-pointer"
                 >
-                  <Circle className="w-6 h-6 text-primary" />
+                  <img
+                    src="/logo.png"
+                    alt="Bits&Pieces"
+                    className="w-8 h-8 rounded-lg"
+                  />
                 </motion.div>
               )}
 

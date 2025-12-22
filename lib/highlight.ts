@@ -1,5 +1,3 @@
-"use server";
-
 import { codeToHtml, BundledLanguage } from "shiki";
 
 /**
