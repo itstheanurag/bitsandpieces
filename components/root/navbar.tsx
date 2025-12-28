@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ThemeToggle } from "./themes";
 import { LayoutGrid, Github, Menu } from "lucide-react";
 import { useScroll, useSpring } from "framer-motion";
@@ -52,10 +53,12 @@ export function Navbar() {
         >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <img
+            <Image
               src="/logo.png"
               alt="Bits&Pieces"
-              className="size-10 rounded-lg"
+              width={40}
+              height={40}
+              className="rounded-lg"
             />
           </Link>
 

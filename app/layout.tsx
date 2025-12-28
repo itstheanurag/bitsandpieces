@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Bits&Pieces - Premium React UI Components",
   description:
     "A high-performance toolkit for React developers who demand speed, accessibility, and pixel-perfect aesthetics. Built with Next.js, Tailwind CSS, and Framer Motion.",
+  metadataBase: new URL("https://itstheanurag.github.io/bitsandpieces"),
   keywords: [
     "React",
     "UI Components",
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "Bits&Pieces",
     images: [
       {
-        url: "/bitsandpieces/logo.png",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "Bits&Pieces Logo",
@@ -47,11 +48,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bits&Pieces",
     description: "Premium React UI Components",
-    images: ["/bitsandpieces/logo.png"],
+    images: ["/logo.png"],
   },
   icons: {
-    icon: "/bitsandpieces/icon.png",
-    apple: "/bitsandpieces/apple-icon.png",
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
   },
 };
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 interface NavItem {
   label: string;
@@ -50,10 +51,12 @@ const GlassNavbar = ({ logo, navItems, buttons, children }: NavbarProps) => {
                   transition={{ duration: 0.5 }}
                   className="flex items-center gap-2 text-lg sm:text-xl md:text-2xl font-bold text-foreground cursor-pointer"
                 >
-                  <img
+                  <Image
                     src="/logo.png"
                     alt="Bits&Pieces"
-                    className="w-9 h-9 rounded-lg"
+                    width={36}
+                    height={36}
+                    className="rounded-lg"
                   />
                 </motion.div>
               )}

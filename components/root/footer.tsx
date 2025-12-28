@@ -2,6 +2,7 @@
 
 import { Github, Twitter } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -14,10 +15,12 @@ export function Footer() {
                 href="/"
                 className="flex items-center gap-2 text-2xl font-black text-neutral-900 dark:text-white group"
               >
-                <img
+                <Image
                   src="/logo.png"
                   alt="Logo"
-                  className="w-8 h-8 rounded-lg group-hover:scale-110 transition-transform"
+                  width={32}
+                  height={32}
+                  className="rounded-lg group-hover:scale-110 transition-transform"
                 />
                 Bits&Pieces
               </Link>

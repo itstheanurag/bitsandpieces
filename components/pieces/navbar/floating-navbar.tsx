@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, X, Menu, Circle } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 interface NavItem {
   label: string;
@@ -58,10 +59,12 @@ export function FloatingNavbar({
                   whileTap={{ scale: 0.95 }}
                   className="flex items-center gap-2 cursor-pointer"
                 >
-                  <img
+                  <Image
                     src="/logo.png"
                     alt="Bits&Pieces"
-                    className="w-8 h-8 rounded-lg"
+                    width={32}
+                    height={32}
+                    className="rounded-lg"
                   />
                 </motion.div>
               )}
