@@ -1,6 +1,6 @@
 export function CTA() {
   return (
-    <section className="relative isolate overflow-hidden py-32 px-6 w-full bg-white dark:bg-neutral-950 max-w-7xl mx-auto">
+    <section className="relative isolate overflow-hidden py-32 px-6 w-full bg-white dark:bg-neutral-950 max-w-7xl mx-auto rounded-3xl my-24 border border-border/50">
       {/* Background grid */}
       <div
         aria-hidden
@@ -28,13 +28,13 @@ export function CTA() {
         />
 
         <h2 className="text-4xl md:text-6xl font-bold mb-8 relative">
-          Start building <br />
-          your legacy today.
+          Ready to ship <br />
+          your next project?
         </h2>
 
         <p className="text-zinc-400 text-lg mb-12 max-w-lg mx-auto relative">
-          Join 10,000+ developers building high-quality interfaces with the
-          Nexus UI Toolkit.
+          Join the community of developers building modern applications with
+          Bits&Pieces.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative">

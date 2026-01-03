@@ -116,22 +116,6 @@ export function Footer() {
             </ul>
           </div>
         </div>
-
-        <div className="mt-24 pt-8 border-t border-neutral-100 dark:border-neutral-900 flex flex-col md:row justify-between items-center gap-6">
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
-            © {new Date().getFullYear()} BitsAndPieces. Crafted with precision
-            for the community.
-          </p>
-          <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 font-medium leading-none">
-            <span>Built by</span>
-            <a
-              href="https://twitter.com/itsTheAnurag"
-              className="text-neutral-900 dark:text-white hover:underline font-bold"
-            >
-              Anurag
-            </a>
-          </div>
-        </div>
       </div>
     </footer>
   );

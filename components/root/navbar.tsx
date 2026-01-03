@@ -1,58 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { Github, Twitter } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "./themes/ThemeToggle";
 import Image from "next/image";
-import { ThemeToggle } from "./themes";
-import { LayoutGrid, Github, Menu } from "lucide-react";
-import { useScroll, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
-  useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navItems = [
-    {
-      label: "Components",
-      href: "/browse",
-      icon: <LayoutGrid className="size-5" />,
-      external: false,
-    },
-    {
-      label: "GitHub",
-      href: "https://github.com/itstheanurag/bitsandpieces",
-      icon: <Github className="size-5" />,
-      external: true,
-    },
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "py-4" : "py-8"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-2">
-        <div
-          className={`flex items-center justify-between rounded-md px-3 py-2 transition-all bg-blur backdrop-blur-sm ${
-            isScrolled ? "shadow-lg" : ""
-          }`}
-        >
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+    <header className="fixed top-0 w-full z-50 border-b border-border/40 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold text-lg tracking-tight"
+          >
             <Image
               src="/logo.png"
               alt="Bits&Pieces"
@@ -61,45 +23,51 @@ export function Navbar() {
               className="rounded-lg"
             />
           </Link>
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+            <Link
+              href="/docs"
+              className="hover:text-foreground transition-colors"
+            >
+              Docs
+            </Link>
+            <Link
+              href="/browse"
+              className="hover:text-foreground transition-colors"
+            >
+              Components
+            </Link>
+          </nav>
+        </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-2">
-            {navItems.map((item) =>
-              item.external ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-md p-2 text-sm text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition"
-                >
-                  {item.icon}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-center gap-2 rounded-md p-2 text-sm text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition"
-                >
-                  {item.icon}
-                </Link>
-              )
-            )}
-
-            <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700 mx-2" />
-
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile */}
-          <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
-            <button className="rounded-md p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
-              <Menu className="h-5 w-5" />
-            </button>
-          </div>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            asChild
+            className="h-8 w-8 text-muted-foreground hover:text-foreground"
+          >
+            <Link
+              href="https://github.com/itstheanurag/bitsandpieces"
+              target="_blank"
+            >
+              <Github className="h-4 w-4" />
+              <span className="sr-only">GitHub</span>
+            </Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            asChild
+            className="h-8 w-8 text-muted-foreground hover:text-foreground"
+          >
+            <Link href="https://twitter.com/itstheanurag" target="_blank">
+              <Twitter className="h-4 w-4" />
+              <span className="sr-only">Twitter</span>
+            </Link>
+          </Button>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
