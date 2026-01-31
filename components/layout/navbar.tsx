@@ -10,11 +10,11 @@ import { Container } from "../layout/container";
 
 export const Navbar: React.FC = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 py-3">
+    <nav className="fixed top-0 left-0 right-0 z-50 py-4">
       <Container>
-        <div className="flex items-center justify-between px-6 py-3 bg-card/60 backdrop-blur-xl border border-border rounded-lg shadow-sm">
+        <div className="flex items-center justify-between px-8 py-4 bg-background border border-border rounded-xl shadow-sm">
           {/* Left */}
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-12">
             <Link href="/" className="flex items-center group">
               <Image
                 src="/logo.png"
@@ -23,6 +23,7 @@ export const Navbar: React.FC = () => {
                 height={32}
                 className="rounded-md"
               />
+              <span className="ml-3 text-lg font-semibold">Bits&Pieces</span>
             </Link>
 
             <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
