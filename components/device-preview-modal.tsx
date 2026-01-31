@@ -23,7 +23,9 @@ export function DevicePreviewModal({
   component: Component,
   title,
 }: DevicePreviewModalProps) {
-  const [device, setDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
+  const [device, setDevice] = useState<"desktop" | "tablet" | "mobile">(
+    "desktop",
+  );
 
   if (!isOpen) return null;
 
@@ -46,7 +48,7 @@ export function DevicePreviewModal({
                   "p-2 rounded-md transition-colors",
                   device === "desktop"
                     ? "bg-white dark:bg-neutral-700 shadow-sm text-neutral-900 dark:text-neutral-100"
-                    : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300"
+                    : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300",
                 )}
                 title="Desktop"
               >
@@ -58,7 +60,7 @@ export function DevicePreviewModal({
                   "p-2 rounded-md transition-colors",
                   device === "tablet"
                     ? "bg-white dark:bg-neutral-700 shadow-sm text-neutral-900 dark:text-neutral-100"
-                    : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300"
+                    : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300",
                 )}
                 title="Tablet"
               >
@@ -70,7 +72,7 @@ export function DevicePreviewModal({
                   "p-2 rounded-md transition-colors",
                   device === "mobile"
                     ? "bg-white dark:bg-neutral-700 shadow-sm text-neutral-900 dark:text-neutral-100"
-                    : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300"
+                    : "text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300",
                 )}
                 title="Mobile"
               >
@@ -98,9 +100,9 @@ export function DevicePreviewModal({
             </TabletFrame>
           ) : (
             <div className="w-full h-full max-w-6xl mx-auto bg-white dark:bg-neutral-950 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-               <BrowserFrame className="h-full overflow-y-auto">
+              <BrowserFrame className="h-full overflow-y-auto">
                 <Component />
-               </BrowserFrame>
+              </BrowserFrame>
             </div>
           )}
         </div>
