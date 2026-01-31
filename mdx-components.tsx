@@ -1,5 +1,7 @@
 import { useMDXComponents as getDocsMDXComponents } from "nextra-theme-docs";
 
+import { ComponentPreview } from "@/components/docs/component-preview";
+
 const docsComponents = getDocsMDXComponents();
 
 export function useMDXComponents(
@@ -7,6 +9,7 @@ export function useMDXComponents(
 ) {
   return {
     ...docsComponents,
+    ComponentPreview,
     ...components,
   };
 }

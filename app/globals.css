@@ -1,7 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "fumadocs-ui/css/neutral.css";
-@import "fumadocs-ui/css/preset.css";
 
 /* Shiki syntax highlighting - class-based dark mode */
 .dark .shiki,
@@ -13,57 +11,75 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Nuanced Light Mode - Clean & Technical */
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.12 0.01 240);
+  /* Refined Light Mode - Clean & Professional  */
+  --background: oklch(0.985 0.002 250);
+  --foreground: oklch(0.145 0.015 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0.01 240);
+  --card-foreground: oklch(0.145 0.015 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0.01 240);
-  --primary: oklch(0.12 0.01 240);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0.01 240);
-  --secondary-foreground: oklch(0.12 0.01 240);
-  --muted: oklch(0.96 0.01 240);
-  --muted-foreground: oklch(0.55 0.02 240);
-  --accent: oklch(0.96 0.01 240);
-  --accent-foreground: oklch(0.12 0.01 240);
-  --destructive: oklch(0.58 0.25 27);
-  --destructive-foreground: oklch(0.98 0 0);
+  --popover-foreground: oklch(0.145 0.015 260);
+  --primary: oklch(0.205 0.02 265);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.965 0.005 250);
+  --secondary-foreground: oklch(0.145 0.015 260);
+  --muted: oklch(0.96 0.005 250);
+  --muted-foreground: oklch(0.45 0.015 260);
+  --accent: oklch(0.955 0.008 250);
+  --accent-foreground: oklch(0.145 0.015 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.985 0 0);
 
-  --border: oklch(0.87 0.01 240);
-  --input: oklch(0.87 0.01 240);
-  --ring: oklch(0.12 0.01 240);
+  --border: oklch(0.915 0.005 260);
+  --input: oklch(0.915 0.005 260);
+  --ring: oklch(0.55 0.15 265);
 
   --radius: 0.5rem;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+  /* Fumadocs overrides */
+  --fd-background-fd: oklch(0.985 0.002 250);
+  --fd-foreground: oklch(0.145 0.015 260);
+  --fd-muted: oklch(0.45 0.015 260);
+  --fd-muted-foreground: oklch(0.55 0.01 260);
+  --fd-border: oklch(0.92 0.003 260);
+  --fd-primary: oklch(0.35 0.12 265);
 }
 
 .dark {
-  /* Deep, Rich Dark Mode - Obsidian/Midnight */
-  --background: oklch(0.05 0.01 240);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.08 0.01 240);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.08 0.01 240);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.98 0 0);
-  --primary-foreground: oklch(0.05 0.01 240);
-  --secondary: oklch(0.12 0.02 240);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.12 0.02 240);
-  --muted-foreground: oklch(0.65 0.01 240);
-  --accent: oklch(0.15 0.02 240);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.3 0.15 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  /* Ultra Dark Mode - Premium Obsidian */
+  --background: oklch(0.095 0.005 270);
+  --foreground: oklch(0.93 0.005 250);
+  --card: oklch(0.115 0.008 270);
+  --card-foreground: oklch(0.93 0.005 250);
+  --popover: oklch(0.115 0.008 270);
+  --popover-foreground: oklch(0.93 0.005 250);
+  --primary: oklch(0.93 0.005 250);
+  --primary-foreground: oklch(0.095 0.005 270);
+  --secondary: oklch(0.145 0.012 270);
+  --secondary-foreground: oklch(0.93 0.005 250);
+  --muted: oklch(0.16 0.01 270);
+  --muted-foreground: oklch(0.55 0.01 260);
+  --accent: oklch(0.18 0.015 270);
+  --accent-foreground: oklch(0.93 0.005 250);
+  --destructive: oklch(0.45 0.2 25);
+  --destructive-foreground: oklch(0.93 0 0);
 
-  --border: oklch(0.14 0.01 240);
-  --input: oklch(0.14 0.01 240);
-  --ring: oklch(0.8 0 0);
+  --border: oklch(0.2 0.008 270);
+  --input: oklch(0.2 0.008 270);
+  --ring: oklch(0.65 0.12 265);
+
+  /* Fumadocs overrides */
+  --fd-background: oklch(0.095 0.005 270);
+  --fd-foreground: oklch(0.93 0.005 250);
+  --fd-muted: oklch(0.55 0.01 260);
+  --fd-muted-foreground: oklch(0.5 0.008 260);
+  --fd-border: oklch(0.18 0.006 270);
+  --fd-primary: oklch(0.75 0.08 265);
 }
 
 @theme inline {
@@ -156,4 +172,233 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
+}
+
+/* ===============================================
+   NEXTRA THEME OVERRIDES - Forge UI Style
+   =============================================== */
+
+/* Dark theme variables - override Nextra's defaults */
+:root {
+  --nextra-primary-hue: 220deg;
+  --nextra-primary-saturation: 60%;
+}
+
+html.dark {
+  --nextra-bg: #0a0a0f;
+  --nextra-navbar-bg: #0a0a0f;
+  --nextra-sidebar-bg: #0a0a0f;
+  --nextra-content-bg: #0a0a0f;
+  --nextra-code-bg: #111118;
+}
+
+/* Banner styling */
+[data-nextra-banner] {
+  background: linear-gradient(90deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Navbar styling */
+nav.nextra-nav-container,
+.nextra-nav-container {
+  background: var(--nextra-navbar-bg) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark nav.nextra-nav-container,
+html.dark .nextra-nav-container {
+  background: #0a0a0f !important;
+}
+
+/* Sidebar styling */
+.nextra-sidebar-container {
+  font-size: 0.875rem;
+}
+
+html.dark .nextra-sidebar-container {
+  background: #0a0a0f !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Sidebar section headers */
+.nextra-sidebar-container li > span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Sidebar links */
+.nextra-sidebar-container a {
+  font-size: 0.8125rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: all 0.15s ease;
+}
+
+html.dark .nextra-sidebar-container a {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+html.dark .nextra-sidebar-container a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.dark .nextra-sidebar-container a[data-active="true"],
+html.dark .nextra-sidebar-container a.active {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.15);
+  font-weight: 500;
+}
+
+/* Main content */
+html.dark main {
+  background: #0a0a0f !important;
+}
+
+html.dark .nextra-content {
+  background: #0a0a0f !important;
+}
+
+/* Article content typography */
+article h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+article h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+article h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+article p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+html:not(.dark) article p {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* Code blocks */
+html.dark pre {
+  background: #111118 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark pre code {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* Inline code */
+html.dark code:not(pre code) {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+}
+
+/* Tables */
+html.dark table {
+  font-size: 0.875rem;
+}
+
+html.dark th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.dark td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* TOC (Table of Contents) */
+html.dark .nextra-toc {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.dark .nextra-toc a {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+html.dark .nextra-toc a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+html.dark .nextra-toc a[data-active="true"] {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* Package manager tabs */
+html.dark [role="tablist"] {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.dark [role="tab"] {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+html.dark [role="tab"][data-state="active"],
+html.dark [role="tab"][aria-selected="true"] {
+  color: #fff;
+  border-bottom-color: #3b82f6;
+}
+
+/* Search */
+html.dark .nextra-search input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer */
+html.dark footer {
+  background: #0a0a0f !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Scrollbar */
+html.dark ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

@@ -1,0 +1,44 @@
+---
+title: Animated Form
+description: Animated form mimicking account creation with progressive name/password animation and completion checkmarks.
+---
+
+# Animated Form
+
+Animated form mimicking account creation with progressive name/password animation and completion checkmarks.
+
+## Preview
+
+<ComponentPreview name="animated-form" />
+
+## Installation
+
+### 1. Install the packages
+
+```bash npm2yarn
+npm i motion react-icons clsx tailwind-merge
+```
+
+### 2. Add util file
+
+Create a utility file for className merging:
+
+```tsx filename="lib/utils.ts"
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+### 3. Copy the component
+
+The component is available in the registry and can be installed via CLI (coming soon) or copied manually from the **Code** tab above.
+
+## Props
+
+| Prop        | Type                                                 | Default | Description                     |
+| ----------- | ---------------------------------------------------- | ------- | ------------------------------- |
+| `onSubmit`  | `(data: { name: string; password: string }) => void` | -       | Callback when form is submitted |
+| `className` | `string`                                             | -       | Additional CSS classes          |
