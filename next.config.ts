@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { createMDX } from "fumadocs-mdx/next";
+import nextra from "nextra";
 
 const nextConfig: NextConfig = {
   images: {
@@ -15,5 +15,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 };
 
-const withMDX = createMDX();
-export default withMDX(nextConfig);
+const withNextra = nextra({
+  contentDirBasePath: "/docs",
+});
+
+export default withNextra(nextConfig);
