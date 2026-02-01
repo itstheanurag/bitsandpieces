@@ -1,14 +1,9 @@
 import type { NextConfig } from "next";
-import { createMDX } from "fumadocs-mdx/next";
-
-const isProd = process.env.NODE_ENV === "production";
+import nextra from "nextra";
 
 const nextConfig: NextConfig = {
-  output: isProd ? "export" : undefined,
-  basePath: isProd ? "/bitsandpieces" : "",
-  assetPrefix: isProd ? "/bitsandpieces/" : "",
   images: {
-    unoptimized: true,
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: "https",
@@ -20,5 +15,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 };
 
-const withMDX = createMDX();
-export default withMDX(nextConfig);
+const withNextra = nextra({
+  contentDirBasePath: "/docs",
+});
+
+export default withNextra(nextConfig);

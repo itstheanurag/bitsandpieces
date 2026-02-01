@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "fumadocs-ui/style.css";
-import { ThemeProvider } from "@/components/root/themes";
-import { RootProvider } from "fumadocs-ui/provider/next";
+import { ThemeProvider } from "@/components/root/theme/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,9 +67,14 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-100 dark:bg-neutral-800`}
       >
-        <RootProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </RootProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

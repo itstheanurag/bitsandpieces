@@ -1,20 +1,68 @@
-
-import { source } from "@/lib/source";
-import { DocsLayout } from "fumadocs-ui/layouts/notebook";
+import { Footer, Layout, Navbar, ThemeSwitch } from "nextra-theme-docs";
+import { Banner, Head } from "nextra/components";
+import { getPageMap } from "nextra/page-map";
+import "nextra-theme-docs/style.css";
+import "@/app/globals.css";
+import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export const metadata = {
+  title: "Bits&Pieces Documentation",
+  description: "Premium React UI Components - Documentation",
+};
+
+const logo = (
+  <div className="flex items-center gap-2">
+    <Image
+      src="/logo.png"
+      alt="Logo"
+      width={28}
+      height={28}
+      className="rounded"
+    />
+    <span className="font-bold text-lg">Bits&Pieces</span>
+  </div>
+);
+
+const navbar = (
+  <Navbar
+    logo={logo}
+    projectLink="https://github.com/itstheanurag/bitsandpieces"
+  >
+    <ThemeSwitch />
+  </Navbar>
+);
+
+export default async function DocsLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const pageMap = await getPageMap();
+
   return (
-    <DocsLayout
-      tree={source.pageTree}
-      nav={{
-        title: "Bits&Pieces",
-      }}
-      sidebar={{
-        defaultOpenLevel: 0,
-      }}
-    >
-      {children}
-    </DocsLayout>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <Head>
+        <link rel="icon" href="/icon.png" />
+      </Head>
+      <body>
+        <Layout
+          navbar={navbar}
+          pageMap={pageMap}
+          docsRepositoryBase="https://github.com/itstheanurag/bitsandpieces/tree/main/content"
+          sidebar={{
+            defaultMenuCollapseLevel: 10,
+            toggleButton: false,
+          }}
+          editLink="Edit this page on GitHub"
+          feedback={{
+            content: "Question? Give us feedback →",
+          }}
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
   );
 }

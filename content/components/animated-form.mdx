@@ -1,0 +1,53 @@
+---
+title: Animated Form
+description: Animated form mimicking account creation with progressive name/password animation and completion checkmarks.
+---
+
+# Animated Form
+
+Animated form mimicking account creation with progressive name/password animation and completion checkmarks.
+
+## Preview
+
+<ComponentPreview name="animated-form" />
+
+## Installation
+
+<InstallationTabs
+  componentName="animated-form"
+  dependencies={["motion", "react-icons", "clsx", "tailwind-merge"]}
+/>
+
+## Usage
+
+```tsx
+import { AnimatedForm } from "@/components/ui/animated-form";
+
+export default function Example() {
+  const handleSubmit = (data: { name: string; password: string }) => {
+    console.log("Form submitted:", data);
+  };
+
+  return <AnimatedForm onSubmit={handleSubmit} />;
+}
+```
+
+## Props
+
+<PropsTable
+  props={[
+    {
+      name: "onSubmit",
+      type: "(data: { name: string; password: string }) => void",
+      default: "-",
+      description: "Callback when form is submitted.",
+      required: true,
+    },
+    {
+      name: "className",
+      type: "string",
+      default: "-",
+      description: "Additional CSS classes.",
+    },
+  ]}
+/>
