@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import React from "react";
 
 export type RegistryItem = {
@@ -9,16 +8,4 @@ export type RegistryItem = {
   description: string;
 };
 
-export const registry: Record<string, RegistryItem> = {
-  "multi-step-form": {
-    name: "multi-step-form",
-    title: "Multi Step Form",
-    description: "A beautiful account creation form with progressive steps.",
-    component: dynamic(() =>
-      import("@/registry/bitsandpieces/forms/multi-step-form").then(
-        (m) => m.MultiStepForm,
-      ),
-    ),
-    path: "registry/bitsandpieces/forms/multi-step-form.tsx",
-  },
-};
+export const registry: Record<string, RegistryItem> = {};
