@@ -402,3 +402,39 @@ html.dark ::-webkit-scrollbar-thumb {
 html.dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
+
+/* Hide theme toggle from Nextra sidebar - should be in navbar only */
+.nextra-sidebar-footer,
+aside > :last-child:has(button),
+nav[class*="sidebar"] > :last-child:has(button),
+.nextra-sidebar-container > :last-child:has(button) {
+  display: none !important;
+}
+
+/* Docs Layout Borders - Modern symmetric design */
+/* Left sidebar - fully contained with borders on both sides */
+.nextra-sidebar-container,
+.nextra-sidebar,
+aside.nextra-sidebar {
+  border-left: 1px solid var(--border) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+/* Right sidebar (TOC) - fully contained with borders on both sides */
+.nextra-toc,
+nav.nextra-toc {
+  border-left: 1px solid var(--border) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+/* Main content area subtle separation */
+main.nextra-content,
+article.nextra-content {
+  background: var(--background);
+}
+
+/* Navbar bottom border */
+nav.nextra-nav-container,
+.nextra-nav-container {
+  border-bottom: 1px solid var(--border) !important;
+}

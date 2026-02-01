@@ -1,4 +1,4 @@
-import { Footer, Layout, Navbar } from "nextra-theme-docs";
+import { Footer, Layout, Navbar, ThemeSwitch } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
@@ -29,7 +29,9 @@ const navbar = (
   <Navbar
     logo={logo}
     projectLink="https://github.com/itstheanurag/bitsandpieces"
-  />
+  >
+    <ThemeSwitch />
+  </Navbar>
 );
 
 export default async function DocsLayout({
@@ -50,7 +52,8 @@ export default async function DocsLayout({
           pageMap={pageMap}
           docsRepositoryBase="https://github.com/itstheanurag/bitsandpieces/tree/main/content"
           sidebar={{
-            defaultMenuCollapseLevel: 1,
+            defaultMenuCollapseLevel: 10,
+            toggleButton: false,
           }}
           editLink="Edit this page on GitHub"
           feedback={{

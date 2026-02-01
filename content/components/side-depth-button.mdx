@@ -1,0 +1,152 @@
+---
+title: Side Depth Button
+description: A tactile 3D button with realistic depth shadows and press animations.
+---
+
+# Side Depth Button
+
+A tactile 3D button with realistic depth shadows and press animations. Features multi-layered shadows for a premium, physical feel.
+
+## Preview
+
+<ComponentPreview name="side-depth-button" />
+
+## Installation
+
+<InstallationTabs
+  componentName="side-depth-button"
+  dependencies={[
+    "clsx",
+    "tailwind-merge",
+    "class-variance-authority",
+    "@radix-ui/react-slot",
+  ]}
+/>
+
+## Usage
+
+```tsx
+import { SideDepthButton } from "@/components/ui/side-depth-button";
+
+export default function Example() {
+  return (
+    <div className="flex gap-4">
+      <SideDepthButton>Default</SideDepthButton>
+      <SideDepthButton variant="secondary">Secondary</SideDepthButton>
+      <SideDepthButton variant="destructive">Destructive</SideDepthButton>
+      <SideDepthButton variant="outline">Outline</SideDepthButton>
+      <SideDepthButton variant="ghost">Ghost</SideDepthButton>
+    </div>
+  );
+}
+```
+
+## Variants
+
+### Default
+
+The primary button style with a vibrant 3D effect.
+
+```tsx
+<SideDepthButton>Primary Action</SideDepthButton>
+```
+
+### Secondary
+
+A subtle button for secondary actions.
+
+```tsx
+<SideDepthButton variant="secondary">Secondary</SideDepthButton>
+```
+
+### Destructive
+
+For dangerous or irreversible actions.
+
+```tsx
+<SideDepthButton variant="destructive">Delete</SideDepthButton>
+```
+
+### Outline
+
+A bordered button with depth effect.
+
+```tsx
+<SideDepthButton variant="outline">Outline</SideDepthButton>
+```
+
+### Ghost
+
+A minimal button without depth shadows.
+
+```tsx
+<SideDepthButton variant="ghost">Ghost</SideDepthButton>
+```
+
+## Sizes
+
+```tsx
+<SideDepthButton size="sm">Small</SideDepthButton>
+<SideDepthButton size="default">Default</SideDepthButton>
+<SideDepthButton size="lg">Large</SideDepthButton>
+<SideDepthButton size="icon"><Icon /></SideDepthButton>
+```
+
+## Loading State
+
+```tsx
+<SideDepthButton loading>Processing...</SideDepthButton>
+```
+
+## As Child (Polymorphic)
+
+Use the `asChild` prop to render as a different element (e.g., a link):
+
+```tsx
+<SideDepthButton asChild>
+  <a href="/dashboard">Go to Dashboard</a>
+</SideDepthButton>
+```
+
+## Props
+
+<PropsTable
+  props={[
+    {
+      name: "variant",
+      type: '"default" | "secondary" | "destructive" | "outline" | "ghost"',
+      default: '"default"',
+      description: "The visual style variant of the button.",
+    },
+    {
+      name: "size",
+      type: '"default" | "sm" | "lg" | "icon"',
+      default: '"default"',
+      description: "The size of the button.",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      default: "false",
+      description: "Shows a loading spinner and disables the button.",
+    },
+    {
+      name: "asChild",
+      type: "boolean",
+      default: "false",
+      description: "Render as a child element (polymorphic).",
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      default: "false",
+      description: "Disables the button.",
+    },
+    {
+      name: "className",
+      type: "string",
+      default: "-",
+      description: "Additional CSS classes.",
+    },
+  ]}
+/>
