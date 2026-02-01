@@ -10,16 +10,16 @@ export type RegistryItem = {
 };
 
 export const registry: Record<string, RegistryItem> = {
-  "animated-form": {
-    name: "animated-form",
-    title: "Animated Form",
+  "multi-step-form": {
+    name: "multi-step-form",
+    title: "Multi Step Form",
     description: "A beautiful account creation form with progressive steps.",
     component: dynamic(() =>
-      import("@/registry/bitsandpieces/forms/animated-form").then(
-        (m) => m.AnimatedForm,
+      import("@/registry/bitsandpieces/forms/multi-step-form").then(
+        (m) => m.MultiStepForm,
       ),
     ),
-    path: "registry/bitsandpieces/forms/animated-form.tsx",
+    path: "registry/bitsandpieces/forms/multi-step-form.tsx",
   },
   "side-depth-button": {
     name: "side-depth-button",

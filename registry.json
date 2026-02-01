@@ -4,21 +4,16 @@
   "homepage": "https://itstheanurag.github.io/bitsandpieces",
   "items": [
     {
-      "name": "animated-form",
+      "name": "multi-step-form",
       "type": "registry:block",
-      "title": "Animated Form",
-      "description": "A beautiful account creation form with progressive steps and smooth transitions.",
-      "dependencies": ["framer-motion", "clsx", "tailwind-merge"],
+      "title": "Multi Step Form",
+      "description": "A flexible multi-step form builder with animations and validation.",
+      "dependencies": ["motion", "lucide-react", "clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "registry/bitsandpieces/forms/animated-form.tsx",
+          "path": "registry/bitsandpieces/forms/multi-step-form.tsx",
           "type": "registry:component",
-          "target": "components/bitsandpieces/animated-form.tsx"
-        },
-        {
-          "path": "registry/bitsandpieces/lib/utils.ts",
-          "type": "registry:lib",
-          "target": "lib/utils.ts"
+          "target": "components/bitsandpieces/multi-step-form.tsx"
         }
       ]
     },

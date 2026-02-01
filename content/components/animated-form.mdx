@@ -1,34 +1,56 @@
 ---
-title: Animated Form
-description: Animated form mimicking account creation with progressive name/password animation and completion checkmarks.
+title: Multi Step Form
+description: A flexible, animated multi-step form builder with per-step validation, motion transitions, and customizable field configurations.
 ---
 
-# Animated Form
+# Multi Step Form
 
-Animated form mimicking account creation with progressive name/password animation and completion checkmarks.
+A flexible, animated multi-step form builder with per-step validation, motion transitions, and customizable field configurations.
 
 ## Preview
 
-<ComponentPreview name="animated-form" />
+### Basic Example
+
+<ComponentPreview name="multi-step-form-basic" />
+
+### Personal Details
+
+<ComponentPreview name="multi-step-form-personal" />
 
 ## Installation
 
 <InstallationTabs
-  componentName="animated-form"
-  dependencies={["motion", "react-icons", "clsx", "tailwind-merge"]}
+  componentName="multi-step-form"
+  dependencies={["motion", "lucide-react", "clsx", "tailwind-merge"]}
 />
 
 ## Usage
 
 ```tsx
-import { AnimatedForm } from "@/components/ui/animated-form";
+import { MultiStepForm } from "@/registry/bitsandpieces/forms/multi-step-form";
 
 export default function Example() {
-  const handleSubmit = (data: { name: string; password: string }) => {
-    console.log("Form submitted:", data);
-  };
+  const steps = [
+    {
+      fieldName: "name",
+      fieldLabel: "Name",
+      fieldDescription: "Enter your full name",
+      validate: (val) => (val.length < 2 ? "Name too short" : null),
+    },
+    {
+      fieldName: "email",
+      fieldLabel: "Email",
+      validate: (val) => (!val.includes("@") ? "Invalid email" : null),
+    },
+  ];
 
-  return <AnimatedForm onSubmit={handleSubmit} />;
+  return (
+    <MultiStepForm
+      formTitle="Create Account"
+      steps={steps}
+      onFinalSubmit={(data) => console.log(data)}
+    />
+  );
 }
 ```
 
@@ -37,17 +59,53 @@ export default function Example() {
 <PropsTable
   props={[
     {
-      name: "onSubmit",
-      type: "(data: { name: string; password: string }) => void",
+      name: "formTitle",
+      type: "string",
       default: "-",
-      description: "Callback when form is submitted.",
+      description: "Header title for the form.",
       required: true,
     },
     {
-      name: "className",
+      name: "formDescription",
       type: "string",
       default: "-",
-      description: "Additional CSS classes.",
+      description: "Optional subtitle for the form header.",
+    },
+    {
+      name: "steps",
+      type: "MultiStepFieldConfig[]",
+      default: "-",
+      description:
+        "Array of step configurations containing field name, label, and validation.",
+      required: true,
+    },
+    {
+      name: "onFinalSubmit",
+      type: "(data: Record<string, string>) => void",
+      default: "-",
+      description:
+        "Callback triggered when the last step is successfully submitted.",
+      required: true,
     },
   ]}
 />
+
+## Step Configuration
+
+The `steps` prop takes an array of objects with the following properties:
+
+| Property           | Type        | Description                                                          |
+| :----------------- | :---------- | :------------------------------------------------------------------- |
+| `fieldName`        | `FieldName` | The key used in the form data. Must match a supported field type.    |
+| `fieldLabel`       | `string`    | The label displayed above the input.                                 |
+| `fieldDescription` | `string`    | Optional text displayed below the input.                             |
+| `fieldIcon`        | `ReactNode` | Optional icon displayed next to the label.                           |
+| `validate`         | `function`  | Optional validation function: `(value, formData) => string \| null`. |
+
+## Features
+
+- **Dynamic Workflows**: Define any sequence of fields from the supported registry.
+- **Per-step Validation**: Prevent navigation until the current step is valid.
+- **Animated Transitions**: Smooth slide-and-fade effects using `motion`.
+- **Progress Tracking**: Automatic progress bar that updates as users advance.
+- **Smart Fields**: Built-in support for various types (Email, Password, Credit Card, etc.) with appropriate input attributes.
