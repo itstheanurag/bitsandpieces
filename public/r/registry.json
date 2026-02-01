@@ -14,25 +14,6 @@
           "path": "registry/bitsandpieces/forms/multi-step-form.tsx",
           "type": "registry:component",
           "target": "components/bitsandpieces/multi-step-form.tsx"
-        }
-      ]
-    },
-    {
-      "name": "button",
-      "type": "registry:ui",
-      "title": "Side Depth Button",
-      "description": "A tactile button that mimics physical depth using complex shadows and transforms.",
-      "dependencies": [
-        "clsx",
-        "tailwind-merge",
-        "class-variance-authority",
-        "@radix-ui/react-slot"
-      ],
-      "files": [
-        {
-          "path": "registry/bitsandpieces/buttons/button.tsx",
-          "type": "registry:component",
-          "target": "components/bitsandpieces/button.tsx"
         },
         {
           "path": "registry/bitsandpieces/lib/utils.ts",

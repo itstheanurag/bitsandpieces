@@ -44,132 +44,137 @@ type FieldRendererProps = {
   value: string;
   onChange: (val: string) => void;
   error?: string | null;
+  placeholder: string;
+  type?: React.HTMLInputTypeAttribute;
 };
 
 type FieldRenderer = (props: FieldRendererProps) => JSX.Element;
 
+function FormInput({
+  value,
+  onChange,
+  placeholder,
+  type,
+  error,
+}: FieldRendererProps) {
+  return (
+    <Input
+      value={value}
+      placeholder={placeholder}
+      type={type ?? "text"}
+      onChange={(e) => onChange(e.target.value)}
+      className={cn("", error && "border-red-500")}
+    />
+  );
+}
+
 const FIELD_REGISTRY: Record<FieldName, FieldRenderer> = {
   name: ({ value, onChange }) => (
-    <Input
-      placeholder="John Doe"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="John Doe" value={value} onChange={onChange} />
   ),
+
   email: ({ value, onChange }) => (
-    <Input
-      type="email"
+    <FormInput
       placeholder="john@example.com"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   password: ({ value, onChange }) => (
-    <Input
+    <FormInput
       type="password"
       placeholder="••••••••"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   confirmPassword: ({ value, onChange }) => (
-    <Input
+    <FormInput
       type="password"
       placeholder="Confirm password"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   phone: ({ value, onChange }) => (
-    <Input
+    <FormInput
       type="tel"
       placeholder="+1 (555) 000-0000"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   address: ({ value, onChange }) => (
-    <Input
-      placeholder="123 Main St"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="123 Main St" value={value} onChange={onChange} />
   ),
+
   city: ({ value, onChange }) => (
-    <Input
-      placeholder="San Francisco"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="San Francisco" value={value} onChange={onChange} />
   ),
+
   state: ({ value, onChange }) => (
-    <Input
-      placeholder="CA"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="CA" value={value} onChange={onChange} />
   ),
+
   zip: ({ value, onChange }) => (
-    <Input
-      placeholder="94103"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="94103" value={value} onChange={onChange} />
   ),
+
   country: ({ value, onChange }) => (
-    <Input
-      placeholder="United States"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="United States" value={value} onChange={onChange} />
   ),
+
   dob: ({ value, onChange }) => (
-    <Input
+    <FormInput
+      placeholder="YYYY-MM-DD"
       type="date"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   ssn: ({ value, onChange }) => (
-    <Input
-      placeholder="XXX-XX-XXXX"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="XXX-XX-XXXX" value={value} onChange={onChange} />
   ),
+
   creditCard: ({ value, onChange }) => (
-    <Input
+    <FormInput
       placeholder="0000 0000 0000 0000"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   cvv: ({ value, onChange }) => (
-    <Input
-      placeholder="123"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
+    <FormInput placeholder="123" value={value} onChange={onChange} />
   ),
+
   expirationDate: ({ value, onChange }) => (
-    <Input
+    <FormInput
+      placeholder="MM-YYYY"
       type="month"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   billingAddress: ({ value, onChange }) => (
-    <Input
+    <FormInput
       placeholder="Billing Address"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
+
   shippingAddress: ({ value, onChange }) => (
-    <Input
+    <FormInput
       placeholder="Shipping Address"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={onChange}
     />
   ),
 };
@@ -230,7 +235,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-4">
+    <div className="w-full max-w-md mx-auto p-4 bg-background rounded-md border border-border">
       <form onSubmit={handleNext} className="space-y-8">
         <header className="space-y-1">
           <h2 className="text-2xl font-semibold tracking-tight">{formTitle}</h2>
@@ -239,7 +244,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           )}
         </header>
 
-        <div className="relative min-h-[140px]">
+        <div className="relative min-h-fit">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={step.fieldName}
@@ -267,6 +272,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   value: formData[step.fieldName] || "",
                   onChange: (val) => handleFieldChange(step.fieldName, val),
                   error: errors[step.fieldName],
+                  placeholder: step.fieldLabel,
                 })}
 
                 <AnimatePresence>
@@ -303,7 +309,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
           <Button
             type="submit"
-            disabled={isLast}
+            disabled={!isLast}
             className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
           >
             {isLast ? "Complete" : "Continue"}

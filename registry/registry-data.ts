@@ -21,15 +21,4 @@ export const registry: Record<string, RegistryItem> = {
     ),
     path: "registry/bitsandpieces/forms/multi-step-form.tsx",
   },
-  "side-depth-button": {
-    name: "side-depth-button",
-    title: "Side Depth Button",
-    description: "A tactile button that mimics physical depth.",
-    component: dynamic(() =>
-      import("@/registry/bitsandpieces/buttons/button").then(
-        (m) => m.SideDepthButton,
-      ),
-    ),
-    path: "registry/bitsandpieces/buttons/button.tsx",
-  },
 };
