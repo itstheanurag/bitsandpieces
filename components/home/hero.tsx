@@ -1,15 +1,16 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 export const Hero: React.FC = () => {
   return (
     <section className="relative pt-24 pb-20 lg:pt-36 lg:pb-32 overflow-hidden border-b border-border/50">
       <div className="absolute inset-0 bg-background overflow-hidden pointer-events-none">
         {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.05]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--foreground)_1px,transparent_1px),linear-gradient(to_bottom,var(--foreground)_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.05]"></div>
 
         {/* Deep ambient glow behind the visual */}
-        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-foreground/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-foreground/5 rounded-full blur-[100px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,21 +56,23 @@ export const Hero: React.FC = () => {
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4 animate-slide-up"
               style={{ animationDelay: "0.2s" }}
             >
-              <a href="#components">
+              <Link href="/docs">
                 <Button
                   size="lg"
                   className="h-12 px-8 bg-foreground text-background hover:bg-foreground/90 border-none shadow-[0_0_30px_-10px] shadow-foreground/30"
                 >
                   Explore Directory
                 </Button>
-              </a>
-              <Button
-                variant="secondary"
-                size="lg"
-                className="h-12 px-8 bg-transparent border-border hover:bg-secondary"
-              >
-                Documentation
-              </Button>
+              </Link>
+              <Link href="/docs">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="h-12 px-8 bg-transparent border-border hover:bg-secondary"
+                >
+                  Documentation
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -78,7 +81,7 @@ export const Hero: React.FC = () => {
             className="flex-1 w-full max-w-[600px] lg:max-w-none perspective-1000 animate-slide-up"
             style={{ animationDelay: "0.3s" }}
           >
-            <div className="grid grid-cols-2 grid-rows-3 gap-4 h-[400px] lg:h-[500px] w-full p-4 rounded-2xl border border-border/50 bg-card/20 backdrop-blur-sm shadow-2xl rotate-y-[-5deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-700 ease-out">
+            <div className="grid grid-cols-2 grid-rows-3 gap-4 h-[400px] lg:h-[500px] w-full p-4 rounded-2xl border border-border/50 bg-card/20 backdrop-blur-sm shadow-md rotate-y-[-5deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-700 ease-out">
               {/* 1. Template Preview (Tall Left) */}
               <div className="row-span-3 col-span-1 bg-card border border-border rounded-xl overflow-hidden flex flex-col group relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-card/80 pointer-events-none z-10" />
@@ -91,7 +94,7 @@ export const Hero: React.FC = () => {
                 {/* Body */}
                 <div className="flex-1 flex">
                   {/* Sidebar */}
-                  <div className="w-12 border-r border-border bg-muted/30 flex flex-col items-center py-3 gap-3">
+                  <div className="w-12 border-r border-border bg-muted/50 flex flex-col items-center py-3 gap-3">
                     <div className="w-6 h-6 rounded bg-muted" />
                     <div className="w-6 h-6 rounded bg-muted/50" />
                     <div className="w-6 h-6 rounded bg-muted/50" />

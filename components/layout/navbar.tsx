@@ -41,21 +41,6 @@ export const Navbar: React.FC = () => {
           </span>
         </div>
 
-        <nav className="hidden md:flex items-center gap-8">
-          <a
-            href="#components"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Directory
-          </a>
-          <a
-            href="#"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Patterns
-          </a>
-        </nav>
-
         <div className="flex items-center gap-4">
           <ThemeToggle />
           <SideDepthButton

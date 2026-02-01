@@ -1,100 +1,163 @@
 "use client";
 
-import { GlassCard } from "@/components/ui/card";
-import { motion } from "motion/react";
-import { Copy, Layout, Palette, Shield } from "lucide-react";
-import { Container } from "@/components/layout/container";
+import React, { useState } from "react";
+import { ComponentCard, ComponentItem } from "./componen-card";
+import {
+  FiMousePointer,
+  FiToggleLeft,
+  FiLayout,
+  FiBell,
+  FiBox,
+  FiType,
+  FiLayers,
+  FiCreditCard,
+} from "react-icons/fi";
 
-const features = [
+import { HiSparkles } from "react-icons/hi";
+import { BsLayoutSidebar } from "react-icons/bs";
+
+import { cn } from "@/registry/bitsandpieces/lib/utils";
+
+export interface Category {
+  id: string;
+  label: string;
+}
+
+export const CATEGORIES: Category[] = [
+  { id: "all", label: "All" },
+  { id: "components", label: "Components" },
+  { id: "blocks", label: "Blocks" },
+  { id: "templates", label: "Templates" },
+];
+
+export const COMPONENTS: ComponentItem[] = [
   {
-    title: "Copy & Paste",
-    description: "Simply copy the code and paste it into your project.",
-    icon: Copy,
-    className: "md:col-span-1",
-    bg: "bg-blue-500/10",
+    id: "1",
+    name: "Tactile Button",
+    description: "Realistic depth with complex shadow layering.",
+    category: "component",
+    icon: FiMousePointer,
+    isNew: true,
   },
   {
-    title: "Modern Design",
-    description: "Crafted with attention to detail and modern aesthetics.",
-    icon: Palette,
-    className: "md:col-span-1",
-    bg: "bg-pink-500/10",
+    id: "3",
+    name: "Elastic Toggle",
+    description: "Spring-based state transitions.",
+    category: "component",
+    icon: FiToggleLeft,
   },
   {
-    title: "Type Safe",
-    description: "Built with TypeScript for robust and error-free code.",
-    icon: Shield,
-    className: "md:col-span-1",
-    bg: "bg-green-500/10",
+    id: "12",
+    name: "Pricing Block",
+    description: "Three-tier pricing section with toggle.",
+    category: "block",
+    icon: FiLayout,
+    isNew: true,
+  },
+  {
+    id: "7",
+    name: "Pulse Badge",
+    description: "Attention-grabbing notification indicator.",
+    category: "component",
+    icon: FiBell,
+  },
+  {
+    id: "13",
+    name: "SaaS Dashboard",
+    description: "Full layout with sidebar and header.",
+    category: "template",
+    icon: BsLayoutSidebar,
+    isNew: true,
+  },
+  {
+    id: "5",
+    name: "3D Tilt Card",
+    description: "Mouse-aware perspective transforms.",
+    category: "component",
+    icon: FiBox,
+  },
+  {
+    id: "4",
+    name: "Fluid Type",
+    description: "Responsive typography scale system.",
+    category: "component",
+    icon: FiType,
+  },
+  {
+    id: "6",
+    name: "Stack Reveal",
+    description: "Scroll-triggered list animations.",
+    category: "component",
+    icon: FiLayers,
   },
 ];
 
-export function Showcase() {
+export const Showcase: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const filteredComponents =
+    activeCategory === "all"
+      ? COMPONENTS
+      : COMPONENTS.filter((c) => c.category === activeCategory);
+
   return (
-    <section className="w-full py-24 bg-muted/30 border-t border-border">
-      <Container>
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Everything you need
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Components designed to be flexible, accessible, and beautiful.
-          </p>
+    <section className="py-24 bg-background min-h-[80vh]" id="components">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">
+              Component Directory
+            </h2>
+            <p className="text-zinc-500 max-w-md text-lg">
+              Explore our collection of production-ready elements. Updated
+              weekly with new blocks and templates.
+            </p>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex items-center p-1 rounded-lg bg-zinc-900/50 border border-zinc-800/50">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={cn(
+                  "px-4 py-2 text-sm font-medium rounded-md transition-all duration-200",
+                  activeCategory === cat.id
+                    ? "bg-zinc-800 text-white shadow-sm"
+                    : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50",
+                )}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* Large Feature - Bento Main */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="md:col-span-2 md:row-span-2"
-          >
-            <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-0 border border-border">
-              <div className="p-8">
-                <div className="mb-4 inline-flex items-center justify-center rounded-lg bg-purple-500/20 p-3 text-purple-500">
-                  <Layout className="h-6 w-6" />
-                </div>
-                <h3 className="mb-2 text-2xl font-bold">
-                  Rich Component Library
-                </h3>
-                <p className="text-muted-foreground">
-                  From simple buttons to complex interactive layouts. Our
-                  library covers a wide range of use cases to speed up your
-                  development.
-                </p>
-              </div>
-              {/* Visual Placeholder - Could be an image or a code block */}
-              <div className="relative h-64 w-full bg-background/50 mt-4 overflow-hidden mask-image-b-0 border-t border-border">
-                <div className="absolute inset-x-0 bottom-0 top-10 mx-auto w-[80%] rounded-t-xl bg-background shadow-2xl ring-1 ring-border" />
-              </div>
-            </GlassCard>
-          </motion.div>
+        {/* Grid Container */}
+        <div className="border border-zinc-800/50 rounded-xl overflow-hidden bg-zinc-950/50 shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredComponents.map((item) => (
+              <ComponentCard
+                key={item.id}
+                item={item}
+                className="min-h-[280px] border-r border-b border-zinc-800/50 last:border-b-0 md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(3n)]:border-r-0 xl:[&:nth-child(4n)]:border-r-0"
+              />
+            ))}
 
-          {/* Small Features */}
-          {features.map((feature, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className={feature.className}
-            >
-              <GlassCard className="h-full p-6 hover:border-border/80 transition-colors border border-border">
-                <div
-                  className={`mb-4 inline-flex items-center justify-center rounded-lg p-3 ${feature.bg}`}
-                >
-                  <feature.icon className="h-6 w-6" />
+            {/* Empty state */}
+            {filteredComponents.length === 0 && (
+              <div className="col-span-full py-32 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 mb-4">
+                  <span className="text-zinc-500 text-xl">?</span>
                 </div>
-                <h3 className="mb-2 text-lg font-bold">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {feature.description}
+                <p className="text-zinc-500 font-medium">
+                  No items found in this category yet.
                 </p>
-              </GlassCard>
-            </motion.div>
-          ))}
+              </div>
+            )}
+          </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
-}
+};

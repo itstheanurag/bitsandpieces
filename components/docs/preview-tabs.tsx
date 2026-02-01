@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { BiCode, BiExpandAlt, BiCollapseAlt } from "react-icons/bi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { cn } from "@/lib/utils";
-
+import { cn } from "@/registry/bitsandpieces/lib/utils";
 interface PreviewTabsProps {
   preview: React.ReactNode;
   code: React.ReactNode;

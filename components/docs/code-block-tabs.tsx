@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { BiCopy, BiCheck } from "react-icons/bi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { cn } from "@/lib/utils";
-
+import { cn } from "@/registry/bitsandpieces/lib/utils";
 interface PackageManagerCode {
   npm: string;
   pnpm: string;
