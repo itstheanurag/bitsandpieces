@@ -1,82 +1,78 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { SideDepthButton } from "@/registry/bitsandpieces/buttons/button";
+import { BiLogoGithub } from "react-icons/bi";
 import Link from "next/link";
-import { BiCommand, BiLogoGithub, BiSearchAlt2 } from "react-icons/bi";
-import { ThemeToggle } from "../root/theme";
 import Image from "next/image";
+import { cn } from "@/registry/bitsandpieces/lib/utils";
 
-import { Container } from "../layout/container";
+import { ThemeToggle } from "../root/theme";
 
 export const Navbar: React.FC = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 py-4">
-      <Container>
-        <div className="flex items-center justify-between px-8 py-4 bg-background border border-border rounded-xl shadow-sm">
-          {/* Left */}
-          <div className="flex items-center gap-12">
-            <Link href="/" className="flex items-center group">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={32}
-                height={32}
-                className="rounded-md"
-              />
-              <span className="ml-3 text-lg font-semibold">Bits&Pieces</span>
-            </Link>
-
-            <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-              <Link
-                href="#bits"
-                className="hover:text-foreground transition-colors"
-              >
-                Bits
-              </Link>
-              <Link
-                href="#pieces"
-                className="hover:text-foreground transition-colors"
-              >
-                Pieces
-              </Link>
-              <Link
-                href="#features"
-                className="hover:text-foreground transition-colors"
-              >
-                Features
-              </Link>
-            </div>
-          </div>
-
-          {/* Right */}
-          <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center gap-3 px-4 py-2 border border-border rounded-md text-xs text-muted-foreground cursor-pointer transition-all hover:bg-muted/50">
-              <BiSearchAlt2 size={14} />
-              <span>Search...</span>
-              <span className="flex items-center gap-1 bg-muted px-2 py-0.5 rounded-md border border-border">
-                <BiCommand size={24} />
-                <span>K</span>
-              </span>
-            </div>
-
-            <div className="flex items-center">
-              <ThemeToggle />
-
-              <Link
-                href="https://github.com"
-                target="_blank"
-                className="text-muted-foreground hover:text-foreground transition-colors p-2"
-              >
-                <BiLogoGithub size={24} />
-              </Link>
-
-              <button className="hidden sm:block px-6 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-bold hover:opacity-90 transition-all active:scale-95 shadow-lg">
-                Get Started
-              </button>
-            </div>
-          </div>
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
+        scrolled
+          ? "bg-background/80 backdrop-blur-md border-border py-3"
+          : "bg-transparent py-5",
+      )}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="flex items-center gap-2 group cursor-pointer">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={24}
+            height={24}
+            className="rounded-md"
+          />
+          <span className="font-bold text-lg tracking-tight text-foreground font-mono">
+            bits&pieces
+          </span>
         </div>
-      </Container>
+
+        <nav className="hidden md:flex items-center gap-8">
+          <a
+            href="#components"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Directory
+          </a>
+          <a
+            href="#"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Patterns
+          </a>
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <SideDepthButton
+            size="sm"
+            className="hidden sm:flex rounded-md"
+            asChild
+          >
+            <Link
+              className="flex items-center gap-4"
+              href="https://github.com/itstheanurag/bitsandpieces"
+            >
+              <BiLogoGithub className="size-5" />
+              Star on GitHub
+            </Link>
+          </SideDepthButton>
+        </div>
+      </div>
     </nav>
   );
 };

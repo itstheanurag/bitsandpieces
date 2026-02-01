@@ -1,108 +1,159 @@
-"use client";
-
-import Link from "next/link";
-import { motion } from "motion/react";
-import { Zap, Code } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/layout/navbar";
-import { Container } from "../layout/container";
-
-export function Hero() {
+import React from "react";
+import { Button } from "../ui/button";
+export const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen bg-background">
-      <Navbar />
+    <section className="relative pt-24 pb-20 lg:pt-36 lg:pb-32 overflow-hidden border-b border-border/50">
+      <div className="absolute inset-0 bg-background overflow-hidden pointer-events-none">
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.05]"></div>
 
-      <Container>
-        <div className="pt-40 pb-32">
-          <div className="grid grid-cols-1 gap-20 md:grid-cols-2 md:items-center">
-            {/* Left */}
-            <div className="space-y-8">
-              <motion.span
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground"
-              >
-                <span className="h-2 w-2 rounded-full bg-green-500" />
-                v1.0 released
-              </motion.span>
+        {/* Deep ambient glow behind the visual */}
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />
+      </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
-                className="text-5xl font-semibold leading-tight sm:text-6xl"
-              >
-                Production-ready UI components
-                <br />
-                for modern React apps
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="max-w-xl text-lg text-muted-foreground"
-              >
-                A growing library of accessible, composable components built
-                with React, Next.js, and Tailwind CSS. Copy, paste, and ship
-                faster.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
-                className="flex flex-wrap gap-4"
-              >
-                <Link href="/docs">
-                  <Button size="lg" className="h-12 px-8 text-base">
-                    <Zap className="mr-2 h-5 w-5" />
-                    View components
-                  </Button>
-                </Link>
-
-                <Link
-                  href="https://github.com/itstheanurag/bitsandpieces"
-                  target="_blank"
-                >
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="h-12 px-8 text-base"
-                  >
-                    <Code className="mr-2 h-5 w-5" />
-                    GitHub
-                  </Button>
-                </Link>
-              </motion.div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          {/* Left Content */}
+          <div className="flex-1 text-center lg:text-left space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-border animate-fade-in">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-[11px] font-mono text-muted-foreground font-medium tracking-wide uppercase">
+                v2.0 Released
+              </span>
             </div>
 
-            {/* Right – Component Preview */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="relative rounded-xl border border-border bg-muted/40 p-6 shadow-sm"
+            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-foreground leading-[1.1] animate-slide-up">
+              The Architecture <br /> of{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
+                Modern UI.
+              </span>
+            </h1>
+
+            <p
+              className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed animate-slide-up"
+              style={{ animationDelay: "0.1s" }}
             >
-              <div className="flex items-center gap-2 border-b border-border px-2 pb-4 text-xs text-muted-foreground">
-                <span className="h-3 w-3 rounded-full bg-red-400" />
-                <span className="h-3 w-3 rounded-full bg-yellow-400" />
-                <span className="h-3 w-3 rounded-full bg-green-400" />
-                <span className="ml-3 font-mono">button.tsx</span>
+              Everything you need to build world-class applications. Start with
+              <span className="text-foreground font-medium">
+                {" "}
+                atomic components
+              </span>
+              , assemble{" "}
+              <span className="text-foreground font-medium">blocks</span>, and
+              ship{" "}
+              <span className="text-foreground font-medium">
+                full templates
+              </span>
+              .
+            </p>
+
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4 animate-slide-up"
+              style={{ animationDelay: "0.2s" }}
+            >
+              <a href="#components">
+                <Button
+                  size="lg"
+                  className="h-12 px-8 bg-foreground text-background hover:bg-foreground/90 border-none shadow-[0_0_30px_-10px] shadow-foreground/30"
+                >
+                  Explore Directory
+                </Button>
+              </a>
+              <Button
+                variant="secondary"
+                size="lg"
+                className="h-12 px-8 bg-transparent border-border hover:bg-secondary"
+              >
+                Documentation
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Visual - Bento Grid */}
+          <div
+            className="flex-1 w-full max-w-[600px] lg:max-w-none perspective-1000 animate-slide-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <div className="grid grid-cols-2 grid-rows-3 gap-4 h-[400px] lg:h-[500px] w-full p-4 rounded-2xl border border-border/50 bg-card/20 backdrop-blur-sm shadow-2xl rotate-y-[-5deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-700 ease-out">
+              {/* 1. Template Preview (Tall Left) */}
+              <div className="row-span-3 col-span-1 bg-card border border-border rounded-xl overflow-hidden flex flex-col group relative">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-card/80 pointer-events-none z-10" />
+                {/* Header */}
+                <div className="h-8 border-b border-border bg-muted/50 flex items-center px-3 gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-red-500/20" />
+                  <div className="w-2 h-2 rounded-full bg-yellow-500/20" />
+                  <div className="w-2 h-2 rounded-full bg-green-500/20" />
+                </div>
+                {/* Body */}
+                <div className="flex-1 flex">
+                  {/* Sidebar */}
+                  <div className="w-12 border-r border-border bg-muted/30 flex flex-col items-center py-3 gap-3">
+                    <div className="w-6 h-6 rounded bg-muted" />
+                    <div className="w-6 h-6 rounded bg-muted/50" />
+                    <div className="w-6 h-6 rounded bg-muted/50" />
+                  </div>
+                  {/* Content */}
+                  <div className="flex-1 p-3 space-y-3">
+                    <div className="h-20 rounded-lg bg-muted border border-border/50" />
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="h-16 rounded-lg bg-muted border border-border/50" />
+                      <div className="h-16 rounded-lg bg-muted border border-border/50" />
+                    </div>
+                    <div className="h-24 rounded-lg bg-muted border border-border/50" />
+                  </div>
+                </div>
+                {/* Label */}
+                <div className="absolute bottom-4 left-4 z-20">
+                  <span className="px-2 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-mono uppercase tracking-wider">
+                    Templates
+                  </span>
+                </div>
               </div>
 
-              <pre className="mt-6 overflow-hidden rounded-md bg-background p-6 text-sm">
-                <code className="text-muted-foreground">
-                  {`<Button variant="outline">
-  Copy & Paste
-</Button>`}
-                </code>
-              </pre>
-            </motion.div>
+              {/* 2. Block Preview (Top Right) */}
+              <div className="row-span-2 col-span-1 bg-card border border-border rounded-xl overflow-hidden relative group">
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  <div className="w-full space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-muted border border-border" />
+                      <div className="space-y-1.5">
+                        <div className="h-2 w-20 bg-muted rounded" />
+                        <div className="h-2 w-12 bg-muted/50 rounded" />
+                      </div>
+                    </div>
+                    <div className="h-2 w-full bg-muted/30 rounded" />
+                    <div className="h-2 w-3/4 bg-muted/30 rounded" />
+                  </div>
+                </div>
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-mono uppercase tracking-wider">
+                    Blocks
+                  </span>
+                </div>
+              </div>
+
+              {/* 3. Component Preview (Bottom Right) */}
+              <div className="row-span-1 col-span-1 bg-card border border-border rounded-xl overflow-hidden relative group flex items-center justify-center gap-4">
+                <button className="h-8 px-4 rounded bg-foreground text-background text-[10px] font-bold shadow-lg transform group-hover:-translate-y-1 transition-transform">
+                  Button
+                </button>
+                <div className="w-10 h-5 rounded-full bg-muted border border-border flex items-center px-0.5">
+                  <div className="w-4 h-4 rounded-full bg-foreground/50 shadow-sm" />
+                </div>
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono uppercase tracking-wider">
+                    Components
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
-}
+};
