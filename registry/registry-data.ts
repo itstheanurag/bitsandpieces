@@ -3,7 +3,7 @@ import React from "react";
 
 export type RegistryItem = {
   name: string;
-  component: React.ComponentType<any>;
+  component: React.ComponentType;
   path: string;
   title: string;
   description: string;
@@ -15,10 +15,21 @@ export const registry: Record<string, RegistryItem> = {
     title: "Animated Form",
     description: "A beautiful account creation form with progressive steps.",
     component: dynamic(() =>
-      import("@/registry/bitsandpieces/animated-form/animated-form").then(
+      import("@/registry/bitsandpieces/forms/animated-form").then(
         (m) => m.AnimatedForm,
       ),
     ),
-    path: "registry/bitsandpieces/animated-form/animated-form.tsx",
+    path: "registry/bitsandpieces/forms/animated-form.tsx",
+  },
+  "side-depth-button": {
+    name: "side-depth-button",
+    title: "Side Depth Button",
+    description: "A tactile button that mimics physical depth.",
+    component: dynamic(() =>
+      import("@/registry/bitsandpieces/buttons/button").then(
+        (m) => m.SideDepthButton,
+      ),
+    ),
+    path: "registry/bitsandpieces/buttons/button.tsx",
   },
 };

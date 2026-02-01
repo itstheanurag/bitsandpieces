@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/registry/bitsandpieces/lib/utils";
+import { cn } from "../lib/utils";
 
 interface AnimatedFormProps {
   onSubmit?: (data: { name: string; password: string }) => void;
