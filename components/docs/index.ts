@@ -1,3 +1,6 @@
 export { ProCard } from "./pro-card";
-export { CodeBlockTabs, InstallCodeBlock } from "./code-block-tabs";
+export { InstallCodeBlock } from "./code-block-tabs";
 export { PreviewTabs, ComponentPreview } from "./preview-tabs";
+export { InstallationTabs } from "./installation-tabs";
+export { CodeBlock } from "./code-block";
+export { PropsTable } from "./props-table";

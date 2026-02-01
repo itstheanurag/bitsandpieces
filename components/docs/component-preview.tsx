@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { registry } from "@/registry/registry-data";
 import { PreviewTabs } from "./preview-tabs";
+import { codeToHtml } from "shiki";
 
 interface ComponentPreviewProps {
   name: string;
@@ -25,11 +26,21 @@ export async function ComponentPreview({
   // Read code from disk
   const filePath = path.join(process.cwd(), item.path);
   let code = "";
+  let highlightedCode = "";
+
   try {
     code = await fs.readFile(filePath, "utf8");
+    highlightedCode = await codeToHtml(code, {
+      lang: "tsx",
+      theme: "github-dark-default",
+    });
   } catch (err) {
-    console.error(`Error reading component file: ${filePath}`, err);
+    console.error(
+      `Error reading/highlighting component file: ${filePath}`,
+      err,
+    );
     code = "// Error loading component source";
+    highlightedCode = `<pre><code>${code}</code></pre>`;
   }
 
   const PreviewComponent = item.component;
@@ -38,10 +49,12 @@ export async function ComponentPreview({
     <div className={className}>
       <PreviewTabs
         preview={<PreviewComponent />}
+        rawCode={code}
         code={
-          <pre className="p-4 text-sm font-mono overflow-auto max-h-[500px]">
-            <code>{code}</code>
-          </pre>
+          <div
+            className="text-sm [&_pre]:p-4 [&_pre]:m-0 [&_pre]:bg-transparent [&_code]:bg-transparent"
+            dangerouslySetInnerHTML={{ __html: highlightedCode }}
+          />
         }
       />
     </div>
