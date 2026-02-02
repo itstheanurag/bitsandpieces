@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { registry } from "@/registry/registry-data";
+import { exampleRegistry } from "@/registry/example-registry";
+import { BiCopy, BiCheck } from "react-icons/bi";
 
 interface ComponentPreviewProps {
   name: string;
@@ -9,23 +11,29 @@ interface ComponentPreviewProps {
 }
 
 export function ComponentPreview({ name, className }: ComponentPreviewProps) {
-  const item = registry[name];
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+
+  // Check if it's a registry component or an example
+  const registryItem = registry[name];
+  const exampleItem = exampleRegistry[name];
+
+  const item = registryItem || exampleItem;
 
   if (!item) {
     return (
       <div className="p-4 border border-destructive rounded-lg text-destructive">
-        Component "{name}" not found in registry.
+        Component "{name}" not found.
       </div>
     );
   }
 
+  const isExample = !!exampleItem;
   const PreviewComponent = item.component;
 
   if (!PreviewComponent) {
     return (
       <div className="p-4 border border-destructive rounded-lg text-destructive">
-        Component "{name}" has no preview component.
+        Component "{name}" has no preview.
       </div>
     );
   }
@@ -33,7 +41,7 @@ export function ComponentPreview({ name, className }: ComponentPreviewProps) {
   return (
     <div className={className}>
       <div className="mb-2 flex items-center gap-2">
-        {item.type === "example" && item.parentComponent && (
+        {isExample && (
           <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
             Example
           </span>
@@ -87,47 +95,132 @@ export function ComponentPreview({ name, className }: ComponentPreviewProps) {
       <div className="rounded-b-xl border-x border-b border-border overflow-hidden bg-[#0d1117]">
         {activeTab === "preview" ? (
           <div className="flex items-center justify-center min-h-[350px] p-8 bg-background bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:24px_24px] bg-center">
-            <PreviewComponent />
+            <Suspense
+              fallback={
+                <div className="animate-pulse text-muted-foreground">
+                  Loading...
+                </div>
+              }
+            >
+              <PreviewComponent />
+            </Suspense>
           </div>
         ) : (
-          <ClientCodeViewer item={item} />
+          <ApiCodeViewer
+            examplePath={item.path}
+            isExample={isExample}
+            exampleName={name}
+          />
         )}
       </div>
     </div>
   );
 }
 
-// Client-side code viewer that reads from public registry JSON
-function ClientCodeViewer({ item }: { item: (typeof registry)[string] }) {
-  const [code, setCode] = React.useState<string>("// Loading...");
+// Code viewer that fetches pre-highlighted HTML from API with copy button
+function ApiCodeViewer({
+  examplePath,
+  isExample,
+  exampleName,
+}: {
+  examplePath: string;
+  isExample: boolean;
+  exampleName: string;
+}) {
+  const [data, setData] = React.useState<{
+    html: string;
+    code?: string;
+  } | null>(null);
+  const [copied, setCopied] = useState(false);
 
   React.useEffect(() => {
-    // Fetch the component code from the public registry JSON
-    const componentJsonUrl = `/r/${item.name}.json`;
+    if (isExample) {
+      fetch(`/api/code?path=${encodeURIComponent(examplePath)}`)
+        .then((res) => res.json())
+        .then((result) => {
+          setData({
+            html: result.html || "<pre>Error</pre>",
+            code: result.code,
+          });
+        })
+        .catch((err) => {
+          console.error("Error fetching code:", err);
+          setData({ html: "<pre>Error loading code</pre>" });
+        });
+    } else {
+      fetch(`/r/${exampleName}.json`)
+        .then((res) => res.json())
+        .then((registryData) => {
+          const file = registryData.files?.find(
+            (f: { type: string }) => f.type === "registry:component",
+          );
+          if (file?.content) {
+            fetch("/api/code", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ code: file.content }),
+            })
+              .then((res) => res.json())
+              .then((highlightResult) => {
+                setData({
+                  html:
+                    highlightResult.html ||
+                    `<pre>${escapeHtml(file.content)}</pre>`,
+                  code: file.content,
+                });
+              })
+              .catch(() => {
+                setData({
+                  html: `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(file.content)}</pre>`,
+                  code: file.content,
+                });
+              });
+          } else {
+            setData({ html: "<pre>Code not found</pre>" });
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching component code:", err);
+          setData({ html: "<pre>Error loading code</pre>" });
+        });
+    }
+  }, [examplePath, isExample, exampleName]);
 
-    fetch(componentJsonUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        const componentFile = data.files?.find(
-          (f: { type: string }) => f.type === "registry:component",
-        );
-        if (componentFile) {
-          setCode(componentFile.content || "// No content");
-        } else {
-          setCode("// Component code not found");
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching component code:", err);
-        setCode("// Error loading code");
-      });
-  }, [item.name]);
+  const handleCopy = async () => {
+    if (data?.code) {
+      await navigator.clipboard.writeText(data.code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
-    <pre className="p-4 text-sm font-mono text-gray-300 overflow-auto max-h-[500px]">
-      <code>{code}</code>
-    </pre>
+    <div className="relative">
+      {/* Copy Button */}
+      <button
+        onClick={handleCopy}
+        className="absolute top-2 right-6 p-2 rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors z-10"
+        aria-label="Copy code"
+      >
+        {copied ? (
+          <BiCheck className="w-4 h-4 text-green-500" />
+        ) : (
+          <BiCopy className="w-4 h-4" />
+        )}
+      </button>
+
+      <div
+        className="p-4 text-sm font-mono overflow-auto max-h-[500px]"
+        dangerouslySetInnerHTML={{
+          __html: data?.html || "<pre>Loading...</pre>",
+        }}
+      />
+    </div>
   );
+}
+
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
 }
 
 // Simple preview wrapper for inline usage in MDX

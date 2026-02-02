@@ -213,21 +213,16 @@ export const InstallationTabs: React.FC<InstallationTabsProps> = ({
               </div>
 
               <TabsContent value="code" className="p-0 m-0 h-full">
-                <HighlightedCodeViewer
-                  fetchUrl={`/r/${componentName}.json`}
+                <RegistryCodeViewer
+                  url={`/r/${componentName}.json`}
                   fileType="registry:component"
                 />
               </TabsContent>
 
               <TabsContent value="utils" className="p-0 m-0 h-full">
-                <HighlightedCodeViewer
-                  code={`import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}`}
-                  language="typescript"
+                <RegistryCodeViewer
+                  url={`/r/${componentName}.json`}
+                  fileType="registry:lib"
                 />
               </TabsContent>
             </Tabs>
@@ -238,97 +233,91 @@ export function cn(...inputs: ClassValue[]) {
   );
 };
 
-// Highlighted code viewer component
-function HighlightedCodeViewer({
-  fetchUrl,
+// Code viewer with copy button and padding
+function RegistryCodeViewer({
+  url,
   fileType,
-  code,
-  language = "typescript",
 }: {
-  fetchUrl?: string;
-  fileType?: string;
-  code?: string;
-  language?: string;
+  url: string;
+  fileType: string;
 }) {
-  const [highlightedCode, setHighlightedCode] = React.useState<string>("");
+  const [data, setData] = React.useState<{
+    html: string;
+    code?: string;
+  } | null>(null);
+  const [copied, setCopied] = useState(false);
 
   React.useEffect(() => {
-    async function loadCode() {
-      if (code) {
-        setHighlightedCode(syntaxHighlight(code, language));
-        return;
-      }
-
-      if (fetchUrl) {
-        try {
-          const res = await fetch(fetchUrl);
-          const data = await res.json();
-          let content = "";
-
-          if (fileType && data.files) {
-            const file = data.files.find(
-              (f: { type: string }) => f.type === fileType,
-            );
-            content = file?.content || "";
-          } else {
-            content = JSON.stringify(data, null, 2);
-          }
-
-          setHighlightedCode(syntaxHighlight(content, language));
-        } catch (err) {
-          console.error("Error loading code:", err);
-          setHighlightedCode(
-            '<pre class="text-red-500">Error loading code</pre>',
-          );
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        const file = data.files?.find(
+          (f: { type: string }) => f.type === fileType,
+        );
+        if (file?.content) {
+          fetch("/api/code", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code: file.content }),
+          })
+            .then((res) => res.json())
+            .then((highlightResult) => {
+              setData({
+                html:
+                  highlightResult.html ||
+                  `<pre>${escapeHtml(file.content)}</pre>`,
+                code: file.content,
+              });
+            })
+            .catch(() => {
+              setData({
+                html: `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(file.content)}</pre>`,
+                code: file.content,
+              });
+            });
+        } else {
+          setData({ html: "<pre class='p-4'>Code not found</pre>" });
         }
-      }
-    }
+      })
+      .catch((err) => {
+        console.error("Error loading code:", err);
+        setData({ html: "<pre class='p-4'>Error loading code</pre>" });
+      });
+  }, [url, fileType]);
 
-    loadCode();
-  }, [fetchUrl, fileType, code, language]);
+  const handleCopy = async () => {
+    if (data?.code) {
+      await navigator.clipboard.writeText(data.code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
-    <div
-      className="overflow-auto max-h-[500px]"
-      dangerouslySetInnerHTML={{ __html: highlightedCode }}
-    />
+    <div className="relative">
+      {/* Copy Button */}
+      <button
+        onClick={handleCopy}
+        className="absolute top-2 right-6 p-2 rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors z-10"
+        aria-label="Copy code"
+      >
+        {copied ? (
+          <BiCheck className="w-4 h-4 text-green-500" />
+        ) : (
+          <BiCopy className="w-4 h-4" />
+        )}
+      </button>
+
+      <div
+        className="p-4 text-sm font-mono overflow-auto max-h-[500px] bg-[#0d1117]"
+        dangerouslySetInnerHTML={{
+          __html: data?.html || "<pre>Loading...</pre>",
+        }}
+      />
+    </div>
   );
 }
 
-// Simple syntax highlighter for TypeScript/TSX
-function syntaxHighlight(code: string, lang: string): string {
-  // Escape HTML
-  let html = code.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
-
-  // Token patterns for TypeScript
-  const patterns: { regex: RegExp; className: string }[] = [
-    { regex: /\/\/.*$/gm, className: "text-gray-500" }, // comments
-    { regex: /\/\*[\s\S]*?\*\//g, className: "text-gray-500" }, // block comments
-    {
-      regex:
-        /\b(const|let|var|function|return|if|else|for|while|class|extends|implements|interface|type|import|export|from|async|await|new|this|super|try|catch|throw|typeof|instanceof)\b/g,
-      className: "text-purple-400 font-medium",
-    },
-    {
-      regex: /\b(true|false|null|undefined|NaN|Infinity)\b/g,
-      className: "text-orange-400",
-    },
-    { regex: /\b\d+\.?\d*\b/g, className: "text-orange-300" }, // numbers
-    { regex: /"(?:[^"\\]|\\.)*"/g, className: "text-green-400" }, // double quotes
-    { regex: /'(?:[^'\\]|\\.)*'/g, className: "text-green-400" }, // single quotes
-    { regex: /`(?:[^`\\]|\\.)*`/g, className: "text-green-400" }, // template literals
-    { regex: /\b[A-Z][a-zA-Z0-9_]*\b/g, className: "text-blue-400" }, // capitalized identifiers
-    {
-      regex: /\b[a-z$][a-zA-Z0-9_]*\b(?=\s*\()/g,
-      className: "text-yellow-300",
-    }, // function calls
-    { regex: /[:=><!~?]+/g, className: "text-gray-400" }, // operators
-    { regex: /[{}\[\]();,]/g, className: "text-gray-400" }, // punctuation
-  ];
-
-  // Apply patterns in order (comments first, then keywords, etc.)
-  // For simplicity, we'll use a different approach - wrap in pre/code and apply basic highlighting
-  html = `<pre class="p-4 text-sm font-mono leading-relaxed overflow-auto"><code>${html}</code></pre>`;
-
-  return html;
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
 }
