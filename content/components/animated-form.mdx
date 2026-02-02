@@ -17,42 +17,16 @@ A flexible, animated multi-step form builder with per-step validation, motion tr
 
 <ComponentPreview name="multi-step-form-personal" />
 
+### Shipping & Billing
+
+<ComponentPreview name="multi-step-form-shipping" />
+
 ## Installation
 
 <InstallationTabs
   componentName="multi-step-form"
   dependencies={["motion", "lucide-react", "clsx", "tailwind-merge"]}
 />
-
-## Usage
-
-```tsx
-import { MultiStepForm } from "@/registry/bitsandpieces/forms/multi-step-form";
-
-export default function Example() {
-  const steps = [
-    {
-      fieldName: "name",
-      fieldLabel: "Name",
-      fieldDescription: "Enter your full name",
-      validate: (val) => (val.length < 2 ? "Name too short" : null),
-    },
-    {
-      fieldName: "email",
-      fieldLabel: "Email",
-      validate: (val) => (!val.includes("@") ? "Invalid email" : null),
-    },
-  ];
-
-  return (
-    <MultiStepForm
-      formTitle="Create Account"
-      steps={steps}
-      onFinalSubmit={(data) => console.log(data)}
-    />
-  );
-}
-```
 
 ## Props
 
@@ -94,13 +68,13 @@ export default function Example() {
 
 The `steps` prop takes an array of objects with the following properties:
 
-| Property           | Type        | Description                                                          |
-| :----------------- | :---------- | :------------------------------------------------------------------- |
-| `fieldName`        | `FieldName` | The key used in the form data. Must match a supported field type.    |
-| `fieldLabel`       | `string`    | The label displayed above the input.                                 |
-| `fieldDescription` | `string`    | Optional text displayed below the input.                             |
-| `fieldIcon`        | `ReactNode` | Optional icon displayed next to the label.                           |
-| `validate`         | `function`  | Optional validation function: `(value, formData) => string \| null`. |
+| Property           | Type        | Description                                                       |
+| :----------------- | :---------- | :---------------------------------------------------------------- | ------ |
+| `fieldName`        | `FieldName` | The key used in the form data. Must match a supported field type. |
+| `fieldLabel`       | `string`    | The label displayed above the input.                              |
+| `fieldDescription` | `string`    | Optional text displayed below the input.                          |
+| `fieldIcon`        | `ReactNode` | Optional icon displayed next to the label.                        |
+| `validate`         | `function`  | Optional validation function: `(value, formData) => string        | null`. |
 
 ## Features
 

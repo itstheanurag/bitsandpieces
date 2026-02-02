@@ -3,8 +3,8 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { BiSun, BiMoon } from "react-icons/bi";
 import { FiGithub } from "react-icons/fi";
+import { ThemeToggle } from "../root/theme";
 
 export const DocsNavbar = () => {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -27,24 +27,10 @@ export const DocsNavbar = () => {
           height={28}
           className="rounded"
         />
-        <span className="font-bold text-lg">Bits&Pieces</span>
       </Link>
 
       {/* Right side actions */}
       <div className="flex items-center gap-3">
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="Toggle theme"
-        >
-          {resolvedTheme === "dark" ? (
-            <BiSun className="h-5 w-5" />
-          ) : (
-            <BiMoon className="h-5 w-5" />
-          )}
-        </button>
-
         {/* GitHub Link */}
         <Link
           href="https://github.com/itstheanurag/bitsandpieces"
@@ -55,6 +41,8 @@ export const DocsNavbar = () => {
         >
           <FiGithub className="h-5 w-5" />
         </Link>
+
+        <ThemeToggle />
       </div>
     </nav>
   );

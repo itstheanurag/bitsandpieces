@@ -101,21 +101,21 @@ export const Showcase: React.FC = () => {
       : COMPONENTS.filter((c) => c.category === activeCategory);
 
   return (
-    <section className="py-24 bg-background min-h-[80vh]" id="components">
+    <section className="py-20 bg-background" id="components">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
               Component Directory
             </h2>
-            <p className="text-zinc-500 max-w-md text-lg">
+            <p className="text-muted-foreground mt-3 max-w-lg text-base">
               Explore our collection of production-ready elements. Updated
               weekly with new blocks and templates.
             </p>
           </div>
 
-          {/* Tabs */}
-          <div className="flex items-center p-1 rounded-lg bg-zinc-900/50 border border-zinc-800/50">
+          {/* Category Tabs */}
+          <div className="flex items-center p-1 rounded-lg bg-muted border border-border">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
@@ -123,8 +123,8 @@ export const Showcase: React.FC = () => {
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-md transition-all duration-200",
                   activeCategory === cat.id
-                    ? "bg-zinc-800 text-white shadow-sm"
-                    : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50",
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/50",
                 )}
               >
                 {cat.label}
@@ -134,28 +134,27 @@ export const Showcase: React.FC = () => {
         </div>
 
         {/* Grid Container */}
-        <div className="border border-zinc-800/50 rounded-xl overflow-hidden bg-zinc-950/50 shadow-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filteredComponents.map((item) => (
-              <ComponentCard
-                key={item.id}
-                item={item}
-                className="min-h-[280px] border-r border-b border-zinc-800/50 last:border-b-0 md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(3n)]:border-r-0 xl:[&:nth-child(4n)]:border-r-0"
-              />
-            ))}
+        <div
+          className={cn(
+            "grid gap-4",
+            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+          )}
+        >
+          {filteredComponents.map((item) => (
+            <ComponentCard key={item.id} item={item} />
+          ))}
 
-            {/* Empty state */}
-            {filteredComponents.length === 0 && (
-              <div className="col-span-full py-32 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 mb-4">
-                  <span className="text-zinc-500 text-xl">?</span>
-                </div>
-                <p className="text-zinc-500 font-medium">
-                  No items found in this category yet.
-                </p>
+          {/* Empty state */}
+          {filteredComponents.length === 0 && (
+            <div className="col-span-full py-20 text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted border border-border mb-4">
+                <span className="text-muted-foreground text-xl">?</span>
               </div>
-            )}
-          </div>
+              <p className="text-muted-foreground font-medium">
+                No items found in this category yet.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </section>
