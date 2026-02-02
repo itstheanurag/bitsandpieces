@@ -1,35 +1,37 @@
-import dynamic from "next/dynamic";
 import React from "react";
+
+// Import main components only (no examples)
+import { MultiStepForm } from "./bitsandpieces/forms/multi-step-form";
+
+export type RegistryItemType = "component";
 
 export type RegistryItem = {
   name: string;
-  component: React.ComponentType;
+  type: RegistryItemType;
+  component: React.ComponentType<Record<string, unknown>>;
   path: string;
   title: string;
   description: string;
+  dependencies?: string[];
 };
 
 export const registry: Record<string, RegistryItem> = {
-  "animated-form": {
-    name: "animated-form",
-    title: "Animated Form",
-    description: "A beautiful account creation form with progressive steps.",
-    component: dynamic(() =>
-      import("@/registry/bitsandpieces/forms/animated-form").then(
-        (m) => m.AnimatedForm,
-      ),
-    ),
-    path: "registry/bitsandpieces/forms/animated-form.tsx",
-  },
-  "side-depth-button": {
-    name: "side-depth-button",
-    title: "Side Depth Button",
-    description: "A tactile button that mimics physical depth.",
-    component: dynamic(() =>
-      import("@/registry/bitsandpieces/buttons/button").then(
-        (m) => m.SideDepthButton,
-      ),
-    ),
-    path: "registry/bitsandpieces/buttons/button.tsx",
+  // Main Components only
+  "multi-step-form": {
+    name: "multi-step-form",
+    type: "component",
+    component: MultiStepForm as unknown as React.ComponentType<
+      Record<string, unknown>
+    >,
+    path: "registry/bitsandpieces/forms/multi-step-form.tsx",
+    title: "Multi Step Form",
+    description:
+      "A flexible multi-step form builder with animations and validation.",
+    dependencies: ["motion", "lucide-react", "clsx", "tailwind-merge"],
   },
 };
+
+// Helper function to get component info
+export function getRegistryItem(name: string): RegistryItem | null {
+  return registry[name] || null;
+}

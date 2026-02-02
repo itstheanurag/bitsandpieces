@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { SideDepthButton } from "@/registry/bitsandpieces/buttons/button";
 import { BiLogoGithub } from "react-icons/bi";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/registry/bitsandpieces/lib/utils";
 
 import { ThemeToggle } from "../root/theme";
+import { Button } from "nextra/components";
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -43,11 +43,7 @@ export const Navbar: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <SideDepthButton
-            size="sm"
-            className="hidden sm:flex rounded-md"
-            asChild
-          >
+          <Button className="hidden sm:flex rounded-md">
             <Link
               className="flex items-center gap-4"
               href="https://github.com/itstheanurag/bitsandpieces"
@@ -55,7 +51,7 @@ export const Navbar: React.FC = () => {
               <BiLogoGithub className="size-5" />
               Star on GitHub
             </Link>
-          </SideDepthButton>
+          </Button>
         </div>
       </div>
     </nav>

@@ -42,7 +42,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends
-    Omit<HTMLMotionProps<"button">, "ref">, // Omit ref to avoid conflict, we handle it
+    Omit<HTMLMotionProps<"button">, "ref">,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
