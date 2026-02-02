@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import { registry } from "@/registry/registry-data";
 import { exampleRegistry } from "@/registry/example-registry";
-import { BiCopy, BiCheck } from "react-icons/bi";
+import { CodeViewer } from "./code-viewer";
 
 interface ComponentPreviewProps {
   name: string;
@@ -106,7 +106,7 @@ export function ComponentPreview({ name, className }: ComponentPreviewProps) {
             </Suspense>
           </div>
         ) : (
-          <ApiCodeViewer
+          <CodeViewerFetcher
             examplePath={item.path}
             isExample={isExample}
             exampleName={name}
@@ -117,8 +117,8 @@ export function ComponentPreview({ name, className }: ComponentPreviewProps) {
   );
 }
 
-// Code viewer that fetches pre-highlighted HTML from API with copy button
-function ApiCodeViewer({
+// Fetches code and passes to CodeViewer
+function CodeViewerFetcher({
   examplePath,
   isExample,
   exampleName,
@@ -127,27 +127,24 @@ function ApiCodeViewer({
   isExample: boolean;
   exampleName: string;
 }) {
-  const [data, setData] = React.useState<{
-    html: string;
-    code?: string;
-  } | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [code, setCode] = React.useState<string>("");
+  const [highlightedHtml, setHighlightedHtml] = React.useState<string>("");
 
   React.useEffect(() => {
     if (isExample) {
+      // For examples, fetch from API
       fetch(`/api/code?path=${encodeURIComponent(examplePath)}`)
         .then((res) => res.json())
         .then((result) => {
-          setData({
-            html: result.html || "<pre>Error</pre>",
-            code: result.code,
-          });
+          setCode(result.code || "");
+          setHighlightedHtml(result.html || "");
         })
         .catch((err) => {
           console.error("Error fetching code:", err);
-          setData({ html: "<pre>Error loading code</pre>" });
+          setHighlightedHtml("<pre>Error loading code</pre>");
         });
     } else {
+      // For main components, fetch from public registry JSON
       fetch(`/r/${exampleName}.json`)
         .then((res) => res.json())
         .then((registryData) => {
@@ -155,6 +152,8 @@ function ApiCodeViewer({
             (f: { type: string }) => f.type === "registry:component",
           );
           if (file?.content) {
+            setCode(file.content);
+            // Fetch highlighted HTML from API
             fetch("/api/code", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -162,61 +161,25 @@ function ApiCodeViewer({
             })
               .then((res) => res.json())
               .then((highlightResult) => {
-                setData({
-                  html:
-                    highlightResult.html ||
-                    `<pre>${escapeHtml(file.content)}</pre>`,
-                  code: file.content,
-                });
+                setHighlightedHtml(highlightResult.html || "");
               })
               .catch(() => {
-                setData({
-                  html: `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(file.content)}</pre>`,
-                  code: file.content,
-                });
+                setHighlightedHtml(
+                  `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(file.content)}</pre>`,
+                );
               });
           } else {
-            setData({ html: "<pre>Code not found</pre>" });
+            setHighlightedHtml("<pre>Code not found</pre>");
           }
         })
         .catch((err) => {
           console.error("Error fetching component code:", err);
-          setData({ html: "<pre>Error loading code</pre>" });
+          setHighlightedHtml("<pre>Error loading code</pre>");
         });
     }
   }, [examplePath, isExample, exampleName]);
 
-  const handleCopy = async () => {
-    if (data?.code) {
-      await navigator.clipboard.writeText(data.code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
-  return (
-    <div className="relative">
-      {/* Copy Button */}
-      <button
-        onClick={handleCopy}
-        className="absolute top-2 right-6 p-2 rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors z-10"
-        aria-label="Copy code"
-      >
-        {copied ? (
-          <BiCheck className="w-4 h-4 text-green-500" />
-        ) : (
-          <BiCopy className="w-4 h-4" />
-        )}
-      </button>
-
-      <div
-        className="p-4 text-sm font-mono overflow-auto max-h-[500px]"
-        dangerouslySetInnerHTML={{
-          __html: data?.html || "<pre>Loading...</pre>",
-        }}
-      />
-    </div>
-  );
+  return <CodeViewer code={code} highlightedHtml={highlightedHtml} />;
 }
 
 function escapeHtml(text: string): string {

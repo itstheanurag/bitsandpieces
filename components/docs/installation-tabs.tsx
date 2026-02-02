@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { cn } from "@/registry/bitsandpieces/lib/utils";
 import { BiCheck, BiCopy, BiCode } from "react-icons/bi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
+import { CodeViewer, escapeHtml } from "./code-viewer";
+
 type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
 type InstallMethod = "cli" | "manual";
 type ManualTab = "code" | "utils";
@@ -233,7 +235,7 @@ export const InstallationTabs: React.FC<InstallationTabsProps> = ({
   );
 };
 
-// Code viewer with copy button and padding
+// Fetches code from registry and passes to CodeViewer
 function RegistryCodeViewer({
   url,
   fileType,
@@ -241,11 +243,8 @@ function RegistryCodeViewer({
   url: string;
   fileType: string;
 }) {
-  const [data, setData] = React.useState<{
-    html: string;
-    code?: string;
-  } | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [code, setCode] = React.useState<string>("");
+  const [highlightedHtml, setHighlightedHtml] = React.useState<string>("");
 
   React.useEffect(() => {
     fetch(url)
@@ -255,6 +254,8 @@ function RegistryCodeViewer({
           (f: { type: string }) => f.type === fileType,
         );
         if (file?.content) {
+          setCode(file.content);
+          // Fetch highlighted HTML from API
           fetch("/api/code", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -262,62 +263,22 @@ function RegistryCodeViewer({
           })
             .then((res) => res.json())
             .then((highlightResult) => {
-              setData({
-                html:
-                  highlightResult.html ||
-                  `<pre>${escapeHtml(file.content)}</pre>`,
-                code: file.content,
-              });
+              setHighlightedHtml(highlightResult.html || "");
             })
             .catch(() => {
-              setData({
-                html: `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(file.content)}</pre>`,
-                code: file.content,
-              });
+              setHighlightedHtml(
+                `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(file.content)}</pre>`,
+              );
             });
         } else {
-          setData({ html: "<pre class='p-4'>Code not found</pre>" });
+          setHighlightedHtml("<pre class='p-4'>Code not found</pre>");
         }
       })
       .catch((err) => {
         console.error("Error loading code:", err);
-        setData({ html: "<pre class='p-4'>Error loading code</pre>" });
+        setHighlightedHtml("<pre class='p-4'>Error loading code</pre>");
       });
   }, [url, fileType]);
 
-  const handleCopy = async () => {
-    if (data?.code) {
-      await navigator.clipboard.writeText(data.code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
-  return (
-    <div className="relative">
-      {/* Copy Button */}
-      <button
-        onClick={handleCopy}
-        className="absolute top-2 right-6 p-2 rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors z-10"
-        aria-label="Copy code"
-      >
-        {copied ? (
-          <BiCheck className="w-4 h-4 text-green-500" />
-        ) : (
-          <BiCopy className="w-4 h-4" />
-        )}
-      </button>
-
-      <div
-        className="p-4 text-sm font-mono overflow-auto max-h-[500px] bg-[#0d1117]"
-        dangerouslySetInnerHTML={{
-          __html: data?.html || "<pre>Loading...</pre>",
-        }}
-      />
-    </div>
-  );
-}
-
-function escapeHtml(text: string): string {
-  return text.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
+  return <CodeViewer code={code} highlightedHtml={highlightedHtml} />;
 }

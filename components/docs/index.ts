@@ -1,4 +1,6 @@
-export { ComponentPreview, SimplePreview } from "./component-preview";
-export { InstallationTabs } from "./installation-tabs";
-export { PropsTable } from "./props-table";
-export { CodeBlock } from "./code-block";
+export * from "./code-block";
+export * from "./code-viewer";
+export * from "./component-preview";
+export * from "./docs-navbar";
+export * from "./installation-tabs";
+export * from "./props-table";
