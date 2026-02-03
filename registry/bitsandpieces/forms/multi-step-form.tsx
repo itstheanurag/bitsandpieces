@@ -4,6 +4,14 @@ import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useCallback } from "react";
 import { JSX } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { cn } from "../lib/utils";
 
 type FieldName =
@@ -235,101 +243,95 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-4 bg-background rounded-md border border-border">
-      <form onSubmit={handleNext} className="space-y-8">
-        <header className="space-y-1">
-          <h2 className="text-2xl font-semibold tracking-tight">{formTitle}</h2>
-          {formDescription && (
-            <p className="text-sm text-muted-foreground">{formDescription}</p>
-          )}
-        </header>
-
-        <div className="relative min-h-fit">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={step.fieldName}
-              variants={stepVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="space-y-4"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  {step.fieldIcon && (
-                    <span className="text-primary">{step.fieldIcon}</span>
-                  )}
-                  <label
-                    htmlFor={step.fieldName}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    {step.fieldLabel}
-                  </label>
-                </div>
-
-                {FIELD_REGISTRY[step.fieldName]({
-                  value: formData[step.fieldName] || "",
-                  onChange: (val) => handleFieldChange(step.fieldName, val),
-                  error: errors[step.fieldName],
-                  placeholder: step.fieldLabel,
-                })}
-
-                <AnimatePresence>
-                  {errors[step.fieldName] && (
-                    <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="text-[0.8rem] font-medium text-destructive"
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>{formTitle}</CardTitle>
+        {formDescription && (
+          <CardDescription>{formDescription}</CardDescription>
+        )}
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleNext} className="space-y-8">
+          <div className="relative min-h-fit">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={step.fieldName}
+                variants={stepVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="space-y-4"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    {step.fieldIcon && (
+                      <span className="text-primary">{step.fieldIcon}</span>
+                    )}
+                    <label
+                      htmlFor={step.fieldName}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      {errors[step.fieldName]}
-                    </motion.p>
+                      {step.fieldLabel}
+                    </label>
+                  </div>
+
+                  {FIELD_REGISTRY[step.fieldName]({
+                    value: formData[step.fieldName] || "",
+                    onChange: (val) => handleFieldChange(step.fieldName, val),
+                    error: errors[step.fieldName],
+                    placeholder: step.fieldLabel,
+                  })}
+
+                  <AnimatePresence>
+                    {errors[step.fieldName] && (
+                      <motion.p
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="text-[0.8rem] font-medium text-destructive"
+                      >
+                        {errors[step.fieldName]}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+
+                  {step.fieldDescription && !errors[step.fieldName] && (
+                    <p className="text-[0.8rem] text-muted-foreground">
+                      {step.fieldDescription}
+                    </p>
                   )}
-                </AnimatePresence>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-                {step.fieldDescription && !errors[step.fieldName] && (
-                  <p className="text-[0.8rem] text-muted-foreground">
-                    {step.fieldDescription}
-                  </p>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <footer className="flex items-center justify-between pt-4">
+            <Button onClick={handleBack} disabled={isFirst} variant="outline">
+              Back
+            </Button>
+
+            <Button type="submit" disabled={!isLast}>
+              {isLast ? "Complete" : "Continue"}
+            </Button>
+          </footer>
+        </form>
+      </CardContent>
+      <CardFooter>
+        {/* Progress indicator */}
+        <div className="mt-8 flex gap-1 justify-center w-full">
+          {steps.map((_, idx) => (
+            <div
+              key={idx}
+              className={cn(
+                "h-1 rounded-full transition-all duration-300",
+                idx <= currentStep ? "w-8 bg-primary" : "w-2 bg-muted",
+              )}
+            />
+          ))}
         </div>
-
-        <footer className="flex items-center justify-between pt-4">
-          <Button
-            onClick={handleBack}
-            disabled={isFirst}
-            className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
-          >
-            Back
-          </Button>
-
-          <Button
-            type="submit"
-            disabled={!isLast}
-            className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-          >
-            {isLast ? "Complete" : "Continue"}
-          </Button>
-        </footer>
-      </form>
-
-      {/* Progress indicator */}
-      <div className="mt-8 flex gap-1 justify-center">
-        {steps.map((_, idx) => (
-          <div
-            key={idx}
-            className={cn(
-              "h-1 rounded-full transition-all duration-300",
-              idx <= currentStep ? "w-8 bg-primary" : "w-2 bg-muted",
-            )}
-          />
-        ))}
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 MultiStepForm.displayName = "MultiStepForm";

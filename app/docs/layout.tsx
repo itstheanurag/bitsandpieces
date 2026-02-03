@@ -1,38 +1,16 @@
-import { Footer, Layout, Navbar, ThemeSwitch } from "nextra-theme-docs";
-import { Banner, Head } from "nextra/components";
+import { Layout } from "nextra-theme-docs";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import "@/app/globals.css";
-import Image from "next/image";
-import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { DocsNavbar } from "@/components/docs/docs-navbar";
 
 export const metadata = {
   title: "Bits&Pieces Documentation",
   description: "Premium React UI Components - Documentation",
 };
 
-const logo = (
-  <div className="flex items-center gap-2">
-    <Image
-      src="/logo.png"
-      alt="Logo"
-      width={28}
-      height={28}
-      className="rounded"
-    />
-    <span className="font-bold text-lg">Bits&Pieces</span>
-  </div>
-);
-
-const navbar = (
-  <Navbar
-    logo={logo}
-    projectLink="https://github.com/itstheanurag/bitsandpieces"
-  >
-    <ThemeSwitch />
-  </Navbar>
-);
+const navbar = <DocsNavbar />;
 
 export default async function DocsLayout({
   children,
@@ -42,27 +20,28 @@ export default async function DocsLayout({
   const pageMap = await getPageMap();
 
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head>
-        <link rel="icon" href="/icon.png" />
-      </Head>
-      <body>
-        <Layout
-          navbar={navbar}
-          pageMap={pageMap}
-          docsRepositoryBase="https://github.com/itstheanurag/bitsandpieces/tree/main/content"
-          sidebar={{
-            defaultMenuCollapseLevel: 10,
-            toggleButton: false,
-          }}
-          editLink="Edit this page on GitHub"
-          feedback={{
-            content: "Question? Give us feedback →",
-          }}
-        >
-          {children}
-        </Layout>
-      </body>
-    </html>
+    <div
+      style={
+        {
+          "--nextra-content-width": "80rem",
+        } as CSSProperties
+      }
+    >
+      <Layout
+        navbar={navbar}
+        pageMap={pageMap}
+        docsRepositoryBase="https://github.com/itstheanurag/bitsandpieces/tree/main/content"
+        sidebar={{
+          defaultMenuCollapseLevel: 10,
+          toggleButton: false,
+        }}
+        editLink="Edit this page on GitHub"
+        feedback={{
+          content: "Question? Give us feedback →",
+        }}
+      >
+        {children}
+      </Layout>
+    </div>
   );
 }

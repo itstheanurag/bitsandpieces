@@ -3,53 +3,75 @@ import { FiGithub, FiTwitter } from "react-icons/fi";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-background/50 backdrop-blur-lg">
-      <div className="container px-4 md:px-6 mx-auto py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-primary"></div>
-            <span className="font-bold text-lg">Bits&Pieces</span>
+    <footer className="border-t border-border/60 bg-background/80">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
+        <div className="grid gap-10 md:grid-cols-3">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-primary/20 border border-primary/30" />
+              <span className="font-semibold text-lg">Bits&Pieces</span>
+            </div>
+            <p className="text-sm text-muted-foreground max-w-sm">
+              A modern UI system built for speed, clarity, and premium dark-mode
+              experiences.
+            </p>
           </div>
 
-          <div className="flex items-center gap-8 text-sm text-muted-foreground">
-            <Link
-              href="/docs"
-              className="hover:text-foreground transition-colors"
-            >
-              Docs
-            </Link>
-            <Link
-              href="/components"
-              className="hover:text-foreground transition-colors"
-            >
-              Components
-            </Link>
-            <Link
-              href="/license"
-              className="hover:text-foreground transition-colors"
-            >
-              License
-            </Link>
+          <div className="grid grid-cols-2 gap-6 text-sm">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                Library
+              </p>
+              <Link href="/docs" className="block hover:text-foreground">
+                Documentation
+              </Link>
+              <Link href="/docs/components" className="block hover:text-foreground">
+                Components
+              </Link>
+              <Link href="/docs" className="block hover:text-foreground">
+                Blocks
+              </Link>
+              <Link href="/docs" className="block hover:text-foreground">
+                Templates
+              </Link>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                Project
+              </p>
+              <Link href="/license" className="block hover:text-foreground">
+                License
+              </Link>
+              <Link href="/contribution" className="block hover:text-foreground">
+                Contribute
+              </Link>
+              <Link href="/docs" className="block hover:text-foreground">
+                Changelog
+              </Link>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://twitter.com"
-              className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <FiTwitter className="w-5 h-5" />
-            </Link>
-            <Link
-              href="https://github.com/itstheanurag/bitsandpieces"
-              className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <FiGithub className="w-5 h-5" />
-            </Link>
+          <div className="flex md:justify-end">
+            <div className="flex items-center gap-3">
+              <Link
+                href="https://twitter.com"
+                className="p-2 rounded-lg border border-border/70 bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              >
+                <FiTwitter className="w-5 h-5" />
+              </Link>
+              <Link
+                href="https://github.com/itstheanurag/bitsandpieces"
+                className="p-2 rounded-lg border border-border/70 bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              >
+                <FiGithub className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} Bits&Pieces. Open Source.
+        <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+          <span>&copy; {new Date().getFullYear()} Bits&Pieces. Open Source.</span>
+          <span className="uppercase tracking-[0.3em]">Crafted for builders</span>
         </div>
       </div>
     </footer>

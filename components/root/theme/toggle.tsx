@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { BiMoon, BiSun } from "react-icons/bi";
+import { Moon, Sun } from "lucide-react";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -59,20 +59,26 @@ export function ThemeToggle() {
   if (!mounted) {
     return <div className="w-9 h-9" />;
   }
-
+  const resolvedTheme =
+    theme === "system"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
   return (
     <button
       onClick={startViewTransition}
-      className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors relative overflow-hidden"
+      className="group relative inline-flex h-10 w-10 items-center justify-center
+           rounded-md border border-transparent
+           text-foreground transition-colors"
       aria-label="Toggle theme"
     >
-      <div key={theme}>
-        {theme === "dark" ? (
-          <BiSun size={24} className="text-foreground" />
-        ) : (
-          <BiMoon size={24} className="text-foreground" />
-        )}
-      </div>
+      <span className="absolute inset-0 rounded-md " />
+      {resolvedTheme === "dark" ? (
+        <Sun className="size-4" />
+      ) : (
+        <Moon className="size-4" />
+      )}
     </button>
   );
 }

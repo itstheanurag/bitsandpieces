@@ -10,10 +10,8 @@ import {
   FiBox,
   FiType,
   FiLayers,
-  FiCreditCard,
 } from "react-icons/fi";
 
-import { HiSparkles } from "react-icons/hi";
 import { BsLayoutSidebar } from "react-icons/bs";
 
 import { cn } from "@/registry/bitsandpieces/lib/utils";
@@ -25,9 +23,9 @@ export interface Category {
 
 export const CATEGORIES: Category[] = [
   { id: "all", label: "All" },
-  { id: "components", label: "Components" },
-  { id: "blocks", label: "Blocks" },
-  { id: "templates", label: "Templates" },
+  { id: "component", label: "Components" },
+  { id: "block", label: "Blocks" },
+  { id: "template", label: "Templates" },
 ];
 
 export const COMPONENTS: ComponentItem[] = [
@@ -105,23 +103,26 @@ export const Showcase: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Component Directory
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              Directory
+            </p>
+            <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
+              The library is growing fast
             </h2>
             <p className="text-muted-foreground mt-3 max-w-lg text-base">
-              Explore our collection of production-ready elements. Updated
-              weekly with new blocks and templates.
+              Browse components, blocks, and templates built to ship. Each
+              entry is designed to feel premium in dark mode.
             </p>
           </div>
 
           {/* Category Tabs */}
-          <div className="flex items-center p-1 rounded-lg bg-muted border border-border">
+          <div className="flex items-center p-1 rounded-full bg-muted/50 border border-border/70">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium rounded-md transition-all duration-200",
+                  "px-4 py-2 text-sm font-medium rounded-full transition-all duration-200",
                   activeCategory === cat.id
                     ? "bg-background text-foreground shadow-sm"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/50",

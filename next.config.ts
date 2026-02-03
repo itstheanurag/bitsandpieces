@@ -13,6 +13,17 @@ const nextConfig: NextConfig = {
     ],
   },
   reactStrictMode: true,
+  compress: true,
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: [
+      "nextra",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-label",
+      "react-icons",
+      "motion",
+    ],
+  },
 };
 
 const withNextra = nextra({
