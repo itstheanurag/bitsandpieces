@@ -3,87 +3,73 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 export const Hero: React.FC = () => {
   return (
-    <section className="relative pt-24 pb-20 lg:pt-36 lg:pb-32 overflow-hidden border-b border-border/50">
+    <section className="relative pt-24 pb-16 lg:pt-36 lg:pb-24 overflow-hidden border-b border-border/60">
       <div className="absolute inset-0 bg-background overflow-hidden pointer-events-none">
-        {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--foreground)_1px,transparent_1px),linear-gradient(to_bottom,var(--foreground)_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.05]"></div>
-
-        {/* Deep ambient glow behind the visual */}
-        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-foreground/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-foreground/5 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_50%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_55%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_50%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:48px_48px] opacity-[0.06]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* Left Content */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           <div className="flex-1 text-center lg:text-left space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-border animate-fade-in">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/60 border border-border/60">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]" />
               <span className="text-[11px] font-mono text-muted-foreground font-medium tracking-wide uppercase">
-                v2.0 Released
+                New: Templates Catalog
               </span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-foreground leading-[1.1] animate-slide-up">
-              The Architecture <br /> of{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
-                Modern UI.
-              </span>
-            </h1>
-
-            <p
-              className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed animate-slide-up"
-              style={{ animationDelay: "0.1s" }}
-            >
-              Everything you need to build world-class applications. Start with
-              <span className="text-foreground font-medium">
-                {" "}
-                atomic components
-              </span>
-              , assemble{" "}
-              <span className="text-foreground font-medium">blocks</span>, and
-              ship{" "}
-              <span className="text-foreground font-medium">
-                full templates
+            <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-foreground leading-[1.05]">
+              Build faster with a{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/70 to-foreground/40">
+                layered UI system
               </span>
               .
+            </h1>
+
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Start with components, compose blocks, and ship templates. Every
+              piece shares the same design grammar, so your product looks
+              intentional from pixel one.
             </p>
 
-            <div
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4 animate-slide-up"
-              style={{ animationDelay: "0.2s" }}
-            >
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <Link href="/docs">
-                <Button
-                  size="lg"
-                  className="h-12 px-8 bg-foreground text-background hover:bg-foreground/90 border-none shadow-[0_0_30px_-10px] shadow-foreground/30"
-                >
-                  Explore Directory
+                <Button size="lg" className="h-12 px-8">
+                  Explore Library
                 </Button>
               </Link>
               <Link href="/docs">
                 <Button
-                  variant="secondary"
+                  variant="outline"
                   size="lg"
-                  className="h-12 px-8 bg-transparent border-border hover:bg-secondary"
+                  className="h-12 px-8 bg-transparent"
                 >
-                  Documentation
+                  View Documentation
                 </Button>
               </Link>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
+              <span className="px-3 py-1 rounded-full border border-border/60 bg-muted/40">
+                Components
+              </span>
+              <span className="px-3 py-1 rounded-full border border-border/60 bg-muted/40">
+                Blocks
+              </span>
+              <span className="px-3 py-1 rounded-full border border-border/60 bg-muted/40">
+                Templates
+              </span>
             </div>
           </div>
 
           {/* Right Visual - Bento Grid */}
           <div
-            className="flex-1 w-full max-w-[600px] lg:max-w-none perspective-1000 animate-slide-up"
-            style={{ animationDelay: "0.3s" }}
+            className="flex-1 w-full max-w-[600px] lg:max-w-none perspective-1000"
           >
-            <div className="grid grid-cols-2 grid-rows-3 gap-4 h-[400px] lg:h-[500px] w-full p-4 rounded-2xl border border-border/50 bg-card/20 backdrop-blur-sm shadow-md rotate-y-[-5deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-700 ease-out">
+            <div className="grid grid-cols-2 grid-rows-3 gap-4 h-[400px] lg:h-[500px] w-full p-4 rounded-2xl border border-border/70 bg-card/40 backdrop-blur-sm shadow-[0_20px_60px_-40px_rgba(0,0,0,0.6)] rotate-y-[-4deg] rotate-x-[4deg] hover:rotate-0 transition-transform duration-700 ease-out">
               {/* 1. Template Preview (Tall Left) */}
-              <div className="row-span-3 col-span-1 bg-card border border-border rounded-xl overflow-hidden flex flex-col group relative">
+              <div className="row-span-3 col-span-1 bg-card/70 border border-border/70 rounded-xl overflow-hidden flex flex-col group relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-card/80 pointer-events-none z-10" />
                 {/* Header */}
                 <div className="h-8 border-b border-border bg-muted/50 flex items-center px-3 gap-1.5">
@@ -111,14 +97,14 @@ export const Hero: React.FC = () => {
                 </div>
                 {/* Label */}
                 <div className="absolute bottom-4 left-4 z-20">
-                  <span className="px-2 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-mono uppercase tracking-wider">
+                  <span className="px-2 py-1 rounded bg-primary/10 border border-primary/30 text-primary text-[10px] font-mono uppercase tracking-wider">
                     Templates
                   </span>
                 </div>
               </div>
 
               {/* 2. Block Preview (Top Right) */}
-              <div className="row-span-2 col-span-1 bg-card border border-border rounded-xl overflow-hidden relative group">
+              <div className="row-span-2 col-span-1 bg-card/70 border border-border/70 rounded-xl overflow-hidden relative group">
                 <div className="absolute inset-0 flex items-center justify-center p-6">
                   <div className="w-full space-y-3">
                     <div className="flex items-center gap-3">
@@ -140,7 +126,7 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* 3. Component Preview (Bottom Right) */}
-              <div className="row-span-1 col-span-1 bg-card border border-border rounded-xl overflow-hidden relative group flex items-center justify-center gap-4">
+              <div className="row-span-1 col-span-1 bg-card/70 border border-border/70 rounded-xl overflow-hidden relative group flex items-center justify-center gap-4">
                 <button className="h-8 px-4 rounded bg-foreground text-background text-[10px] font-bold shadow-lg transform group-hover:-translate-y-1 transition-transform">
                   Button
                 </button>

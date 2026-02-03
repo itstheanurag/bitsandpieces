@@ -33,12 +33,13 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({
   return (
     <div
       className={cn(
-        "group relative bg-card hover:bg-muted/50 transition-all duration-300 flex flex-col p-6 rounded-xl border border-border",
+        "group relative overflow-hidden bg-card/70 transition-all duration-300 flex flex-col p-6 rounded-2xl border border-border/70 shadow-[0_12px_40px_-30px_rgba(0,0,0,0.65)] hover:-translate-y-1 hover:border-border",
         className,
       )}
     >
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-br from-foreground/10 via-transparent to-transparent" />
       <div className="flex items-start justify-between mb-4">
-        <div className="p-2.5 bg-muted rounded-lg group-hover:bg-background transition-colors border border-border/50 group-hover:border-border">
+        <div className="p-2.5 bg-muted/60 rounded-xl group-hover:bg-background transition-colors border border-border/50 group-hover:border-border">
           <item.icon
             className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors"
             strokeWidth={1.5}
@@ -54,7 +55,7 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({
       </div>
 
       <div className="space-y-2 flex-grow">
-        <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">
+        <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
           {item.name}
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -63,7 +64,7 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({
       </div>
 
       <div className="pt-4 flex items-center justify-between mt-auto">
-        <span className="text-[10px] uppercase tracking-wider font-mono text-muted-foreground group-hover:text-foreground/70 transition-colors bg-muted/50 px-2 py-1 rounded">
+        <span className="text-[10px] uppercase tracking-wider font-mono text-muted-foreground transition-colors bg-muted/50 px-2 py-1 rounded capitalize">
           {item.category}
         </span>
 
