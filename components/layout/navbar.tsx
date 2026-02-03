@@ -38,24 +38,24 @@ export const Navbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={28}
-                height={28}
-                className="rounded-md"
-              />
-              <span className="absolute -inset-1 rounded-lg bg-gradient-to-br from-foreground/20 to-transparent opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
-            </div>
-            <span className="font-semibold text-lg tracking-tight text-foreground">
-              bits&pieces
-            </span>
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="relative">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                  className="rounded-md"
+                />
+                <span className="absolute -inset-1 rounded-lg bg-gradient-to-br from-foreground/20 to-transparent opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
+              </div>
+              <span className="font-semibold text-lg tracking-tight text-foreground">
+                bits&pieces
+              </span>
+            </Link>
 
-          <div className="hidden md:flex items-center gap-2">
-            <div className="flex items-center gap-1 rounded-full border border-border/70 bg-muted/50 p-1 text-sm">
+            <div className="hidden md:flex items-center gap-1 rounded-full border border-border/70 bg-muted/50 p-1 text-sm">
               {[
                 { label: "Components", href: "/#components" },
                 { label: "Blocks", href: "/#blocks" },
@@ -89,15 +89,16 @@ export const Navbar: React.FC = () => {
                 GitHub
               </Link>
             </Button>
-            <Button asChild size="sm" className="hidden sm:inline-flex">
-              <Link href="/docs">Browse Library</Link>
-            </Button>
             <button
               className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border border-border/70 bg-muted/40 text-foreground"
               onClick={() => setMenuOpen((prev) => !prev)}
               aria-label="Toggle navigation"
             >
-              {menuOpen ? <FiX className="size-4" /> : <FiMenu className="size-4" />}
+              {menuOpen ? (
+                <FiX className="size-4" />
+              ) : (
+                <FiMenu className="size-4" />
+              )}
             </button>
           </div>
         </div>
