@@ -175,21 +175,20 @@
 }
 
 /* View transition theming */
-html {
-  view-transition-name: root;
-}
-
+/* View Transitions API - Theme Toggle Animation */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+  overflow: clip;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
 }
 
 /* ===============================================
@@ -474,6 +473,26 @@ nav.nextra-toc {
 main.nextra-content,
 article.nextra-content {
   background: var(--background);
+}
+
+/* Constrain docs content width */
+main.nextra-content {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+main.nextra-content > *,
+main.nextra-content > * > *,
+article.nextra-content {
+  width: 100% !important;
+  max-width: 80rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+main.nextra-content > * {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 /* Navbar bottom border */

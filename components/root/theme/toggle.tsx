@@ -5,20 +5,21 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const startViewTransition = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const currentTheme = resolvedTheme ?? "light";
-    const isDark = currentTheme === "dark";
-    const nextTheme = isDark ? "light" : "dark";
+  const switchTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+  };
 
+  const startViewTransition = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!document.startViewTransition) {
-      setTheme(nextTheme);
+      switchTheme();
       return;
     }
 
@@ -30,27 +31,25 @@ export function ThemeToggle() {
       Math.max(y, window.innerHeight - y),
     );
 
-    const transition = document.startViewTransition(() => setTheme(nextTheme));
+    const transition = document.startViewTransition(() => {
+      switchTheme();
+    });
 
     transition.ready.then(() => {
-      const duration = 650;
-      const easing = "cubic-bezier(0.65, 0, 0.35, 1)";
-      const clipPath = [
-        `circle(0px at ${x}px ${y}px)`,
-        `circle(${endRadius}px at ${x}px ${y}px)`,
-      ];
+      const duration = 1000;
 
       requestAnimationFrame(() => {
         document.documentElement.animate(
           {
-            clipPath: isDark ? clipPath.slice().reverse() : clipPath,
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`,
+            ],
           },
           {
-            duration,
-            easing,
-            pseudoElement: isDark
-              ? "::view-transition-old(root)"
-              : "::view-transition-new(root)",
+            duration: duration,
+            easing: "ease-in-out",
+            pseudoElement: "::view-transition-new(root)",
           },
         );
       });
@@ -58,20 +57,27 @@ export function ThemeToggle() {
   };
 
   if (!mounted) {
-    return <div className="w-10 h-10" />;
+    return <div className="w-9 h-9" />;
   }
-
+  const resolvedTheme =
+    theme === "system"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
   return (
     <button
       onClick={startViewTransition}
-      className="group relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-muted/40 text-foreground transition-colors hover:bg-muted/70"
+      className="group relative inline-flex h-10 w-10 items-center justify-center
+           rounded-md border border-transparent
+           text-foreground transition-colors"
       aria-label="Toggle theme"
     >
-      <span className="absolute inset-0 rounded-full shadow-[inset_0_0_12px_rgba(255,255,255,0.06)]" />
+      <span className="absolute inset-0 rounded-md " />
       {resolvedTheme === "dark" ? (
-        <Sun className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+        <Sun className="size-4" />
       ) : (
-        <Moon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12" />
+        <Moon className="size-4" />
       )}
     </button>
   );

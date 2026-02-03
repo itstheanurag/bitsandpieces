@@ -1,23 +1,29 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { BiLogoGithub } from "react-icons/bi";
-import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
-import { cn } from "@/registry/bitsandpieces/lib/utils";
+import { BiLogoGithub } from "react-icons/bi";
+import { FiMenu, FiX } from "react-icons/fi";
 
+import { cn } from "@/registry/bitsandpieces/lib/utils";
 import { ThemeToggle } from "../root/theme";
 import { Button } from "@/components/ui/button";
+
+const navItems = [
+  { label: "Components", href: "/docs" },
+  { label: "Blocks", href: "/#blocks" },
+  { label: "Templates", href: "/#templates" },
+];
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -30,42 +36,33 @@ export const Navbar: React.FC = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+        "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-border/70 py-3 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.6)]"
+          ? "bg-background/80 backdrop-blur-xl border-border/70 py-3 "
           : "bg-transparent border-transparent py-5",
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative">
-                <Image
-                  src="/logo.png"
-                  alt="Logo"
-                  width={28}
-                  height={28}
-                  className="rounded-md"
-                />
-                <span className="absolute -inset-1 rounded-lg bg-gradient-to-br from-foreground/20 to-transparent opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
-              </div>
-              <span className="font-semibold text-lg tracking-tight text-foreground">
-                bits&pieces
-              </span>
+          {/* Left */}
+          <div className="flex items-center gap-2">
+            <Link href="/" className="shrink-0">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={28}
+                height={28}
+                className="rounded-md"
+                priority
+              />
             </Link>
 
-            <div className="hidden md:flex items-center gap-1 rounded-full border border-border/70 bg-muted/50 p-1 text-sm">
-              {[
-                { label: "Components", href: "/#components" },
-                { label: "Blocks", href: "/#blocks" },
-                { label: "Templates", href: "/#templates" },
-                { label: "Docs", href: "/docs" },
-              ].map((item) => (
+            <div className="hidden md:flex items-center p-1 text-sm">
+              {navItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:text-foreground hover:bg-background/70"
+                  className="rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:bg-background/70 hover:text-foreground"
                 >
                   {item.label}
                 </Link>
@@ -73,64 +70,64 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* Right */}
+          <div className="flex items-center gap-2 shrink-0">
             <ThemeToggle />
+
             <Button
               asChild
               variant="outline"
               size="sm"
-              className="hidden sm:inline-flex"
+              className="hidden sm:inline-flex shrink-0 w-[96px]"
             >
               <Link
-                className="flex items-center gap-2"
                 href="https://github.com/itstheanurag/bitsandpieces"
+                className="flex items-center justify-center gap-2"
               >
-                <BiLogoGithub className="size-4" />
+                <BiLogoGithub className="h-4 w-4" />
                 GitHub
               </Link>
             </Button>
+
             <button
-              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border border-border/70 bg-muted/40 text-foreground"
-              onClick={() => setMenuOpen((prev) => !prev)}
+              className="md:hidden inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border/70 bg-muted/40 text-foreground"
+              onClick={() => setMenuOpen((v) => !v)}
               aria-label="Toggle navigation"
             >
               {menuOpen ? (
-                <FiX className="size-4" />
+                <FiX className="h-4 w-4" />
               ) : (
-                <FiMenu className="size-4" />
+                <FiMenu className="h-4 w-4" />
               )}
             </button>
           </div>
         </div>
 
-        {menuOpen ? (
+        {/* Mobile menu */}
+        {menuOpen && (
           <div className="md:hidden mt-3 rounded-xl border border-border/70 bg-background/90 backdrop-blur-xl p-3 shadow-lg">
             <div className="flex flex-col gap-2 text-sm">
-              {[
-                { label: "Components", href: "/#components" },
-                { label: "Blocks", href: "/#blocks" },
-                { label: "Templates", href: "/#templates" },
-                { label: "Docs", href: "/docs" },
-              ].map((item) => (
+              {navItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
                 >
                   {item.label}
                 </Link>
               ))}
+
               <Link
                 href="https://github.com/itstheanurag/bitsandpieces"
                 onClick={() => setMenuOpen(false)}
-                className="rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
               >
                 GitHub
               </Link>
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     </nav>
   );
