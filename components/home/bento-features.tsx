@@ -22,7 +22,7 @@ export const BentoFeatures: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 auto-rows-[24rem]">
           {/* Card 1: Components (Span 2) */}
-          <div className="lg:col-span-2 relative overflow-hidden rounded-[2.5rem] border border-border/60 dark:border-border bg-card shadow-sm hover:shadow-md transition-shadow dark:bg-card/90 p-10 flex flex-col justify-between group">
+          <div className="lg:col-span-2 relative overflow-hidden rounded-[2.5rem] bg-card border border-border shadow-sm hover:shadow-md transition-all p-10 flex flex-col justify-between group">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-4">
@@ -64,7 +64,7 @@ export const BentoFeatures: React.FC = () => {
           </div>
 
           {/* Card 2: Dark Mode First (Span 1) */}
-          <div className="col-span-1 col-start-1 lg:col-start-3 relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-zinc-950 p-10 flex flex-col justify-between group shadow-lg">
+          <div className="col-span-1 col-start-1 lg:col-start-3 relative overflow-hidden rounded-[2.5rem] bg-[#09090b] dark:bg-card border border-border shadow-lg transition-all p-10 flex flex-col justify-between group">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-primary/20 blur-[80px] rounded-full group-hover:scale-125 transition-transform duration-1000" />
 
@@ -92,7 +92,7 @@ export const BentoFeatures: React.FC = () => {
           </div>
 
           {/* Card 3: Interactive (Span 1) */}
-          <div className="col-span-1 lg:col-start-1 lg:row-start-2 relative overflow-hidden rounded-[2.5rem] border border-border/60 dark:border-border bg-card shadow-sm hover:shadow-md transition-shadow dark:bg-card/90 p-10 flex flex-col justify-between group">
+          <div className="col-span-1 lg:col-start-1 lg:row-start-2 relative overflow-hidden rounded-[2.5rem] bg-card border border-border shadow-sm hover:shadow-md transition-all p-10 flex flex-col justify-between group">
             <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative z-10 flex flex-col h-full pointer-events-none">
               <div className="flex items-center gap-3 mb-auto">
@@ -122,7 +122,7 @@ export const BentoFeatures: React.FC = () => {
           </div>
 
           {/* Card 4: Dev Experience (Span 2) */}
-          <div className="lg:col-span-2 lg:col-start-2 lg:row-start-2 relative overflow-hidden rounded-[2.5rem] border border-border/60 dark:border-border bg-card shadow-sm hover:shadow-md transition-shadow dark:bg-card/90 p-10 flex flex-col justify-between group">
+          <div className="lg:col-span-2 lg:col-start-2 lg:row-start-2 relative overflow-hidden rounded-[2.5rem] bg-card border border-border shadow-sm hover:shadow-md transition-all p-10 flex flex-col justify-between group">
             <div className="absolute inset-0 bg-gradient-to-tl from-emerald-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
             <div className="flex flex-col md:flex-row h-full gap-8 relative z-10">
