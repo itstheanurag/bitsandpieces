@@ -9,6 +9,7 @@ import {
   FiTerminal,
 } from "react-icons/fi";
 import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 const MOCK_CODE = `"use client";
 
@@ -79,7 +80,7 @@ export const CodeShowcase: React.FC = () => {
         </div>
 
         {/* Central interactive showcase */}
-        <div className="rounded-[2rem] border border-border/60 bg-muted/10 shadow-2xl overflow-hidden flex flex-col">
+        <div className="rounded-[2rem] border border-border/60 dark:border-border bg-muted/40 dark:bg-muted/10 shadow-2xl overflow-hidden flex flex-col">
           {/* Top Bar Navigation */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-border/60 bg-card/60 backdrop-blur">
             <div className="flex items-center gap-6">
@@ -89,27 +90,38 @@ export const CodeShowcase: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
 
-              <div className="flex items-center bg-muted/50 p-1 rounded-lg border border-border/50">
-                <button
-                  onClick={() => setActiveTab("preview")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    activeTab === "preview"
-                      ? "bg-background text-foreground shadow-sm border border-border/50"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <FiLayout className="w-4 h-4" /> Preview
-                </button>
-                <button
-                  onClick={() => setActiveTab("code")}
-                  className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    activeTab === "code"
-                      ? "bg-background text-foreground shadow-sm border border-border/50"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <FiTerminal className="w-4 h-4" /> Code
-                </button>
+              <div className="flex items-center bg-muted/50 p-1 rounded-lg border border-border/50 relative">
+                {["preview", "code"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab as "preview" | "code")}
+                    className={`relative flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-colors z-10 ${
+                      activeTab === tab
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground/80"
+                    }`}
+                  >
+                    {activeTab === tab && (
+                      <motion.div
+                        layoutId="active-tab-code-showcase"
+                        className="absolute inset-0 bg-background rounded-md shadow-sm border border-border/50"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.15,
+                          duration: 0.5,
+                        }}
+                      />
+                    )}
+                    <span className="relative z-20 flex items-center gap-2">
+                      {tab === "preview" ? (
+                        <FiLayout className="w-4 h-4" />
+                      ) : (
+                        <FiTerminal className="w-4 h-4" />
+                      )}
+                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -131,13 +143,13 @@ export const CodeShowcase: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative min-h-[400px] flex items-center justify-center bg-gradient-to-br from-background via-muted/20 to-background p-8 md:p-12 overflow-hidden">
+          <div className="relative min-h-[400px] flex items-center justify-center bg-gradient-to-br from-background via-muted/30 to-background p-8 md:p-12 overflow-hidden">
             {/* Background pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
             {activeTab === "preview" ? (
               <div className="relative w-full max-w-md animate-in fade-in zoom-in-95 duration-500">
-                <div className="p-8 rounded-3xl bg-card border border-border/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
+                <div className="p-8 rounded-3xl bg-card border border-border/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
                   <div className="flex items-center justify-between mb-6">
                     <div>
                       <h3 className="font-semibold text-lg text-foreground">

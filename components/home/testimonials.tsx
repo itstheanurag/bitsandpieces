@@ -42,7 +42,7 @@ export const Testimonials: React.FC = () => {
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="p-8 rounded-3xl border border-border/60 bg-muted/20 backdrop-blur transition-all duration-300 hover:bg-muted/40 hover:border-border"
+              className="p-8 rounded-3xl border border-border/60 dark:border-border bg-card shadow-sm dark:bg-card/90 transition-all duration-300 hover:shadow-md dark:hover:bg-card hover:border-border"
             >
               <div className="flex gap-1 text-amber-500 mb-6">
                 {[...Array(5)].map((_, j) => (

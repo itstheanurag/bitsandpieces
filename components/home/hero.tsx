@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { motion, Variants } from "motion/react";
-import { FiCommand, FiArrowRight } from "react-icons/fi";
+import { FiCheck, FiCopy, FiArrowRight } from "react-icons/fi";
 
 const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -12,6 +12,14 @@ const fadeUpVariant: Variants = {
 };
 
 export const Hero: React.FC = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("npm i bitsandpieces");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <section className="relative overflow-hidden border-b border-border/60 pt-32 pb-20 lg:pt-48 lg:pb-32 flex flex-col items-center justify-center min-h-[90vh] bg-background">
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -26,7 +34,7 @@ export const Hero: React.FC = () => {
           {/* Badge */}
           <motion.div variants={fadeUpVariant} className="flex justify-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/40 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md transition-colors hover:bg-muted/60">
-              <span className="flex h-2 w-2 rounded-full bg-primary"></span>
+              <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
               Introducing Bits&Pieces v0.1
               <FiArrowRight className="ml-1 h-3 w-3" />
             </div>
@@ -50,40 +58,53 @@ export const Hero: React.FC = () => {
           {/* CTA Buttons */}
           <motion.div
             variants={fadeUpVariant}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 relative z-20"
           >
-            <Link href="/docs">
+            <Link href="/docs" passHref>
               <Button
                 size="lg"
-                className="h-12 px-8 rounded-full text-base font-medium shadow-lg shadow-primary/20"
+                className="h-12 px-8 rounded-full text-base font-medium shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300"
               >
                 Start Building
               </Button>
             </Link>
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-border/60 bg-muted/20 backdrop-blur text-sm font-mono text-muted-foreground">
-              <FiCommand className="h-4 w-4" />
-              <span>npm i bitsandpieces</span>
-              <button
-                className="ml-2 hover:text-foreground transition-colors p-1"
-                aria-label="Copy install command"
-              >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-3.5 w-3.5"
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="w-full max-w-md mx-auto relative group mt-10 z-10"
+          >
+            {/* Subtle floating effect for the terminal */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative flex items-center bg-card border border-border/50 rounded-xl p-2 shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+                <div className="flex-1 flex items-center px-4 font-mono text-sm text-muted-foreground">
+                  <span className="text-primary mr-2 select-none">$</span>
+                  <span className="text-foreground">npm i bitsandpieces</span>
+                </div>
+                <button
+                  onClick={handleCopy}
+                  className="p-2 sm:px-4 sm:py-2.5 rounded-lg bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 active:scale-95 flex flex-col items-center justify-center relative min-w-[3rem] sm:min-w-[5rem]"
                 >
-                  <path
-                    d="M1 9.50006C1 10.3285 1.67157 11.0001 2.5 11.0001H4L4 10.0001H2.5C2.22386 10.0001 2 9.7762 2 9.50006L2 2.50006C2 2.22392 2.22386 2.00006 2.5 2.00006L9.5 2.00006C9.77614 2.00006 10 2.22392 10 2.50006V4.00002H5.5C4.67157 4.00002 4 4.67159 4 5.50002V12.5C4 13.3284 4.67157 14 5.5 14H12.5C13.3284 14 14 13.3284 14 12.5V5.50002C14 4.67159 13.3284 4.00002 12.5 4.00002H11V2.50006C11 1.67163 10.3284 1.00006 9.5 1.00006H2.5C1.67157 1.00006 1 1.67163 1 2.50006V9.50006ZM5.5 5.00002H12.5C12.7761 5.00002 13 5.22388 13 5.50002V12.5C13 12.7762 12.7761 13 12.5 13H5.5C5.22386 13 5 12.7762 5 12.5V5.50002C5 5.22388 5.22386 5.00002 5.5 5.00002Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
+                  {copied ? (
+                    <FiCheck className="w-4 h-4 text-emerald-500" />
+                  ) : (
+                    <>
+                      <FiCopy className="w-4 h-4 sm:hidden" />
+                      <span className="hidden sm:inline-block text-sm font-medium">
+                        Copy
+                      </span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
