@@ -1,0 +1,105 @@
+---
+title: Multi Step Form
+description: A flexible, animated multi-step form builder with per-step validation, motion transitions, and customizable field configurations.
+---
+
+# Multi Step Form
+
+A flexible, animated multi-step form builder with per-step validation, motion transitions, and customizable field configurations.
+
+## Preview
+
+### Basic Example
+
+<ComponentPreview name="multi-step-form-basic" />
+
+### Personal Details
+
+<ComponentPreview name="multi-step-form-personal" />
+
+### Shipping & Billing
+
+<ComponentPreview name="multi-step-form-shipping" />
+
+## Installation
+
+<InstallationTabs
+  componentName="multi-step-form"
+  dependencies={["motion", "lucide-react", "clsx", "tailwind-merge"]}
+/>
+
+## Props
+
+<PropsTable
+  props={[
+    {
+      name: "formTitle",
+      type: "string",
+      default: "-",
+      description: "Header title for the form.",
+      required: true,
+    },
+    {
+      name: "formDescription",
+      type: "string",
+      default: "-",
+      description: "Optional subtitle for the form header.",
+    },
+    {
+      name: "steps",
+      type: "MultiStepFormStep[]",
+      default: "-",
+      description:
+        "Array of steps. Each step groups one or more fields shown together.",
+      required: true,
+    },
+    {
+      name: "onFinalSubmit",
+      type: "(data: Record<string, string>) => void",
+      default: "-",
+      description:
+        "Callback triggered when the last step is successfully submitted.",
+      required: true,
+    },
+    {
+      name: "className",
+      type: "string",
+      default: "-",
+      description: "Optional className merged onto the outer Card element.",
+    },
+  ]}
+/>
+
+## Step Configuration
+
+Each item in the `steps` array is a `MultiStepFormStep`:
+
+| Property      | Type                      | Description                                     |
+| :------------ | :------------------------ | :---------------------------------------------- |
+| `title`       | `string`                  | Optional title shown in the step indicator.      |
+| `description` | `string`                  | Optional description displayed in the step body. |
+| `fields`      | `MultiStepFieldConfig[]`  | One or more fields rendered in this step.        |
+
+### Field Configuration
+
+Each field in a step's `fields` array is a `MultiStepFieldConfig`:
+
+| Property           | Type                                            | Description                                        |
+| :----------------- | :---------------------------------------------- | :------------------------------------------------- |
+| `fieldName`        | `string`                                        | Unique key used in the form data object.           |
+| `fieldLabel`       | `string`                                        | Label displayed above the input.                   |
+| `placeholder`      | `string`                                        | Placeholder text for the input.                    |
+| `type`             | `HTMLInputTypeAttribute`                        | Input type — defaults to `"text"`.                 |
+| `fieldDescription` | `string`                                        | Helper text displayed below the input.             |
+| `fieldIcon`        | `ReactNode`                                     | Optional icon displayed next to the label.         |
+| `validate`         | `(value: string, formData) => string \| null`   | Return error string to block, or `null` to pass.  |
+
+## Features
+
+- **Multi-Field Steps**: Group related fields together in one step.
+- **Per-step Validation**: Prevent navigation until all fields in the current step are valid.
+- **Directional Animations**: Forward slides right-to-left, back slides left-to-right.
+- **Step Indicator**: Numbered circles with optional labels and check marks for completed steps.
+- **Progress Bar**: Automatic progress bar that updates as users advance.
+- **Accessible**: ARIA attributes for live error regions, step groups, and navigation.
+- **Fully Generic**: No hardcoded field types — use any `fieldName` and `type` you need.

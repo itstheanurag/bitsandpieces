@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
-import nextra from "nextra";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     unoptimized: false,
     remotePatterns: [
@@ -17,7 +18,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: [
-      "nextra",
       "@radix-ui/react-tabs",
       "@radix-ui/react-label",
       "react-icons",
@@ -26,8 +26,23 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withNextra = nextra({
-  contentDirBasePath: "/docs",
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [
+      ["remark-frontmatter", ["yaml"]],
+      ["remark-mdx-frontmatter", { name: "frontmatter" }],
+    ],
+    rehypePlugins: [
+      ["rehype-slug", {}],
+      [
+        "rehype-pretty-code",
+        {
+          theme: "github-dark",
+          keepBackground: false,
+        },
+      ],
+    ],
+  },
 });
 
-export default withNextra(nextConfig);
+export default withMDX(nextConfig);
