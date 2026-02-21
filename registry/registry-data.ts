@@ -1,7 +1,7 @@
 import React from "react";
 
 // Import main components only (no examples)
-import { MultiStepForm } from "./bitsandpieces/forms/multi-step-form";
+import { MultiStepForm } from "./bitsandpieces/forms/multi-step-form/multi-step-form";
 
 export type RegistryItemType = "component";
 
@@ -23,7 +23,7 @@ export const registry: Record<string, RegistryItem> = {
     component: MultiStepForm as unknown as React.ComponentType<
       Record<string, unknown>
     >,
-    path: "registry/bitsandpieces/forms/multi-step-form.tsx",
+    path: "registry/bitsandpieces/forms/multi-step-form/multi-step-form.tsx",
     title: "Multi Step Form",
     description:
       "A flexible multi-step form builder with animations and validation.",

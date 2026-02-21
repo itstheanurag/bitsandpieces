@@ -11,9 +11,24 @@
       "dependencies": ["motion", "lucide-react", "clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "registry/bitsandpieces/forms/multi-step-form.tsx",
+          "path": "registry/bitsandpieces/forms/multi-step-form/multi-step-form.tsx",
           "type": "registry:component",
-          "target": "components/bitsandpieces/multi-step-form.tsx"
+          "target": "components/bitsandpieces/multi-step-form/multi-step-form.tsx"
+        },
+        {
+          "path": "registry/bitsandpieces/forms/multi-step-form/types.ts",
+          "type": "registry:component",
+          "target": "components/bitsandpieces/multi-step-form/types.ts"
+        },
+        {
+          "path": "registry/bitsandpieces/forms/multi-step-form/form-input.tsx",
+          "type": "registry:component",
+          "target": "components/bitsandpieces/multi-step-form/form-input.tsx"
+        },
+        {
+          "path": "registry/bitsandpieces/forms/multi-step-form/step-indicator.tsx",
+          "type": "registry:component",
+          "target": "components/bitsandpieces/multi-step-form/step-indicator.tsx"
         },
         {
           "path": "registry/bitsandpieces/lib/utils.ts",

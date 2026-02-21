@@ -1,4 +1,4 @@
-import { MultiStepForm } from "@/registry/bitsandpieces/forms/multi-step-form";
+import { MultiStepForm } from "@/registry/bitsandpieces/forms/multi-step-form/multi-step-form";
 
 const NameEmailPasswordForm = () => {
   return (
