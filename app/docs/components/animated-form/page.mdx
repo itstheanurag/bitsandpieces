@@ -47,10 +47,10 @@ A flexible, animated multi-step form builder with per-step validation, motion tr
     },
     {
       name: "steps",
-      type: "MultiStepFieldConfig[]",
+      type: "MultiStepFormStep[]",
       default: "-",
       description:
-        "Array of step configurations containing field name, label, and validation.",
+        "Array of steps. Each step groups one or more fields shown together.",
       required: true,
     },
     {
@@ -61,25 +61,45 @@ A flexible, animated multi-step form builder with per-step validation, motion tr
         "Callback triggered when the last step is successfully submitted.",
       required: true,
     },
+    {
+      name: "className",
+      type: "string",
+      default: "-",
+      description: "Optional className merged onto the outer Card element.",
+    },
   ]}
 />
 
 ## Step Configuration
 
-The `steps` prop takes an array of objects with the following properties:
+Each item in the `steps` array is a `MultiStepFormStep`:
 
-| Property           | Type        | Description                                                       |
-| :----------------- | :---------- | :---------------------------------------------------------------- | ------ |
-| `fieldName`        | `FieldName` | The key used in the form data. Must match a supported field type. |
-| `fieldLabel`       | `string`    | The label displayed above the input.                              |
-| `fieldDescription` | `string`    | Optional text displayed below the input.                          |
-| `fieldIcon`        | `ReactNode` | Optional icon displayed next to the label.                        |
-| `validate`         | `function`  | Optional validation function: `(value, formData) => string        | null`. |
+| Property      | Type                      | Description                                     |
+| :------------ | :------------------------ | :---------------------------------------------- |
+| `title`       | `string`                  | Optional title shown in the step indicator.      |
+| `description` | `string`                  | Optional description displayed in the step body. |
+| `fields`      | `MultiStepFieldConfig[]`  | One or more fields rendered in this step.        |
+
+### Field Configuration
+
+Each field in a step's `fields` array is a `MultiStepFieldConfig`:
+
+| Property           | Type                                            | Description                                        |
+| :----------------- | :---------------------------------------------- | :------------------------------------------------- |
+| `fieldName`        | `string`                                        | Unique key used in the form data object.           |
+| `fieldLabel`       | `string`                                        | Label displayed above the input.                   |
+| `placeholder`      | `string`                                        | Placeholder text for the input.                    |
+| `type`             | `HTMLInputTypeAttribute`                        | Input type — defaults to `"text"`.                 |
+| `fieldDescription` | `string`                                        | Helper text displayed below the input.             |
+| `fieldIcon`        | `ReactNode`                                     | Optional icon displayed next to the label.         |
+| `validate`         | `(value: string, formData) => string \| null`   | Return error string to block, or `null` to pass.  |
 
 ## Features
 
-- **Dynamic Workflows**: Define any sequence of fields from the supported registry.
-- **Per-step Validation**: Prevent navigation until the current step is valid.
-- **Animated Transitions**: Smooth slide-and-fade effects using `motion`.
-- **Progress Tracking**: Automatic progress bar that updates as users advance.
-- **Smart Fields**: Built-in support for various types (Email, Password, Credit Card, etc.) with appropriate input attributes.
+- **Multi-Field Steps**: Group related fields together in one step.
+- **Per-step Validation**: Prevent navigation until all fields in the current step are valid.
+- **Directional Animations**: Forward slides right-to-left, back slides left-to-right.
+- **Step Indicator**: Numbered circles with optional labels and check marks for completed steps.
+- **Progress Bar**: Automatic progress bar that updates as users advance.
+- **Accessible**: ARIA attributes for live error regions, step groups, and navigation.
+- **Fully Generic**: No hardcoded field types — use any `fieldName` and `type` you need.
