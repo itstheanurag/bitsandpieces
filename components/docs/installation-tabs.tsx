@@ -8,7 +8,6 @@ import { CodeViewer, escapeHtml } from "./code-viewer";
 
 type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
 type InstallMethod = "cli" | "manual";
-type ManualTab = "code" | "utils";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
 
@@ -36,7 +35,6 @@ export const InstallationTabs: React.FC<InstallationTabsProps> = ({
   const [method, setMethod] = useState<InstallMethod>("cli");
   const [packageManager, setPackageManager] = useState<PackageManager>("pnpm");
   const [copied, setCopied] = useState(false);
-  const [activeTab, setActiveTab] = useState<ManualTab>("code");
 
   const cliCommand = `${packageManagerCommands[packageManager].exec} shadcn@latest add ${SITE_URL}/r/${componentName}.json`;
   const manualCommand =
@@ -178,107 +176,117 @@ export const InstallationTabs: React.FC<InstallationTabsProps> = ({
             </div>
           </div>
 
-          {/* Component Code Tabs */}
-          <div className="rounded-lg border border-border bg-card overflow-hidden">
-            <Tabs
-              value={activeTab}
-              onValueChange={(val) => setActiveTab(val as ManualTab)}
-              className="h-full flex flex-col"
-            >
-              <div className="flex items-center justify-between border-b border-border bg-muted/30 px-4 py-2">
-                <TabsList className="flex gap-1">
-                  <TabsTrigger
-                    value="code"
-                    className={cn(
-                      "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all rounded-md",
-                      activeTab === "code"
-                        ? "bg-background text-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground hover:bg-background/50",
-                    )}
-                  >
-                    <BiCode className="h-3.5 w-3.5" />
-                    Component
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="utils"
-                    className={cn(
-                      "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all rounded-md",
-                      activeTab === "utils"
-                        ? "bg-background text-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground hover:bg-background/50",
-                    )}
-                  >
-                    <BiCode className="h-3.5 w-3.5" />
-                    Utils
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="code" className="p-0 m-0 h-full">
-                <RegistryCodeViewer
-                  url={`/r/${componentName}.json`}
-                  fileType="registry:component"
-                />
-              </TabsContent>
-
-              <TabsContent value="utils" className="p-0 m-0 h-full">
-                <RegistryCodeViewer
-                  url={`/r/${componentName}.json`}
-                  fileType="registry:lib"
-                />
-              </TabsContent>
-            </Tabs>
-          </div>
+          {/* Component Code Tabs — dynamically renders all files */}
+          <RegistryFileTabs componentName={componentName} />
         </>
       )}
     </div>
   );
 };
 
-// Fetches code from registry and passes to CodeViewer
-function RegistryCodeViewer({
-  url,
-  fileType,
-}: {
-  url: string;
-  fileType: string;
-}) {
-  const [code, setCode] = React.useState<string>("");
+/** A file entry from the shadcn registry JSON. */
+interface RegistryFile {
+  path: string;
+  content: string;
+  type: string;
+  target?: string;
+}
+
+/**
+ * Fetches the registry JSON for a component and renders a tab
+ * for every file it contains.
+ */
+function RegistryFileTabs({ componentName }: { componentName: string }) {
+  const [files, setFiles] = React.useState<RegistryFile[]>([]);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    fetch(`/r/${componentName}.json`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data.files) && data.files.length > 0) {
+          setFiles(data.files);
+        }
+      })
+      .catch((err) => console.error("Error loading registry:", err));
+  }, [componentName]);
+
+  if (files.length === 0) {
+    return (
+      <div className="rounded-lg border border-border bg-card p-6 text-center text-sm text-muted-foreground">
+        Loading component files…
+      </div>
+    );
+  }
+
+  /** Extract the filename from a path like "registry/foo/bar/types.ts" */
+  const basename = (filePath: string) => filePath.split("/").pop() ?? filePath;
+
+  return (
+    <div className="rounded-lg border border-border bg-card overflow-hidden">
+      <Tabs
+        value={String(activeIndex)}
+        onValueChange={(val) => setActiveIndex(Number(val))}
+        className="h-full flex flex-col"
+      >
+        <div className="flex items-center justify-between border-b border-border bg-muted/30 px-4 py-2 overflow-x-auto">
+          <TabsList className="flex gap-1">
+            {files.map((file, idx) => (
+              <TabsTrigger
+                key={file.path}
+                value={String(idx)}
+                className={cn(
+                  "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-all rounded-md whitespace-nowrap",
+                  activeIndex === idx
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/50",
+                )}
+              >
+                <BiCode className="h-3.5 w-3.5" />
+                {basename(file.path)}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
+
+        {files.map((file, idx) => (
+          <TabsContent
+            key={file.path}
+            value={String(idx)}
+            className="p-0 m-0 h-full"
+          >
+            <RegistryCodeViewer content={file.content} />
+          </TabsContent>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+
+/**
+ * Renders highlighted code from pre-fetched content.
+ * Sends code to the /api/code endpoint for syntax highlighting.
+ */
+function RegistryCodeViewer({ content }: { content: string }) {
+  const [code] = React.useState(content);
   const [highlightedHtml, setHighlightedHtml] = React.useState<string>("");
 
   React.useEffect(() => {
-    fetch(url)
+    fetch("/api/code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: content }),
+    })
       .then((res) => res.json())
-      .then((data) => {
-        const file = data.files?.find(
-          (f: { type: string }) => f.type === fileType,
-        );
-        if (file?.content) {
-          setCode(file.content);
-          // Fetch highlighted HTML from API
-          fetch("/api/code", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ code: file.content }),
-          })
-            .then((res) => res.json())
-            .then((highlightResult) => {
-              setHighlightedHtml(highlightResult.html || "");
-            })
-            .catch(() => {
-              setHighlightedHtml(
-                `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(file.content)}</pre>`,
-              );
-            });
-        } else {
-          setHighlightedHtml("<pre class='p-4'>Code not found</pre>");
-        }
+      .then((result) => {
+        setHighlightedHtml(result.html || "");
       })
-      .catch((err) => {
-        console.error("Error loading code:", err);
-        setHighlightedHtml("<pre class='p-4'>Error loading code</pre>");
+      .catch(() => {
+        setHighlightedHtml(
+          `<pre class="p-4 text-sm font-mono text-gray-300">${escapeHtml(content)}</pre>`,
+        );
       });
-  }, [url, fileType]);
+  }, [content]);
 
   return <CodeViewer code={code} highlightedHtml={highlightedHtml} />;
 }
